@@ -1,0 +1,2495 @@
+# AUREXA RESIN – COMPLETE DYNAMIC CMS + SEO-FIRST WEBSITE DEVELOPMENT PROMPT
+
+## 1. PROJECT OVERVIEW
+
+Build a complete, production-ready, SEO-first, CMS-driven informational and product website for:
+
+**Brand Name:** Aurexa Resin
+**Business:** Epoxy Resin Wholesaler / Supplier / Dealer / Manufacturer
+**Primary Location:** Surat, Gujarat, India
+**Phone / WhatsApp:** +91 93164 94976
+
+The website must be built as a **fully dynamic CMS website**, not as a static website.
+
+The most important requirement is:
+
+> Almost every visible website element must be manageable from the Admin Panel without editing source code.
+
+The Admin Panel should allow the website owner to create, edit, delete, reorder, publish, unpublish and manage website content dynamically.
+
+The website must be designed for:
+
+* Google SEO
+* Local SEO
+* GEO SEO
+* AEO / Answer Engine Optimization
+* LLM / AI search visibility
+* Entity-based SEO
+* Product SEO
+* Informational SEO
+* Country-specific SEO
+* Lead generation
+* WhatsApp inquiries
+* Direct inquiry forms
+* Google Analytics
+* Google Search Console
+* Microsoft Clarity
+* Schema markup
+* Sitemap management
+* Robots.txt management
+* Canonical URLs
+* Redirect management
+* Custom HTML/CSS/JS
+* Custom scripts
+* Tracking IDs
+* Dynamic landing pages
+* Dynamic blogs
+* Dynamic products
+* Dynamic categories
+
+---
+
+# 2. CORE WEBSITE REQUIREMENT
+
+Create a modern, premium, fast and professional resin industry website.
+
+The website should communicate:
+
+* Product quality
+* Resin expertise
+* Product variety
+* B2B supply capability
+* Wholesale capability
+* Manufacturing/sourcing capability where applicable
+* Bulk requirements
+* Single-piece requirements where applicable
+* Pan-India supply
+* Different resin applications
+* Resin education
+* Technical information
+* Product comparison
+* Customer inquiry generation
+
+Do NOT make the website look like a generic template.
+
+The design should feel like a professional resin manufacturing/supply brand.
+
+Use the original Aurexa Resin logo provided by the website owner.
+
+Do not recreate, redesign or replace the original logo.
+
+Use original product images supplied by the website owner.
+
+Do not generate fake product images when original product images are available.
+
+---
+
+# 3. TECHNOLOGY ARCHITECTURE
+
+Build the project using a modern, scalable architecture.
+
+Recommended:
+
+* Next.js
+* React
+* TypeScript
+* Tailwind CSS or clean scalable CSS architecture
+* PostgreSQL
+* Prisma ORM
+* Secure authentication
+* Admin dashboard
+* REST/API or server actions
+* Server-side rendering where beneficial
+* Static generation / ISR where beneficial
+* Image optimization
+* Structured data generation
+* SEO metadata generation
+* Sitemap generation
+* Robots.txt generation
+
+The exact technology stack can be changed only if there is a strong technical reason.
+
+The architecture must support future growth.
+
+Avoid hardcoding business content directly into frontend files.
+
+---
+
+# 4. ADMIN PANEL
+
+Create a powerful CMS Admin Panel.
+
+Admin panel sections:
+
+## Dashboard
+
+Show:
+
+* Total products
+* Total categories
+* Total blogs
+* Total landing pages
+* Total inquiries
+* Published pages
+* Draft pages
+* SEO health overview
+* Recent inquiries
+* Recent products
+* Recent blogs
+* Website traffic integration status
+* Search Console integration status
+* Analytics integration status
+* Clarity integration status
+
+---
+
+# 5. GLOBAL WEBSITE SETTINGS
+
+Create:
+
+## Settings → General
+
+Admin can edit:
+
+* Brand name
+* Logo
+* Favicon
+* Phone
+* WhatsApp number
+* Email
+* Address
+* City
+* State
+* Country
+* PIN code
+* Business description
+* Short description
+* Footer description
+* Social media URLs
+* WhatsApp default message
+* Contact details
+* Business hours
+* Google Maps URL
+* Google Business Profile URL
+
+Do not hardcode these values in frontend files.
+
+---
+
+# 6. HEADER CMS
+
+Header must be fully dynamic.
+
+Admin should manage:
+
+* Logo
+* Navigation items
+* Navigation order
+* Dropdown menus
+* Mega menu
+* CTA button
+* WhatsApp button
+* Inquiry button
+* Mobile menu
+* Header announcement bar
+* Header visibility
+* Sticky header
+* Header style
+
+Admin should be able to add:
+
+* Home
+* About
+* Products
+* Categories
+* Applications
+* Blog
+* Contact
+* Custom pages
+* Custom links
+
+without modifying code.
+
+---
+
+# 7. FOOTER CMS
+
+Create fully dynamic footer.
+
+Admin can manage:
+
+* Logo
+* About text
+* Contact details
+* Address
+* Phone
+* WhatsApp
+* Email
+* Navigation links
+* Product category links
+* Important pages
+* Social media links
+* Legal links
+* Privacy Policy
+* Terms
+* Disclaimer
+* Sitemap link
+* Copyright text
+
+Footer columns must be dynamically configurable.
+
+---
+
+# 8. FLOATING ACTION BUTTONS
+
+Create three prominent floating/accessible actions:
+
+### 1. WhatsApp
+
+Open WhatsApp with configurable pre-filled message.
+
+Example:
+
+"Hello Aurexa Resin, I am interested in your resin products. Please share product details."
+
+Admin must be able to change the message.
+
+### 2. Inquiry
+
+Open the Inquiry form.
+
+### 3. Call
+
+Open phone dialer on mobile.
+
+Admin can enable/disable each button.
+
+Admin can control:
+
+* Position
+* Label
+* Icon
+* Color
+* Mobile visibility
+* Desktop visibility
+
+---
+
+# 9. INQUIRY SYSTEM
+
+Create a dedicated dynamic Inquiry page.
+
+Form fields:
+
+### Mandatory:
+
+* Name
+* Mobile Number
+* City
+* Country
+
+### Optional:
+
+* Email
+* Product
+* Resin Type
+* Quantity Requirement
+* Application
+* Message
+
+Mobile number must be mandatory.
+
+City must be mandatory.
+
+Country must be mandatory.
+
+Add country code selector.
+
+India (+91) should be default.
+
+Support international country codes.
+
+Add validation.
+
+Prevent spam using:
+
+* Honeypot
+* Rate limiting
+* CAPTCHA/reCAPTCHA option
+
+---
+
+# 10. INQUIRY MANAGEMENT CMS
+
+Admin should have:
+
+## Inquiries
+
+Display:
+
+* Name
+* Mobile
+* WhatsApp
+* Email
+* City
+* Country
+* Product
+* Quantity
+* Message
+* Date
+* Time
+* Source page
+* UTM source
+* UTM medium
+* UTM campaign
+* Landing page
+* Device
+* Status
+
+Statuses:
+
+* New
+* Contacted
+* Follow-up
+* Qualified
+* Converted
+* Closed
+
+Admin can:
+
+* Search
+* Filter
+* Sort
+* Export CSV
+* View inquiry
+* Change status
+* Add internal notes
+* Delete inquiry
+
+---
+
+# 11. HOME PAGE
+
+Create a premium homepage with approximately 10–12 strong sections.
+
+All sections must be CMS controlled.
+
+Suggested structure:
+
+## Section 1 – Hero
+
+Headline example:
+
+"Premium Epoxy Resin Solutions for Art, Craft, Woodworking & Industrial Applications"
+
+Subheading:
+
+"Explore reliable resin solutions from Aurexa Resin for artists, makers, businesses, manufacturers and professional applications."
+
+Buttons:
+
+* Explore Resin Products
+* Send Inquiry
+* WhatsApp Us
+
+Admin controls:
+
+* Heading
+* Subheading
+* Background
+* Image
+* CTA labels
+* CTA URLs
+* SEO text
+* visibility
+
+---
+
+## Section 2 – Resin Product Categories
+
+Display major resin categories dynamically.
+
+Examples:
+
+* Clear Epoxy Resin
+* Crystal Clear Epoxy Resin
+* Transparent Epoxy Resin
+* Art Epoxy Resin
+* Casting Epoxy Resin
+* Table Top Epoxy Resin
+* Deep Pour Epoxy Resin
+* River Table Epoxy Resin
+* Coating Epoxy Resin
+* Laminating Epoxy Resin
+* Industrial Epoxy Resin
+* Decorative Epoxy Resin
+* Craft Epoxy Resin
+* Jewellery Epoxy Resin
+* Woodworking Epoxy Resin
+
+The category list must come from CMS.
+
+---
+
+## Section 3 – Why Aurexa Resin
+
+Create 4–8 dynamically manageable USP cards.
+
+Examples:
+
+* Crystal Clear Finish
+* Multiple Resin Systems
+* Art & Craft Applications
+* Professional Applications
+* Wholesale Supply
+* Bulk Requirements
+* Pan-India Supply
+* Application-Focused Solutions
+
+Admin can add/remove/reorder cards.
+
+---
+
+## Section 4 – Featured Products
+
+Show products dynamically.
+
+Admin chooses featured products.
+
+Product cards should contain:
+
+* Image
+* Product name
+* Short description
+* Application
+* CTA
+* Inquiry button
+
+Avoid displaying price unless explicitly enabled from CMS.
+
+---
+
+## Section 5 – Resin Applications
+
+Create application cards:
+
+* Resin Art
+* Jewellery Making
+* Table Tops
+* River Tables
+* Woodworking
+* Coating
+* Casting
+* Decorative Products
+* Industrial Applications
+* Craft Projects
+* Mould Casting
+* Custom Projects
+
+Dynamic CMS.
+
+---
+
+## Section 6 – Resin Selection Guide
+
+Educational section explaining how customers can choose resin based on:
+
+* Application
+* Pour depth
+* Curing time
+* Mixing ratio
+* Working time
+* Finish
+* Transparency
+* Project size
+
+Create SEO-friendly internal links to relevant products.
+
+---
+
+## Section 7 – Product/Application Comparison
+
+Create dynamic comparison tables.
+
+Admin can create comparison tables such as:
+
+Resin Type | Best For | Pour Depth | Finish | Curing | Recommended Application
+
+The table must be CMS editable.
+
+---
+
+## Section 8 – B2B / Wholesale Section
+
+Highlight:
+
+* Wholesale requirements
+* Bulk requirements
+* Regular supply
+* Business inquiries
+* Manufacturer requirements
+* Resellers
+* Artists
+* Workshops
+* Institutions
+
+CTA:
+
+"Discuss Your Requirement"
+
+---
+
+## Section 9 – Informational Content
+
+Create dynamically managed educational cards.
+
+Examples:
+
+* What is epoxy resin?
+* How does epoxy resin work?
+* 2:1 vs 3:1 epoxy resin
+* How to mix epoxy resin
+* How to avoid bubbles
+* How to choose resin for jewellery
+* How to choose resin for tables
+
+---
+
+## Section 10 – Testimonials
+
+Dynamic testimonial CMS.
+
+Admin can manage:
+
+* Customer name
+* Location
+* Review
+* Rating
+* Product
+* Date
+* Visibility
+
+---
+
+## Section 11 – FAQ
+
+Dynamic FAQ section.
+
+Admin can create unlimited FAQs.
+
+Generate FAQ schema automatically when enabled.
+
+---
+
+## Section 12 – Final CTA
+
+Example:
+
+"Looking for the Right Epoxy Resin for Your Project?"
+
+Buttons:
+
+* Send an Inquiry
+* WhatsApp Aurexa Resin
+* Explore Products
+
+---
+
+# 12. ABOUT PAGE
+
+Create a complete dynamic About page.
+
+Sections:
+
+* About Aurexa Resin
+* Brand introduction
+* Resin expertise
+* Product range
+* Quality approach
+* Applications
+* Wholesale/B2B supply
+* Service coverage
+* Why choose Aurexa Resin
+* FAQ
+* CTA
+
+All content must be editable through CMS.
+
+---
+
+# 13. CONTACT PAGE
+
+Dynamic Contact page.
+
+Include:
+
+* Business name
+* Phone
+* WhatsApp
+* Email
+* Address
+* City
+* State
+* Country
+* PIN
+* Business hours
+* Google Maps
+* Contact form
+* Inquiry CTA
+* WhatsApp CTA
+
+Generate LocalBusiness / Organization schema according to available business information.
+
+---
+
+# 14. CATEGORY SYSTEM
+
+Create fully dynamic product categories.
+
+Admin can:
+
+* Create category
+* Edit category
+* Delete category
+* Upload category image
+* Add category description
+* Add SEO title
+* Add SEO description
+* Add keywords
+* Add canonical
+* Add OG title
+* Add OG description
+* Add OG image
+* Add schema
+* Add FAQs
+* Add custom HTML
+* Add custom CSS
+* Add custom JS
+* Set index/noindex
+* Set follow/nofollow
+* Set URL slug
+* Set parent category if required
+* Reorder categories
+
+Each category should have a dedicated SEO-friendly URL.
+
+Example:
+
+/resin/clear-epoxy-resin/
+
+---
+
+# 15. PRODUCT CMS
+
+Create a powerful product management system.
+
+Every product should have:
+
+* Product name
+* SKU
+* Slug
+* Main image
+* Gallery images
+* Short description
+* Long description
+* Resin type
+* Mixing ratio
+* Pack size
+* Curing information
+* Working time
+* Application
+* Recommended use
+* Pour depth
+* Finish
+* Technical specifications
+* Features
+* Benefits
+* Suitable projects
+* Safety information
+* FAQ
+* Related products
+* Related categories
+
+Admin controls:
+
+* Publish/unpublish
+* Featured
+* Draft
+* Archive
+* SEO index/noindex
+* Canonical
+* Schema
+* Social metadata
+* Custom code
+
+---
+
+# 16. PRODUCT SEO
+
+Every product must automatically generate:
+
+* SEO title
+* Meta description
+* Canonical
+* Open Graph
+* Twitter/X metadata
+* Product schema where appropriate
+* Breadcrumb schema
+* FAQ schema if FAQs exist
+* Image alt text
+* Internal linking
+* XML sitemap entry
+
+Admin must be able to override automatically generated SEO values manually.
+
+Never force keyword stuffing.
+
+---
+
+# 17. PRODUCT IMAGE SEO
+
+Every uploaded image should support:
+
+* Filename
+* Alt text
+* Title
+* Caption
+* Description
+
+Admin must be able to edit image metadata.
+
+Do not automatically use meaningless filenames such as IMG1234.
+
+---
+
+# 18. PACK SIZE / VARIANT SYSTEM
+
+Products should support dynamic variants.
+
+Example:
+
+A product may have:
+
+* 1 kg
+* 1.2 kg
+* 1.5 kg
+* 5 kg
+* 10 kg
+* 20 kg
+* 50 kg
+* 100 kg
+
+Admin can create unlimited variants.
+
+Each variant can contain:
+
+* Pack size
+* SKU
+* Availability
+* Description
+* Optional price
+* Optional image
+
+Price should be optional and disabled by default.
+
+---
+
+# 19. RATIO SYSTEM
+
+Support resin mixing ratios such as:
+
+* 2:1
+* 3:1
+* Other custom ratios
+
+Admin can add custom ratio values.
+
+Do not assume every product has the same ratio.
+
+---
+
+# 20. BLOG SYSTEM
+
+Create a fully dynamic Blog system.
+
+IMPORTANT:
+
+There should be **NO blog category system**.
+
+Only:
+
+* Blog posts
+* Tags if required
+* Author
+* Date
+* Featured image
+* Content
+* SEO
+
+Admin can create unlimited blog posts.
+
+Each blog supports:
+
+* Title
+* Slug
+* Excerpt
+* Content editor
+* Featured image
+* Author
+* Published date
+* Updated date
+* Tags
+* Reading time
+* SEO title
+* Meta description
+* Canonical
+* OG image
+* Schema
+* FAQ
+* Related products
+* Related pages
+* Custom HTML
+* Custom CSS
+* Custom JS
+* Index/noindex
+
+---
+
+# 21. BLOG CONTENT EDITOR
+
+Provide a rich editor.
+
+Support:
+
+* Headings
+* Paragraphs
+* Bold
+* Italic
+* Lists
+* Tables
+* Images
+* Links
+* Quotes
+* Buttons
+* Embedded videos
+* HTML blocks
+* FAQ blocks
+* Product blocks
+* CTA blocks
+
+Content should remain SEO-friendly and clean.
+
+---
+
+# 22. DYNAMIC LANDING PAGE BUILDER
+
+This is one of the most important features.
+
+Create a CMS Landing Page Builder.
+
+Admin can create unlimited landing pages.
+
+Example:
+
+/epoxy-resin-supplier-surat/
+
+/epoxy-resin-wholesaler-surat/
+
+/epoxy-resin-dealer-surat/
+
+/epoxy-resin-supplier-india/
+
+/epoxy-resin-for-jewellery/
+
+/clear-epoxy-resin-surat/
+
+/epoxy-resin-mumbai/
+
+/epoxy-resin-pune/
+
+Do NOT automatically create hundreds of low-quality pages.
+
+Each landing page must contain unique useful content.
+
+---
+
+# 23. LANDING PAGE BUILDER BLOCKS
+
+Allow admin to add/reorder:
+
+* Hero
+* Text
+* Image
+* Product grid
+* Category grid
+* FAQ
+* Comparison table
+* Testimonials
+* Benefits
+* Applications
+* CTA
+* Contact form
+* Inquiry form
+* WhatsApp CTA
+* Internal links
+* Related blogs
+* Related products
+* Custom HTML
+* Custom CSS
+* Custom JS
+
+Drag-and-drop ordering would be preferred.
+
+---
+
+# 24. SEO CONTROL FOR EVERY PAGE
+
+Every page must support:
+
+### Basic SEO
+
+* SEO title
+* Meta description
+* Focus keyword
+* Secondary keywords
+* URL slug
+* Canonical URL
+* Robots directive
+* Index/noindex
+* Follow/nofollow
+
+### Social SEO
+
+* OG title
+* OG description
+* OG image
+* Twitter/X title
+* Twitter/X description
+* Twitter/X image
+
+### Advanced SEO
+
+* Breadcrumb
+* Schema type
+* Custom JSON-LD
+* H1
+* H2
+* SEO intro
+* SEO content
+* FAQ
+* Internal links
+* Related content
+
+---
+
+# 25. AEO / ANSWER ENGINE OPTIMIZATION
+
+The CMS must support content structured for answer engines.
+
+Allow admin to create:
+
+* Question
+* Direct answer
+* Detailed explanation
+* Supporting facts
+* Related questions
+
+FAQ content should be structured clearly.
+
+Use natural-language questions such as:
+
+"What is epoxy resin?"
+
+"Which epoxy resin is suitable for jewellery?"
+
+"What is the difference between 2:1 and 3:1 epoxy resin?"
+
+"How long does epoxy resin take to cure?"
+
+"Which resin is suitable for deep casting?"
+
+Do not keyword stuff.
+
+---
+
+# 26. GEO SEO
+
+Create a location targeting system.
+
+Admin can define:
+
+* Country
+* State
+* City
+* Region
+* Service area
+* Target keyword
+* Local title
+* Local description
+* Local content
+* Local FAQs
+* Local schema
+
+Example:
+
+India → Gujarat → Surat
+
+India → Maharashtra → Mumbai
+
+India → Maharashtra → Pune
+
+International locations can also be created.
+
+The system should allow country-specific and city-specific landing pages.
+
+---
+
+# 27. INTERNATIONAL SEO
+
+Support:
+
+* Country targeting
+* Hreflang
+* Country-specific landing pages
+* Country-specific metadata
+* Country-specific content
+* Country-specific schema
+* Country-specific contact information where applicable
+
+Do not create duplicate pages with only city names changed.
+
+The CMS should encourage genuinely unique localized content.
+
+---
+
+# 28. LLM / AI SEARCH SEO
+
+Structure content so AI search systems can understand:
+
+* Brand entity
+* Product entities
+* Product categories
+* Applications
+* Business information
+* Locations
+* Expertise
+* FAQs
+* Relationships between products and applications
+
+Use:
+
+* Clear headings
+* Concise answers
+* Structured facts
+* Tables
+* FAQs
+* Schema
+* Internal linking
+* Author information
+* Updated dates
+* Organization information
+
+Create a dynamic:
+
+## Brand Knowledge / Entity Information
+
+Admin can define:
+
+* Brand name
+* Business description
+* Products
+* Services
+* Locations
+* Applications
+* Contact details
+* Social profiles
+* Official URLs
+
+---
+
+# 29. SCHEMA MARKUP CMS
+
+Create a dedicated Schema Manager.
+
+Support:
+
+* Organization
+* LocalBusiness
+* Product
+* BreadcrumbList
+* Article
+* BlogPosting
+* FAQPage
+* WebPage
+* CollectionPage
+* WebSite
+* SearchAction where appropriate
+* Service
+* ItemList
+* ImageObject
+
+Allow custom JSON-LD.
+
+Admin can:
+
+* Enable
+* Disable
+* Edit
+* Add custom schema
+
+Never generate invalid or misleading schema.
+
+Schema must match visible page content.
+
+---
+
+# 30. GLOBAL CUSTOM CODE MANAGER
+
+This is critical.
+
+Create:
+
+## Settings → Custom Code
+
+Allow code insertion without editing source files.
+
+Fields:
+
+### Head Code
+
+For:
+
+* Meta tags
+* Verification codes
+* Scripts
+* Third-party integrations
+
+### Body Start
+
+For scripts/pixels.
+
+### Body End
+
+For scripts.
+
+### Global CSS
+
+Custom CSS.
+
+### Global JS
+
+Custom JavaScript.
+
+Admin can set:
+
+* Global
+* Homepage only
+* Specific page
+* Product
+* Category
+* Blog
+* Landing page
+
+Include enable/disable toggle.
+
+---
+
+# 31. TRACKING & ANALYTICS
+
+Create admin fields for:
+
+### Google Analytics
+
+Support:
+
+* GA4 Measurement ID
+
+Example:
+
+G-XXXXXXXXXX
+
+No source code editing required.
+
+### Google Search Console
+
+Support:
+
+* Verification meta tag
+* Verification HTML if required
+* Property setup instructions
+
+### Microsoft Clarity
+
+Support:
+
+* Clarity Project ID
+
+### Google Tag Manager
+
+Support:
+
+* GTM Container ID
+
+### Meta Pixel
+
+Support:
+
+* Pixel ID
+
+### Other scripts
+
+Provide generic:
+
+"Custom Tracking Script"
+
+---
+
+# 32. SEO TECHNICAL SETTINGS
+
+Create:
+
+## SEO Settings
+
+Admin can manage:
+
+* Site title
+* Default meta description
+* Default OG image
+* Default robots
+* Canonical settings
+* Sitemap settings
+* Sitemap exclusions
+* Robots.txt
+* Search engine verification
+* Breadcrumb settings
+* Schema settings
+* Pagination settings
+* URL structure
+* Trailing slash rules
+* 301 redirects
+* 404 page
+* 410 page
+* Noindex pages
+
+---
+
+# 33. REDIRECT MANAGER
+
+Create:
+
+## SEO → Redirects
+
+Fields:
+
+* Old URL
+* New URL
+* Status code
+
+Support:
+
+* 301
+* 302
+* 307
+* 308
+
+Admin should be able to create redirects without code changes.
+
+---
+
+# 34. SITEMAP SYSTEM
+
+Automatically generate:
+
+/sitemap.xml
+
+Also support separate sitemaps where useful:
+
+* Products
+* Categories
+* Blogs
+* Pages
+* Images
+
+Only published/indexable pages should be included.
+
+Admin can exclude individual URLs.
+
+---
+
+# 35. ROBOTS.TXT
+
+Create dynamic robots.txt.
+
+Admin should be able to edit rules from CMS.
+
+Provide safe defaults.
+
+Do not accidentally block:
+
+* CSS
+* JS
+* Images
+* Important pages
+
+---
+
+# 36. INTERNAL LINKING SYSTEM
+
+Add CMS support for internal links.
+
+Admin can define:
+
+* Related products
+* Related categories
+* Related blogs
+* Related landing pages
+* Related applications
+
+Automatically suggest related content based on product/category relationships.
+
+Do not create spammy internal links.
+
+---
+
+# 37. BREADCRUMB SYSTEM
+
+Automatically generate breadcrumbs.
+
+Example:
+
+Home → Resin → Clear Epoxy Resin
+
+Home → Products → Jewellery Epoxy Resin
+
+Home → Blog → Article Name
+
+Generate BreadcrumbList schema.
+
+---
+
+# 38. FAQ SYSTEM
+
+Create reusable FAQ management.
+
+FAQ can be attached to:
+
+* Homepage
+* About
+* Contact
+* Category
+* Product
+* Blog
+* Landing page
+
+Admin can:
+
+* Add question
+* Add answer
+* Reorder
+* Enable/disable
+
+Generate FAQ schema only where appropriate.
+
+---
+
+# 39. SEARCH SYSTEM
+
+Website search should support:
+
+* Products
+* Categories
+* Blogs
+* Pages
+
+Search should return relevant results.
+
+Admin can control searchable content.
+
+---
+
+# 40. 404 PAGE
+
+Create dynamic 404 page.
+
+Include:
+
+* Helpful message
+* Search
+* Popular products
+* Categories
+* Home button
+* Inquiry CTA
+
+---
+
+# 41. PERFORMANCE
+
+Website must be optimized for:
+
+* Core Web Vitals
+* LCP
+* INP
+* CLS
+* Image optimization
+* Lazy loading
+* WebP/AVIF where supported
+* Code splitting
+* Caching
+* CDN compatibility
+* Minimal JavaScript
+* Server rendering where beneficial
+
+Do not sacrifice SEO for unnecessary animations.
+
+---
+
+# 42. MOBILE RESPONSIVENESS
+
+Design mobile-first.
+
+Must work correctly on:
+
+* Mobile
+* Tablet
+* Laptop
+* Desktop
+* Large desktop
+
+Test:
+
+* Navigation
+* Forms
+* Product grids
+* Tables
+* Images
+* Buttons
+* Floating buttons
+* WhatsApp
+* Inquiry form
+
+---
+
+# 43. SECURITY
+
+Admin panel must include:
+
+* Secure login
+* Password hashing
+* Session security
+* CSRF protection where applicable
+* Input validation
+* File upload validation
+* Rate limiting
+* Spam protection
+* XSS protection
+* SQL injection protection
+* Role-based access where applicable
+
+Never expose admin APIs publicly without authentication.
+
+---
+
+# 44. MEDIA LIBRARY
+
+Create CMS Media Library.
+
+Admin can:
+
+* Upload images
+* Search images
+* Delete images
+* Replace images
+* Edit alt text
+* Edit filename
+* Edit caption
+* Edit description
+* Copy image URL
+* Select image for SEO/social sharing
+
+Organize media by:
+
+* Products
+* Categories
+* Blogs
+* Pages
+* General
+
+---
+
+# 45. PRODUCT DATA IMPORT / EXPORT
+
+Support CSV import/export.
+
+Admin should be able to bulk import products.
+
+CSV fields should support:
+
+* Product name
+* SKU
+* Category
+* Slug
+* Description
+* Ratio
+* Pack size
+* Applications
+* SEO title
+* Meta description
+* Canonical
+* Status
+
+Also allow export.
+
+---
+
+# 46. BLOG IMPORT / EXPORT
+
+Provide bulk content management where practical.
+
+---
+
+# 47. ADMIN ROLES
+
+Create roles such as:
+
+* Super Admin
+* Admin
+* Editor
+* SEO Manager
+
+Permissions should be configurable.
+
+---
+
+# 48. DATABASE STRUCTURE
+
+Create scalable database models for:
+
+* User
+* Role
+* Permission
+* Settings
+* Product
+* ProductVariant
+* Category
+* Application
+* BlogPost
+* Tag
+* Page
+* LandingPage
+* FAQ
+* Testimonial
+* Inquiry
+* Media
+* SEO
+* Schema
+* Redirect
+* TrackingSettings
+* CustomCode
+* Location
+* Country
+* City
+* InternalLink
+* Navigation
+* Footer
+* Header
+
+Use proper relations and indexes.
+
+---
+
+# 49. URL STRUCTURE
+
+Create clean URLs.
+
+Examples:
+
+/
+/about/
+/contact/
+/inquiry/
+/products/
+/resin/
+/resin/clear-epoxy-resin/
+/resin/jewellery-epoxy-resin/
+/blog/
+/blog/how-to-choose-epoxy-resin/
+/landing/epoxy-resin-supplier-surat/
+
+Avoid unnecessary query parameters for indexable pages.
+
+Slugs must be editable from CMS.
+
+---
+
+# 50. SEO-FRIENDLY CONTENT STRUCTURE
+
+Every important page should have:
+
+One clear H1.
+
+Logical H2/H3 hierarchy.
+
+Natural keyword usage.
+
+Helpful content.
+
+Relevant internal links.
+
+Relevant images.
+
+Alt text.
+
+FAQs where useful.
+
+Structured data where applicable.
+
+Do not use keyword stuffing.
+
+---
+
+# 51. NEAR ME SEO
+
+The website may target local intent such as:
+
+* Epoxy Resin Supplier Near Me
+* Epoxy Resin Wholesaler Near Me
+* Epoxy Resin Dealer Near Me
+* Resin Supplier Near Me
+* Resin Wholesaler Near Me
+
+However, do NOT create hundreds of doorway pages.
+
+Local intent should be supported with useful location pages, actual service coverage and strong business information.
+
+Primary local market:
+
+Surat, Gujarat, India.
+
+Support expansion to other locations through the CMS.
+
+---
+
+# 52. RESIN PRODUCT DATABASE
+
+The system should support a broad resin catalog.
+
+Initial examples:
+
+* Clear Epoxy Resin
+* Crystal Clear Epoxy Resin
+* Transparent Epoxy Resin
+* Art Epoxy Resin
+* Casting Epoxy Resin
+* Table Top Epoxy Resin
+* Deep Pour Epoxy Resin
+* River Table Epoxy Resin
+* Coating Epoxy Resin
+* Laminating Epoxy Resin
+* Industrial Epoxy Resin
+* Decorative Epoxy Resin
+* Craft Epoxy Resin
+* Jewellery Epoxy Resin
+* Woodworking Epoxy Resin
+
+Also support:
+
+* 2:1 Resin
+* 3:1 Resin
+* Fast Dry Resin
+* Custom resin types
+* Custom pack sizes
+
+Do not assume these are the only products.
+
+The admin must be able to add unlimited new products.
+
+---
+
+# 53. APPLICATION DATABASE
+
+Create dynamic applications such as:
+
+* Resin Art
+* Jewellery
+* Woodworking
+* Table Making
+* River Tables
+* Coating
+* Casting
+* Mould Making
+* Decorative Art
+* Craft
+* Industrial Applications
+* Custom Projects
+
+Admin can add unlimited applications.
+
+---
+
+# 54. COUNTRY TARGETING SYSTEM
+
+Create:
+
+## SEO → Locations
+
+Admin can create:
+
+Country → State/Region → City
+
+Each location should have:
+
+* Location name
+* Slug
+* Description
+* SEO title
+* Meta description
+* H1
+* Content
+* Products
+* FAQs
+* Local keywords
+* Schema
+* Coordinates if required
+* Index/noindex
+* Canonical
+
+---
+
+# 55. SEO AUDIT PANEL
+
+Create an internal SEO checklist for every page.
+
+Show:
+
+* SEO title present
+* Meta description present
+* H1 present
+* Image alt text
+* Canonical present
+* Schema present
+* Internal links
+* Content length
+* Slug quality
+* Indexability
+* Open Graph
+* Sitemap status
+
+Give a simple score.
+
+Example:
+
+SEO Score: 87/100
+
+But do not make meaningless keyword-density scores the main metric.
+
+---
+
+# 56. CONTENT QUALITY
+
+The CMS should encourage:
+
+* Original content
+* Helpful information
+* Real product information
+* Accurate specifications
+* Human-readable writing
+* Clear answers
+* Useful comparisons
+* Strong internal linking
+
+Avoid:
+
+* Keyword stuffing
+* Duplicate location pages
+* Fake reviews
+* Fake claims
+* Automatically generated nonsense
+* Thin content
+* Hidden SEO text
+
+---
+
+# 57. ADMIN PREVIEW
+
+Every editable page should have:
+
+* Save draft
+* Preview
+* Publish
+* Unpublish
+
+Preview should show the exact frontend design.
+
+---
+
+# 58. VERSIONING / SAFETY
+
+Where practical, provide:
+
+* Draft history
+* Updated date
+* Last edited by
+* Restore previous version
+
+Prevent accidental deletion.
+
+---
+
+# 59. CONTACT / LEAD ATTRIBUTION
+
+Inquiry system should capture:
+
+* Current URL
+* Referrer
+* UTM source
+* UTM medium
+* UTM campaign
+* UTM term
+* UTM content
+* Landing page
+* Product
+* Device
+
+This will help identify which SEO or marketing page generated inquiries.
+
+---
+
+# 60. SEO-FRIENDLY CONTACT / INQUIRY FLOW
+
+Inquiry should be simple.
+
+Step 1:
+
+Name + Mobile + Country + City
+
+Step 2:
+
+Select requirement
+
+Step 3:
+
+Product / Resin type
+
+Step 4:
+
+Quantity + Message
+
+Step 5:
+
+Submit
+
+After submission:
+
+Show confirmation.
+
+Also provide:
+
+"Continue on WhatsApp"
+
+Do not make the form unnecessarily long.
+
+---
+
+# 61. WHATSAPP INTEGRATION
+
+WhatsApp number:
+
++91 93164 94976
+
+Create configurable WhatsApp links.
+
+Different pages may use different prefilled messages.
+
+Example:
+
+Product page:
+
+"Hello Aurexa Resin, I am interested in [PRODUCT NAME]. Please share the details."
+
+Category page:
+
+"Hello Aurexa Resin, I want to know about your [CATEGORY] products."
+
+Admin should be able to edit message templates.
+
+---
+
+# 62. EMAIL NOTIFICATIONS
+
+When an inquiry is submitted:
+
+Send email notification to configured admin email.
+
+Admin should be able to configure:
+
+* Recipient email
+* Sender name
+* Email subject
+* Notification template
+
+---
+
+# 63. SEO META TEMPLATE SYSTEM
+
+Create dynamic templates.
+
+Example Product:
+
+{Product Name} | Epoxy Resin Supplier in {Location} | Aurexa Resin
+
+Category:
+
+{Category Name} | Epoxy Resin Supplier & Wholesaler | Aurexa Resin
+
+Location:
+
+Epoxy Resin Supplier in {City} | Aurexa Resin
+
+Admin can customize templates.
+
+---
+
+# 64. OG IMAGE SYSTEM
+
+Allow default OG image.
+
+Allow individual:
+
+* Product OG image
+* Blog OG image
+* Page OG image
+* Category OG image
+* Landing page OG image
+
+---
+
+# 65. SOCIAL MEDIA
+
+Admin can add:
+
+* Instagram
+* Facebook
+* LinkedIn
+* YouTube
+* Pinterest
+* Other social URLs
+
+Only show platforms that are configured.
+
+---
+
+# 66. LEGAL PAGES
+
+Create dynamic:
+
+* Privacy Policy
+* Terms & Conditions
+* Disclaimer
+* Shipping Policy
+* Return/Refund Policy where applicable
+
+All editable through CMS.
+
+---
+
+# 67. ADMIN UI
+
+Admin dashboard should be:
+
+* Clean
+* Fast
+* Professional
+* Responsive
+* Easy for non-technical users
+
+Use clear navigation.
+
+Suggested:
+
+Dashboard
+
+Content
+
+* Pages
+* Products
+* Categories
+* Applications
+* Blogs
+* FAQs
+* Testimonials
+
+Leads
+
+* Inquiries
+
+SEO
+
+* SEO Settings
+* Redirects
+* Sitemap
+* Robots
+* Schema
+* SEO Audit
+* Locations
+
+Design
+
+* Header
+* Footer
+* Homepage
+* Navigation
+
+Integrations
+
+* Analytics
+* Search Console
+* Clarity
+* Tag Manager
+* Meta Pixel
+* Custom Code
+
+Settings
+
+* General
+* Contact
+* WhatsApp
+* Users
+* Security
+* Media
+
+---
+
+# 68. HOMEPAGE SECTION BUILDER
+
+Admin should be able to:
+
+* Add section
+* Delete section
+* Duplicate section
+* Hide section
+* Reorder section
+* Edit section
+* Change background
+* Change heading
+* Change image
+* Change CTA
+* Change content
+
+Homepage must not require developer intervention.
+
+---
+
+# 69. CUSTOM HTML/CSS/JS PER PAGE
+
+Every major CMS content type should optionally support:
+
+### Custom HTML
+
+### Custom CSS
+
+### Custom JavaScript
+
+### Custom Head Code
+
+This must be disabled by default for normal editors.
+
+Only authorized admin roles should access it.
+
+---
+
+# 70. SEO CUSTOM HTML
+
+Allow SEO manager to add:
+
+* Custom meta tags
+* JSON-LD
+* Verification tags
+* Alternate tags
+* Custom canonical
+* Other legitimate SEO tags
+
+Do not allow duplicate conflicting canonical/meta tags.
+
+---
+
+# 71. TECHNICAL SEO VALIDATION
+
+Before publishing, validate:
+
+* Slug
+* Meta title
+* Meta description
+* H1
+* Canonical
+* Schema JSON
+* Required fields
+* Broken links where possible
+
+Show warnings instead of blocking every publication.
+
+---
+
+# 72. IMAGE OPTIMIZATION
+
+When uploading images:
+
+* Compress
+* Resize where appropriate
+* Generate modern format
+* Preserve quality
+* Store original if configured
+* Generate responsive sizes
+* Add alt text
+* Add metadata
+
+Do not destroy original uploaded images.
+
+---
+
+# 73. ACCESSIBILITY
+
+Follow accessible practices:
+
+* Semantic HTML
+* Proper labels
+* Alt text
+* Keyboard navigation
+* Contrast
+* Focus states
+* Accessible forms
+* ARIA only where necessary
+
+---
+
+# 74. SEARCH ENGINE FRIENDLY RENDERING
+
+Important SEO content must be available in the server-rendered HTML.
+
+Do not depend entirely on client-side JavaScript to display important content.
+
+---
+
+# 75. STRUCTURED CONTENT
+
+Product pages should expose structured information clearly:
+
+Product Name
+Product Type
+Mixing Ratio
+Pack Size
+Application
+Finish
+Curing Information
+Recommended Use
+
+Only show fields when actual data exists.
+
+Do not invent technical specifications.
+
+---
+
+# 76. BRAND VOICE
+
+Website content should sound:
+
+* Professional
+* Clear
+* Trustworthy
+* Human
+* Industry-focused
+* Informative
+
+Avoid excessive marketing language.
+
+Avoid fake claims such as:
+
+"India's No.1"
+
+"Best in the world"
+
+"Guaranteed cheapest"
+
+unless the business owner provides verifiable proof.
+
+---
+
+# 77. FINAL TECHNICAL REQUIREMENT
+
+The final application must be a real working CMS.
+
+Do not build a fake frontend demo with static JSON.
+
+The following must actually work:
+
+* Admin login
+* Database
+* CRUD operations
+* Product management
+* Category management
+* Blog management
+* Page management
+* Landing page management
+* Inquiry management
+* Media upload
+* SEO settings
+* Schema settings
+* Header management
+* Footer management
+* Homepage section management
+* Analytics IDs
+* Search Console verification
+* Clarity ID
+* Custom scripts
+* Redirects
+* Sitemap
+* Robots.txt
+* Dynamic metadata
+* Dynamic URLs
+* Dynamic schema
+
+---
+
+# 78. SEED DATA
+
+Create initial demo/seed data for Aurexa Resin.
+
+Use the following products as initial examples:
+
+1. Clear Epoxy Resin
+2. Crystal Clear Epoxy Resin
+3. Transparent Epoxy Resin
+4. Art Epoxy Resin
+5. Casting Epoxy Resin
+6. Table Top Epoxy Resin
+7. Deep Pour Epoxy Resin
+8. River Table Epoxy Resin
+9. Coating Epoxy Resin
+10. Laminating Epoxy Resin
+11. Industrial Epoxy Resin
+12. Decorative Epoxy Resin
+13. Craft Epoxy Resin
+14. Jewellery Epoxy Resin
+15. Woodworking Epoxy Resin
+16. 2:1 Epoxy Resin
+17. 3:1 Epoxy Resin
+18. Fast Dry Epoxy Resin
+
+These should only be seed records.
+
+The Admin Panel must allow unlimited additional products.
+
+---
+
+# 79. IMPORTANT BUSINESS DATA
+
+Use:
+
+Brand:
+Aurexa Resin
+
+Phone:
++91 93164 94976
+
+Location:
+Surat, Gujarat, India
+
+Primary business intent:
+Epoxy Resin Supplier / Wholesaler / Dealer / Manufacturer
+
+Supply intent:
+B2B, bulk and other customer requirements as applicable.
+
+Do not invent email addresses, exact street addresses, certifications, manufacturing claims, certifications, prices or technical specifications.
+
+Leave unknown information editable from the CMS.
+
+---
+
+# 80. SEO STRATEGY
+
+Build the website architecture around topic clusters.
+
+Example:
+
+Epoxy Resin
+|
+|-- Clear Epoxy Resin
+|-- Art Epoxy Resin
+|-- Casting Epoxy Resin
+|-- Deep Pour Epoxy Resin
+|-- Table Top Epoxy Resin
+|-- Jewellery Epoxy Resin
+|-- Woodworking Epoxy Resin
+|
+|-- Applications
+|   |-- Jewellery
+|   |-- Resin Art
+|   |-- Tables
+|   |-- Woodworking
+|
+|-- Locations
+|   |-- Surat
+|   |-- Gujarat
+|   |-- India
+|
+|-- Blog
+|   |-- Educational Articles
+|   |-- Buying Guides
+|   |-- Application Guides
+|   |-- Technical Guides
+
+Build strong contextual internal linking between these entities.
+
+---
+
+# 81. FINAL UX REQUIREMENT
+
+The visitor should always have clear paths to:
+
+Explore Products
+View Categories
+Learn About Resin
+Send Inquiry
+WhatsApp
+Call
+Read Blog
+Contact Aurexa Resin
+
+The site should be informational first and lead-generation friendly.
+
+Do not make every section look like a sales banner.
+
+---
+
+# 82. DEVELOPMENT WORKFLOW
+
+Build the application in phases.
+
+Phase 1:
+Architecture + database + authentication
+
+Phase 2:
+Admin CMS
+
+Phase 3:
+Frontend design
+
+Phase 4:
+Products/categories
+
+Phase 5:
+Blogs/pages/landing pages
+
+Phase 6:
+SEO engine
+
+Phase 7:
+Schema/AEO/GEO/LLM SEO
+
+Phase 8:
+Inquiry + WhatsApp
+
+Phase 9:
+Analytics/integrations
+
+Phase 10:
+Performance/security
+
+Phase 11:
+Testing
+
+Phase 12:
+Production deployment
+
+---
+
+# 83. DO NOT DO THESE THINGS
+
+Do not:
+
+* Hardcode products
+* Hardcode categories
+* Hardcode blog posts
+* Hardcode homepage sections
+* Hardcode SEO metadata
+* Hardcode tracking IDs
+* Hardcode schema
+* Hardcode location pages
+* Hardcode navigation
+* Hardcode footer
+* Replace the original logo
+* Invent product specifications
+* Create fake testimonials
+* Create fake certifications
+* Create spammy location pages
+* Keyword stuff content
+* Generate hundreds of doorway pages
+* Add unnecessary animations
+* Build a fake CMS that does not actually save data
+
+---
+
+# 84. SUCCESS CRITERIA
+
+The project is complete only when a non-technical admin can log into the CMS and perform the following without changing source code:
+
+1. Add a new resin product.
+2. Add product images.
+3. Add product specifications.
+4. Create a new category.
+5. Create a new blog.
+6. Create a new landing page.
+7. Change homepage sections.
+8. Change header menu.
+9. Change footer.
+10. Change phone/WhatsApp number.
+11. Change SEO title.
+12. Change meta description.
+13. Add canonical.
+14. Add schema.
+15. Add FAQ.
+16. Add custom HTML.
+17. Add custom CSS.
+18. Add custom JS.
+19. Add Google Analytics ID.
+20. Add Search Console verification.
+21. Add Microsoft Clarity ID.
+22. Add Google Tag Manager.
+23. Add Meta Pixel.
+24. Create a 301 redirect.
+25. Control sitemap.
+26. Control robots.txt.
+27. Create a location page.
+28. Create a country-targeted page.
+29. Receive inquiries.
+30. Manage inquiries.
+31. Export inquiries.
+32. Publish/unpublish content.
+
+---
+
+# 85. MOST IMPORTANT FINAL INSTRUCTION TO THE AI CODING AGENT
+
+Do not simply generate a visually attractive website.
+
+Build a **complete production-ready CMS platform for Aurexa Resin**.
+
+The frontend, backend, database, admin panel, SEO system, product system, blog system, landing page builder, inquiry system, schema system, tracking integrations and technical SEO system must work together.
+
+Whenever content can reasonably be managed from the CMS, make it dynamic.
+
+Whenever an SEO setting can reasonably be managed from the CMS, make it dynamic.
+
+Whenever a marketing/tracking integration can reasonably be configured from the CMS, make it configurable without source-code changes.
+
+The website must be scalable so that Aurexa Resin can add hundreds of products, blogs, applications and SEO landing pages in the future without redesigning the architecture.
+
+Prioritize:
+
+**Performance + SEO + CMS flexibility + clean UX + security + scalability + lead generation + maintainability.**
+
+Do not stop after creating the frontend.
+
+Complete the backend, database, admin panel and all required CMS functionality.
+
+Before considering the project complete, test every major CRUD operation and every major SEO function end-to-end.

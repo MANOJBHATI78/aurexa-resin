@@ -1,0 +1,320 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+// ============ AUTH ============
+
+model AdminUser {
+  id           String   @id @default(cuid())
+  email        String   @unique
+  name         String
+  passwordHash String
+  role         String   @default("ADMIN") // SUPER_ADMIN | ADMIN | EDITOR | SEO_MANAGER
+  active       Boolean  @default(true)
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+}
+
+// ============ CATALOG ============
+
+model Category {
+  id          String    @id @default(cuid())
+  name        String
+  slug        String    @unique
+  description String?
+  longContent String?
+  image       String?
+  icon        String?
+  order       Int       @default(0)
+  featured    Boolean   @default(false)
+  published   Boolean   @default(true)
+  // SEO
+  seoTitle       String?
+  seoDescription String?
+  seoKeywords    String?
+  canonical      String?
+  ogTitle        String?
+  ogDescription  String?
+  ogImage        String?
+  noindex        Boolean @default(false)
+  customHeadCode String?
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+  products     Product[]
+  faqs         Faq[]    @relation("CategoryFaqs")
+}
+
+model Product {
+  id             String    @id @default(cuid())
+  name           String
+  slug           String    @unique
+  sku            String?
+  shortDesc      String?
+  longDesc       String?
+  image          String?
+  gallery        String? // JSON array of image objects {url, alt}
+  categoryId     String?
+  category       Category? @relation(fields: [categoryId], references: [id], onDelete: SetNull)
+  resinType      String?
+  mixingRatio    String?
+  packSizes      String? // JSON array [{size, sku, availability}]
+  curingInfo     String?
+  workingTime    String?
+  applications   String? // JSON array of strings
+  recommendedUse String?
+  pourDepth      String?
+  finish         String?
+  features       String? // JSON array of strings
+  benefits       String? // JSON array of strings
+  suitableFor    String? // JSON array of strings
+  safetyInfo     String?
+  specs          String? // JSON array of {label, value}
+  showPrice      Boolean   @default(false)
+  price          String?
+  featured       Boolean   @default(false)
+  published      Boolean   @default(true)
+  // SEO
+  seoTitle       String?
+  seoDescription String?
+  seoKeywords    String?
+  canonical      String?
+  ogTitle        String?
+  ogDescription  String?
+  ogImage        String?
+  noindex        Boolean @default(false)
+  customHeadCode String?
+  createdAt      DateTime @default(now())
+  updatedAt      DateTime @updatedAt
+}
+
+model Application {
+  id          String   @id @default(cuid())
+  name        String
+  slug        String   @unique
+  description String?
+  longContent String?
+  image       String?
+  icon        String?
+  order       Int      @default(0)
+  published   Boolean  @default(true)
+  seoTitle       String?
+  seoDescription String?
+  noindex        Boolean @default(false)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+}
+
+// ============ CONTENT ============
+
+model BlogPost {
+  id            String    @id @default(cuid())
+  title         String
+  slug          String    @unique
+  excerpt       String?
+  content       String? // markdown/HTML
+  featuredImage String?
+  author        String    @default("Aurexa Resin")
+  tags          String? // JSON array
+  readingTime   Int?
+  published     Boolean   @default(false)
+  publishedAt   DateTime?
+  // SEO
+  seoTitle       String?
+  seoDescription String?
+  seoKeywords    String?
+  canonical      String?
+  ogTitle        String?
+  ogDescription  String?
+  ogImage        String?
+  noindex        Boolean @default(false)
+  customHeadCode String?
+  createdAt      DateTime @default(now())
+  updatedAt      DateTime @updatedAt
+}
+
+model Page {
+  id          String   @id @default(cuid())
+  title       String
+  slug        String   @unique
+  content     String?
+  published   Boolean  @default(true)
+  showInFooter Boolean @default(true)
+  sortOrder   Int      @default(0)
+  // SEO
+  seoTitle       String?
+  seoDescription String?
+  noindex        Boolean @default(false)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+}
+
+model LandingPage {
+  id          String   @id @default(cuid())
+  title       String
+  slug        String   @unique
+  h1          String?
+  blocks      String? // JSON array of blocks [{type, data}]
+  published   Boolean  @default(true)
+  // SEO
+  seoTitle       String?
+  seoDescription String?
+  seoKeywords    String?
+  canonical      String?
+  ogTitle        String?
+  ogDescription  String?
+  ogImage        String?
+  noindex        Boolean @default(false)
+  customHeadCode String?
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+}
+
+model LocationPage {
+  id          String   @id @default(cuid())
+  country     String
+  state       String?
+  city        String?
+  slug        String   @unique
+  description String?
+  content     String?
+  keywords    String?
+  published   Boolean  @default(true)
+  seoTitle       String?
+  seoDescription String?
+  noindex        Boolean @default(false)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+}
+
+model Faq {
+  id         String    @id @default(cuid())
+  question   String
+  answer     String
+  order      Int       @default(0)
+  active     Boolean   @default(true)
+  // attach to: HOME, ABOUT, CONTACT, INQUIRY, CATEGORY:<id>, PRODUCT:<id>, LANDING:<id>, GLOBAL
+  entityType String    @default("GLOBAL")
+  entityId   String?
+  categoryId String?
+  category   Category? @relation("CategoryFaqs", fields: [categoryId], references: [id], onDelete: Cascade)
+  createdAt  DateTime  @default(now())
+  updatedAt  DateTime  @updatedAt
+}
+
+model Testimonial {
+  id        String   @id @default(cuid())
+  name      String
+  location  String?
+  review    String
+  rating    Int      @default(5)
+  product   String?
+  visible   Boolean  @default(false) // hidden by default — admin enables real reviews only
+  order     Int      @default(0)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+// ============ HOMEPAGE ============
+
+model HomeSection {
+  id      String  @id @default(cuid())
+  type    String // hero, categories, why_us, featured_products, applications, guide, comparison, b2b, info, testimonials, faq, cta
+  title   String?
+  data    String? // JSON config
+  order   Int     @default(0)
+  visible Boolean @default(true)
+}
+
+// ============ NAVIGATION ============
+
+model NavigationItem {
+  id       String          @id @default(cuid())
+  label    String
+  url      String
+  location String          @default("HEADER") // HEADER | FOOTER_QUICK | FOOTER_LEGAL
+  parentId String?
+  parent   NavigationItem? @relation("NavTree", fields: [parentId], references: [id], onDelete: Cascade)
+  children NavigationItem[] @relation("NavTree")
+  order    Int             @default(0)
+  enabled  Boolean         @default(true)
+}
+
+// ============ LEADS ============
+
+model Inquiry {
+  id          String   @id @default(cuid())
+  name        String
+  mobile      String
+  countryCode String   @default("+91")
+  city        String
+  country     String
+  email       String?
+  product     String?
+  resinType   String?
+  quantity    String?
+  application String?
+  message     String?
+  status      String   @default("NEW") // NEW | CONTACTED | FOLLOW_UP | QUALIFIED | CONVERTED | CLOSED
+  notes       String?
+  // attribution
+  sourcePage  String?
+  landingPage String?
+  currentUrl  String?
+  referrer    String?
+  utmSource   String?
+  utmMedium   String?
+  utmCampaign String?
+  utmTerm     String?
+  utmContent  String?
+  device      String?
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+}
+
+// ============ MEDIA ============
+
+model Media {
+  id          String   @id @default(cuid())
+  filename    String
+  url         String   @unique
+  mimeType    String?
+  size        Int?
+  alt         String?
+  title       String?
+  caption     String?
+  description String?
+  folder      String   @default("general")
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+}
+
+// ============ SETTINGS / SEO INFRA ============
+
+model SiteSetting {
+  key   String @id
+  value String
+}
+
+model Redirect {
+  id         String  @id @default(cuid())
+  fromPath   String  @unique
+  toPath     String
+  statusCode Int     @default(301)
+  active     Boolean @default(true)
+  createdAt  DateTime @default(now())
+}
+
+model CustomCode {
+  id        String  @id @default(cuid())
+  name      String
+  placement String  @default("HEAD") // HEAD | BODY_START | BODY_END | CSS | JS
+  scope     String  @default("GLOBAL") // GLOBAL | HOME | PAGE:<id> ...
+  content   String
+  enabled   Boolean @default(false)
+  createdAt DateTime @default(now())
+}

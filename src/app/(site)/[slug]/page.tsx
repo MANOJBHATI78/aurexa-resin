@@ -175,7 +175,7 @@ async function LandingBlock({
             <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
               {items.map((item, i) => (
                 <div key={i} className="card-lift rounded-xl border bg-card p-6">
-                  <CheckCircle2 className="h-6 w-6 text-gold-dark mb-3" aria-hidden />
+                  <CheckCircle2 className="h-6 w-6 text-forest-light mb-3" aria-hidden />
                   <h3 className="font-display font-semibold text-forest">{item.title}</h3>
                   <p className="text-sm text-muted-foreground leading-relaxed mt-2">{item.text}</p>
                 </div>

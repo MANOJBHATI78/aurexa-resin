@@ -68,7 +68,7 @@ export default async function AboutPage() {
                   "Support before and after every order",
                 ].map((t) => (
                   <li key={t} className="flex items-start gap-2.5 text-sm text-muted-foreground">
-                    <CheckCircle2 className="h-4 w-4 text-gold-dark mt-0.5 shrink-0" aria-hidden /> {t}
+                    <CheckCircle2 className="h-4 w-4 text-forest mt-0.5 shrink-0" aria-hidden /> {t}
                   </li>
                 ))}
               </ul>
@@ -85,7 +85,7 @@ export default async function AboutPage() {
                   { icon: Truck, title: "Pan-India Buyers", text: "Dispatch from Surat to artists and businesses across the country." },
                 ].map(({ icon: Icon, title, text }) => (
                   <div key={title} className="rounded-xl border bg-card p-5">
-                    <Icon className="h-5 w-5 text-gold-dark mb-2.5" aria-hidden />
+                    <Icon className="h-5 w-5 text-forest-light mb-2.5" aria-hidden />
                     <h3 className="font-display font-semibold text-forest text-[15px]">{title}</h3>
                     <p className="text-[13px] text-muted-foreground leading-relaxed mt-1.5">{text}</p>
                   </div>
@@ -96,7 +96,7 @@ export default async function AboutPage() {
 
           {/* Contact card */}
           <aside className="lg:col-span-2">
-            <div className="sticky top-24 rounded-xl border border-gold/40 overflow-hidden">
+            <div className="sticky top-24 rounded-xl border border-forest/25 overflow-hidden">
               <div className="hero-dark text-cream p-6">
                 <h2 className="font-display text-xl font-bold">Talk to {s.brandName}</h2>
                 <p className="text-cream/70 text-sm mt-2 leading-relaxed">
@@ -112,14 +112,14 @@ export default async function AboutPage() {
                     <Link href="/inquiry">Send an Inquiry</Link>
                   </Button>
                   {s.instagramUrl && (
-                    <Button asChild className="bg-transparent border border-gold/40 text-gold hover:bg-gold hover:text-forest-dark w-full">
+                    <Button asChild className="bg-transparent border border-forest/25 text-forest hover:bg-forest hover:text-cream w-full">
                       <a href={s.instagramUrl} target="_blank" rel="noopener noreferrer">
                         <Instagram className="h-4 w-4" /> Follow @aurexa_resin
                       </a>
                     </Button>
                   )}
                   {s.googleBusinessProfileUrl && (
-                    <Button asChild variant="outline" className="bg-transparent border-cream/30 text-cream/80 hover:text-gold w-full">
+                    <Button asChild variant="outline" className="bg-transparent border-cream/30 text-cream/80 hover:text-cream w-full">
                       <a href={s.googleBusinessProfileUrl} target="_blank" rel="noopener noreferrer">
                         <Globe className="h-4 w-4" /> Find Us on Google
                       </a>

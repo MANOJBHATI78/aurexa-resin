@@ -42,7 +42,7 @@ export default async function InquiryPage() {
           <ul className="mt-6 grid sm:grid-cols-3 gap-2 max-w-2xl text-sm text-cream/70">
             {["Response during business hours", "Wholesale pricing on bulk volumes", "Pan-India dispatch from Surat"].map((t) => (
               <li key={t} className="inline-flex items-start gap-1.5">
-                <CheckCircle2 className="h-4 w-4 text-gold shrink-0 mt-0.5" aria-hidden /> {t}
+                <CheckCircle2 className="h-4 w-4 text-forest shrink-0 mt-0.5" aria-hidden /> {t}
               </li>
             ))}
           </ul>

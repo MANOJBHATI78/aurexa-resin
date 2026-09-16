@@ -25,6 +25,7 @@ export function SiteHeader({ s, nav, categories }: { s: SiteSettings; nav: NavIt
   const [open, setOpen] = useState(false);
   const pathname = usePathname();
   const whatsappHref = waLink(s.whatsappNumber, s.whatsappDefaultMessage);
+  const telHref = `tel:${s.phone.replace(/\s/g, "")}`;
 
   // Build nav: Products item gets a dropdown of categories
   const items = nav.map((item) => {
@@ -44,144 +45,202 @@ export function SiteHeader({ s, nav, categories }: { s: SiteSettings; nav: NavIt
   const isActive = (url: string) =>
     url === "/" ? pathname === "/" : pathname.startsWith(url);
 
+  // Round icon button — always visible (desktop + mobile), teapost.in style
+  const iconBtn =
+    "inline-flex h-10 w-10 items-center justify-center rounded-full transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-cream/50";
+
   return (
     <header className={s.stickyHeader === "true" ? "sticky top-0 z-50" : "relative z-50"}>
       {/* Announcement bar */}
       {s.announcementEnabled === "true" && s.announcementBar && (
-        <div className="bg-forest-dark text-cream/90 text-xs sm:text-[13px] text-center px-4 py-2 border-b border-gold/20">
+        <div className="bg-forest-dark text-cream/85 text-[11px] sm:text-[13px] text-center px-4 py-2">
           <span className="inline-flex items-center gap-2">
-            <span className="w-1.5 h-1.5 rounded-full bg-gold inline-block" aria-hidden />
+            <span className="w-1.5 h-1.5 rounded-full bg-gold inline-block shrink-0" aria-hidden />
             {s.announcementBar}
           </span>
         </div>
       )}
 
-      <div className="hero-dark text-cream shadow-lg">
-        <div className="max-w-7xl mx-auto px-4 flex items-center justify-between h-16 md:h-20 gap-4">
-          {/* Logo — original Aurexa Resin artwork */}
-          <Link href="/" className="flex items-center gap-2.5 shrink-0" aria-label={`${s.brandName} — Home`}>
-            <Image
-              src={s.logo || "/uploads/aurexa-logo-crop.png"}
-              alt={`${s.brandName} — Epoxy Resin Wholesaler in Surat`}
-              width={64}
-              height={64}
-              priority
-              className="h-11 w-11 md:h-12 md:w-12 object-cover rounded-full border border-gold/40"
-            />
-            <span className="leading-tight">
-              <span className="font-display block text-base md:text-lg font-bold tracking-wide gold-gradient-text">
-                {s.brandName}
-              </span>
-              <span className="block text-[10px] md:text-[11px] tracking-[0.22em] text-cream/60 uppercase">
-                Epoxy Resin · Surat
-              </span>
-            </span>
-          </Link>
+      {/* Floating pill header — solid brand green, minimal gold */}
+      <div className="bg-forest-dark md:bg-transparent">
+        <div className="max-w-7xl mx-auto px-3 sm:px-4 pt-2 md:pt-4 pb-1">
+          <div className="rounded-2xl md:rounded-full bg-forest shadow-xl ring-1 ring-white/10">
+            <div className="flex items-center justify-between gap-2 h-14 md:h-[74px] pl-3 md:pl-6 pr-3 md:pr-4">
 
-          {/* Desktop nav */}
-          <nav className="hidden lg:flex items-center gap-1" aria-label="Main navigation">
-            {items.map((item) =>
-              item.children ? (
-                <DropdownMenu key={item.id}>
-                  <DropdownMenuTrigger asChild>
-                    <Link
-                      href={item.url}
-                      className={`px-3 py-2 rounded-md text-sm font-medium transition-colors flex items-center gap-1 hover:text-gold ${isActive(item.url) ? "text-gold" : "text-cream/85"}`}
-                    >
-                      {item.label}
-                      <ChevronDown className="h-3.5 w-3.5" />
-                    </Link>
-                  </DropdownMenuTrigger>
-                  <DropdownMenuContent align="start" className="w-64 max-h-96 overflow-y-auto">
-                    {item.children.map((child) => (
-                      <DropdownMenuItem key={child.id} asChild>
-                        <Link href={child.url} className="cursor-pointer">{child.label}</Link>
-                      </DropdownMenuItem>
-                    ))}
-                    <DropdownMenuItem asChild>
-                      <Link href={item.url} className="cursor-pointer font-semibold text-gold-dark">
-                        View All →
-                      </Link>
-                    </DropdownMenuItem>
-                  </DropdownMenuContent>
-                </DropdownMenu>
-              ) : (
-                <Link
-                  key={item.id}
-                  href={item.url}
-                  className={`px-3 py-2 rounded-md text-sm font-medium transition-colors hover:text-gold ${isActive(item.url) ? "text-gold" : "text-cream/85"}`}
-                >
-                  {item.label}
-                </Link>
-              )
-            )}
-          </nav>
+              {/* Logo — original Aurexa Resin artwork, uncropped */}
+              <Link
+                href="/"
+                className="flex items-center shrink-0"
+                aria-label={`${s.brandName} — Home`}
+              >
+                <Image
+                  src={s.logo || "/uploads/aurexa-logo.png"}
+                  alt={`${s.brandName} — Epoxy Resin Wholesaler in Surat`}
+                  width={520}
+                  height={284}
+                  priority
+                  className="h-10 md:h-[52px] w-auto object-contain rounded-lg"
+                />
+              </Link>
 
-          {/* Desktop CTAs */}
-          <div className="hidden lg:flex items-center gap-2 shrink-0">
-            <Button variant="outline" size="sm" asChild className="btn-outline-light border-cream/40 text-cream hover:text-gold">
-              <a href={`tel:${s.phone.replace(/\s/g, "")}`} aria-label={`Call ${s.brandName}`}>
-                <Phone className="h-4 w-4" /> {s.phone}
-              </a>
-            </Button>
-            <Button size="sm" asChild className="btn-gold">
-              <Link href={s.headerCtaUrl || "/inquiry"}>{s.headerCtaLabel || "Send Inquiry"}</Link>
-            </Button>
-          </div>
-
-          {/* Mobile menu */}
-          <Sheet open={open} onOpenChange={setOpen}>
-            <SheetTrigger asChild className="lg:hidden">
-              <Button variant="ghost" size="icon" className="text-cream hover:text-gold" aria-label="Open menu">
-                <Menu className="h-6 w-6" />
-              </Button>
-            </SheetTrigger>
-            <SheetContent side="right" className="w-80 bg-forest-dark text-cream border-l border-gold/30 overflow-y-auto">
-              <SheetTitle className="font-display gold-gradient-text text-lg">{s.brandName}</SheetTitle>
-              <nav className="mt-4 flex flex-col gap-1" aria-label="Mobile navigation">
-                {items.map((item) => (
-                  <div key={item.id}>
-                    <Link
-                      href={item.url}
-                      onClick={() => setOpen(false)}
-                      className={`block px-3 py-2.5 rounded-md text-[15px] font-medium hover:bg-white/5 ${isActive(item.url) ? "text-gold" : "text-cream/90"}`}
-                    >
-                      {item.label}
-                    </Link>
-                    {item.children && (
-                      <div className="ml-4 border-l border-gold/20 pl-2">
+              {/* Desktop nav — uppercase, teapost style */}
+              <nav className="hidden lg:flex items-center gap-0.5 mx-auto" aria-label="Main navigation">
+                {items.map((item) =>
+                  item.children ? (
+                    <DropdownMenu key={item.id}>
+                      <DropdownMenuTrigger asChild>
+                        <Link
+                          href={item.url}
+                          className={`flex items-center gap-1 px-3.5 py-2 rounded-full text-[13px] font-medium uppercase tracking-wide transition-colors ${
+                            isActive(item.url)
+                              ? "bg-white/15 text-white"
+                              : "text-cream/85 hover:bg-white/10 hover:text-white"
+                          }`}
+                        >
+                          {item.label}
+                          <ChevronDown className="h-3 w-3" aria-hidden />
+                        </Link>
+                      </DropdownMenuTrigger>
+                      <DropdownMenuContent align="start" className="w-64 max-h-96 overflow-y-auto rounded-xl border-forest/10">
                         {item.children.map((child) => (
-                          <Link
-                            key={child.id}
-                            href={child.url}
-                            onClick={() => setOpen(false)}
-                            className="block px-3 py-1.5 text-sm text-cream/70 hover:text-gold rounded-md"
-                          >
-                            {child.label}
-                          </Link>
+                          <DropdownMenuItem key={child.id} asChild>
+                            <Link href={child.url} className="cursor-pointer text-forest hover:text-forest">
+                              {child.label}
+                            </Link>
+                          </DropdownMenuItem>
                         ))}
-                      </div>
-                    )}
-                  </div>
-                ))}
+                        <DropdownMenuItem asChild>
+                          <Link href={item.url} className="cursor-pointer font-semibold text-forest">
+                            View All →
+                          </Link>
+                        </DropdownMenuItem>
+                      </DropdownMenuContent>
+                    </DropdownMenu>
+                  ) : (
+                    <Link
+                      key={item.id}
+                      href={item.url}
+                      className={`px-3.5 py-2 rounded-full text-[13px] font-medium uppercase tracking-wide transition-colors ${
+                        isActive(item.url)
+                          ? "bg-white/15 text-white"
+                          : "text-cream/85 hover:bg-white/10 hover:text-white"
+                      }`}
+                    >
+                      {item.label}
+                    </Link>
+                  )
+                )}
               </nav>
-              <div className="mt-6 flex flex-col gap-2 border-t border-gold/20 pt-4">
-                <Button asChild className="btn-gold w-full">
-                  <Link href="/inquiry" onClick={() => setOpen(false)}>Send Inquiry</Link>
-                </Button>
-                <Button asChild variant="outline" className="btn-outline-light w-full">
-                  <a href={whatsappHref} target="_blank" rel="noopener noreferrer">
-                    <MessageCircle className="h-4 w-4" /> WhatsApp Us
+
+              {/* Action cluster — icons visible on ALL screen sizes */}
+              <div className="flex items-center gap-1.5 md:gap-2 shrink-0">
+                {s.headerShowPhone !== "false" && (
+                  <a
+                    href={telHref}
+                    aria-label={`Call ${s.brandName} — ${s.phone}`}
+                    className={`${iconBtn} border border-cream/30 text-cream hover:bg-cream hover:text-forest`}
+                  >
+                    <Phone className="h-4 w-4" aria-hidden />
                   </a>
-                </Button>
-                <Button asChild variant="outline" className="btn-outline-light w-full">
-                  <a href={`tel:${s.phone.replace(/\s/g, "")}`}>
-                    <Phone className="h-4 w-4" /> {s.phone}
+                )}
+                {s.headerShowWhatsApp !== "false" && (
+                  <a
+                    href={whatsappHref}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    aria-label="WhatsApp us"
+                    className={`${iconBtn} bg-[#25D366] text-white hover:bg-[#1fb857]`}
+                  >
+                    <MessageCircle className="h-4 w-4" aria-hidden />
                   </a>
-                </Button>
+                )}
+                {s.headerShowCta !== "false" && (
+                  <Button
+                    asChild
+                    size="sm"
+                    className="hidden md:inline-flex btn-gold rounded-full px-4"
+                  >
+                    <Link href={s.headerCtaUrl || "/inquiry"}>{s.headerCtaLabel || "Send Inquiry"}</Link>
+                  </Button>
+                )}
+
+                {/* Mobile menu */}
+                <Sheet open={open} onOpenChange={setOpen}>
+                  <SheetTrigger asChild className="lg:hidden">
+                    <button
+                      type="button"
+                      aria-label="Open menu"
+                      className={`${iconBtn} border border-cream/30 text-cream hover:bg-cream hover:text-forest ml-0.5`}
+                    >
+                      <Menu className="h-5 w-5" aria-hidden />
+                    </button>
+                  </SheetTrigger>
+                  <SheetContent side="right" className="w-80 bg-forest-dark text-cream border-l border-white/10 overflow-y-auto p-0">
+                    <div className="px-5 pt-6 pb-4 border-b border-white/10">
+                      <SheetTitle className="sr-only">{s.brandName} menu</SheetTitle>
+                      <Image
+                        src={s.logo || "/uploads/aurexa-logo.png"}
+                        alt={`${s.brandName} logo`}
+                        width={520}
+                        height={284}
+                        className="h-14 w-auto object-contain"
+                      />
+                    </div>
+                    <nav className="px-3 py-4 flex flex-col gap-0.5" aria-label="Mobile navigation">
+                      {items.map((item) => (
+                        <div key={item.id}>
+                          <Link
+                            href={item.url}
+                            onClick={() => setOpen(false)}
+                            className={`block px-3 py-2.5 rounded-lg text-sm font-medium uppercase tracking-wide transition-colors ${
+                              isActive(item.url) ? "bg-white/15 text-white" : "text-cream/90 hover:bg-white/10 hover:text-white"
+                            }`}
+                          >
+                            {item.label}
+                          </Link>
+                          {item.children && (
+                            <div className="ml-4 border-l border-white/10 pl-2">
+                              {item.children.map((child) => (
+                                <Link
+                                  key={child.id}
+                                  href={child.url}
+                                  onClick={() => setOpen(false)}
+                                  className="block px-3 py-2 text-[13px] text-cream/70 hover:text-cream rounded-md"
+                                >
+                                  {child.label}
+                                </Link>
+                              ))}
+                            </div>
+                          )}
+                        </div>
+                      ))}
+                    </nav>
+                    <div className="mt-auto px-4 pb-6 pt-4 border-t border-white/10 flex flex-col gap-2">
+                      {s.headerShowCta !== "false" && (
+                        <Button asChild className="btn-gold w-full rounded-full">
+                          <Link href={s.headerCtaUrl || "/inquiry"} onClick={() => setOpen(false)}>
+                            {s.headerCtaLabel || "Send Inquiry"}
+                          </Link>
+                        </Button>
+                      )}
+                      <div className="grid grid-cols-2 gap-2">
+                        <Button asChild variant="outline" className="btn-outline-light w-full rounded-full">
+                          <a href={telHref}>
+                            <Phone className="h-4 w-4" /> Call
+                          </a>
+                        </Button>
+                        <Button asChild className="w-full rounded-full bg-[#25D366] hover:bg-[#1fb857] text-white border-transparent">
+                          <a href={whatsappHref} target="_blank" rel="noopener noreferrer">
+                            <MessageCircle className="h-4 w-4" /> WhatsApp
+                          </a>
+                        </Button>
+                      </div>
+                    </div>
+                  </SheetContent>
+                </Sheet>
               </div>
-            </SheetContent>
-          </Sheet>
+            </div>
+          </div>
         </div>
       </div>
     </header>

@@ -89,7 +89,7 @@ export default async function BlogDetailPage({ params }: { params: Promise<{ slu
           {tags.length > 0 && (
             <div className="flex flex-wrap gap-2 mt-4">
               {tags.map((t) => (
-                <span key={t} className="text-xs rounded-full bg-forest-mist text-forest px-3 py-1 border border-gold/25">#{t}</span>
+                <span key={t} className="text-xs rounded-full bg-forest-mist text-forest px-3 py-1 border border-forest/15">#{t}</span>
               ))}
             </div>
           )}
@@ -101,7 +101,7 @@ export default async function BlogDetailPage({ params }: { params: Promise<{ slu
         )}
 
         {post.excerpt && (
-          <p className="text-lg text-muted-foreground leading-relaxed border-l-2 border-gold pl-4 mb-8">{post.excerpt}</p>
+          <p className="text-lg text-muted-foreground leading-relaxed border-l-2 border-forest/30 pl-4 mb-8">{post.excerpt}</p>
         )}
 
         <div className="prose-aurexa text-foreground/90 text-[15.5px]">
@@ -144,7 +144,7 @@ export default async function BlogDetailPage({ params }: { params: Promise<{ slu
             <h2 className="font-display text-xl font-bold text-forest mb-4">Related Products</h2>
             <div className="grid sm:grid-cols-2 gap-3">
               {relatedProducts.map((p: { slug: string; name: string }) => (
-                <Link key={p.slug} href={`/products/${p.slug}`} className="card-lift rounded-lg border bg-card px-4 py-3 text-sm font-medium text-forest hover:text-gold-dark">
+                <Link key={p.slug} href={`/products/${p.slug}`} className="card-lift rounded-lg border bg-card px-4 py-3 text-sm font-medium text-forest hover:text-forest-light">
                   {p.name}
                 </Link>
               ))}
@@ -168,7 +168,7 @@ export default async function BlogDetailPage({ params }: { params: Promise<{ slu
         )}
 
         <div className="mt-10">
-          <Button asChild variant="ghost" className="text-forest hover:text-gold-dark">
+          <Button asChild variant="ghost" className="text-forest hover:text-forest-light">
             <Link href="/blog"><ArrowLeft className="h-4 w-4" /> Back to Blog</Link>
           </Button>
         </div>

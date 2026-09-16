@@ -148,8 +148,8 @@
 
 .hero-dark {
   background:
-    radial-gradient(1200px 500px at 70% -10%, rgba(212, 175, 55, 0.14), transparent 60%),
-    radial-gradient(900px 500px at 10% 110%, rgba(212, 175, 55, 0.1), transparent 60%),
+    radial-gradient(1200px 500px at 70% -10%, rgba(212, 175, 55, 0.06), transparent 60%),
+    radial-gradient(900px 500px at 10% 110%, rgba(212, 175, 55, 0.04), transparent 60%),
     linear-gradient(160deg, #0b3d2e 0%, #072a20 70%, #061f18 100%);
 }
 
@@ -163,7 +163,7 @@
 .card-lift:hover {
   transform: translateY(-4px);
   box-shadow: 0 14px 34px -14px rgba(7, 42, 32, 0.28);
-  border-color: rgba(212, 175, 55, 0.55);
+  border-color: rgba(11, 61, 46, 0.35);
 }
 
 .btn-gold {
@@ -184,14 +184,14 @@
   transition: background 0.2s ease, border-color 0.2s ease;
 }
 .btn-outline-light:hover {
-  background: rgba(247, 244, 236, 0.1);
-  border-color: rgba(212, 175, 55, 0.7);
+  background: rgba(247, 244, 236, 0.12);
+  border-color: rgba(247, 244, 236, 0.75);
 }
 
 .divider-gold {
   height: 2px;
   width: 64px;
-  background: linear-gradient(90deg, #d4af37, #e9cd7a, transparent);
+  background: linear-gradient(90deg, #0b3d2e, #a8842c, transparent);
   border-radius: 2px;
 }
 

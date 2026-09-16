@@ -37,7 +37,7 @@ export default async function BlogListingPage() {
       />
       <section className="hero-dark text-cream">
         <div className="max-w-7xl mx-auto px-4 py-12 lg:py-16">
-          <p className="inline-flex items-center gap-2 text-xs tracking-[0.25em] uppercase text-gold mb-3">
+          <p className="inline-flex items-center gap-2 text-xs tracking-[0.25em] uppercase text-forest-light mb-3">
             <BookOpen className="h-4 w-4" aria-hidden /> Resin Knowledge
           </p>
           <h1 className="font-display text-3xl md:text-4xl font-bold">Epoxy Resin Guides & Articles</h1>
@@ -58,7 +58,7 @@ export default async function BlogListingPage() {
                    
                   <img src={post.featuredImage} alt={post.title} className="w-full h-full object-cover" loading="lazy" />
                 ) : (
-                  <span className="font-display text-gold/60 text-4xl" aria-hidden>❞</span>
+                  <span className="font-display text-forest/20 text-4xl" aria-hidden>❞</span>
                 )}
               </Link>
               <div className="p-5 flex flex-col gap-2.5 flex-1">
@@ -73,10 +73,10 @@ export default async function BlogListingPage() {
                   )}
                 </div>
                 <h2 className="font-display font-semibold text-forest text-[17px] leading-snug">
-                  <Link href={`/blog/${post.slug}`} className="hover:text-gold-dark transition-colors">{post.title}</Link>
+                  <Link href={`/blog/${post.slug}`} className="hover:text-forest-light transition-colors">{post.title}</Link>
                 </h2>
                 {post.excerpt && <p className="text-sm text-muted-foreground leading-relaxed line-clamp-3">{post.excerpt}</p>}
-                <span className="mt-auto inline-flex items-center gap-1.5 text-[13px] font-semibold text-gold-dark pt-2">
+                <span className="mt-auto inline-flex items-center gap-1.5 text-[13px] font-semibold text-forest-light pt-2">
                   Read article <ArrowRight className="h-3.5 w-3.5" />
                 </span>
               </div>

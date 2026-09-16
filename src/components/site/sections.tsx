@@ -45,13 +45,17 @@ function Heading({ text, sub, light }: { text?: string; sub?: string; light?: bo
 
 function HeroSection({ data, s }: { data: any; s: SiteSettings }) {
   const wa = waLink(s.whatsappNumber, s.whatsappDefaultMessage);
+  const bannerOn = s.heroBannerEnabled === "true";
+  const desktopBanner = bannerOn && s.heroBannerImage ? s.heroBannerImage : "";
+  const mobileBanner = bannerOn && s.heroBannerMobileImage ? s.heroBannerMobileImage : "";
+  const bannerAlt = s.heroBannerAlt || "Aurexa Resin — epoxy resin wholesaler in Surat, Gujarat";
   return (
     <section className="hero-dark text-cream relative overflow-hidden">
       <div className="max-w-7xl mx-auto px-4 py-16 md:py-24 lg:py-28 relative">
         <div className="grid lg:grid-cols-5 gap-10 items-center">
           <div className="lg:col-span-3">
-            <p className="inline-flex items-center gap-2 text-xs md:text-sm tracking-[0.25em] uppercase text-gold border border-gold/40 rounded-full px-4 py-1.5 mb-6">
-              <Sparkles className="h-3.5 w-3.5" aria-hidden /> Epoxy Resin Wholesaler · Surat, Gujarat
+            <p className="inline-flex items-center gap-2 text-xs md:text-sm tracking-[0.25em] uppercase text-cream/90 border border-white/25 rounded-full px-4 py-1.5 mb-6">
+              <Sparkles className="h-3.5 w-3.5 text-gold" aria-hidden /> Epoxy Resin Wholesaler · Surat, Gujarat
             </p>
             <h1 className="font-display text-3xl md:text-5xl lg:text-[3.4rem] font-bold leading-[1.15]">
               {data.headline || "Premium Epoxy Resin Solutions"}
@@ -78,28 +82,55 @@ function HeroSection({ data, s }: { data: any; s: SiteSettings }) {
                 </Button>
               )}
             </div>
-            <div className="mt-8 flex flex-wrap gap-x-6 gap-y-2 text-sm text-cream/60">
+            <div className="mt-8 flex flex-wrap gap-x-6 gap-y-2 text-sm text-cream/65">
               {["Wholesale & Bulk Supply", "Pan-India Dispatch", "Single-Piece Orders Welcome"].map((t) => (
                 <span key={t} className="inline-flex items-center gap-1.5">
-                  <CheckCircle2 className="h-4 w-4 text-gold" aria-hidden /> {t}
+                  <CheckCircle2 className="h-4 w-4 text-gold/80" aria-hidden /> {t}
                 </span>
               ))}
             </div>
           </div>
-          <div className="lg:col-span-2 flex justify-center lg:justify-end">
-            <div className="relative">
-              <div className="absolute inset-0 rounded-full bg-gold/20 blur-3xl scale-90" aria-hidden />
-              <Image
-                src="/uploads/aurexa-logo.png"
-                alt="Aurexa Resin — Epoxy Resin Wholesaler in Surat, Gujarat. Original brand logo featuring a golden resin drop."
-                width={420}
-                height={420}
-                priority
-                className="relative rounded-2xl border border-gold/30 shadow-2xl w-full max-w-[380px] h-auto"
-              />
+          {/* Desktop visual — hidden on mobile when the mobile banner is active (avoids duplicate branding) */}
+          <div className={`lg:col-span-2 justify-center lg:justify-end ${mobileBanner ? "hidden lg:flex" : "flex"}`}>
+            <div className="relative w-full max-w-[380px] lg:max-w-[460px]">
+              {desktopBanner ? (
+                <Image
+                  src={desktopBanner}
+                  alt={bannerAlt}
+                  width={900}
+                  height={600}
+                  priority
+                  className="relative rounded-3xl border border-white/10 shadow-2xl w-full h-auto object-cover"
+                />
+              ) : (
+                <>
+                  <div className="absolute inset-0 rounded-full bg-gold/10 blur-3xl scale-90" aria-hidden />
+                  <Image
+                    src="/uploads/aurexa-logo.png"
+                    alt="Aurexa Resin — Epoxy Resin Wholesaler in Surat, Gujarat. Original brand logo featuring a golden resin drop."
+                    width={420}
+                    height={420}
+                    priority
+                    className="relative rounded-2xl border border-white/10 shadow-2xl w-full max-w-[380px] h-auto"
+                  />
+                </>
+              )}
             </div>
           </div>
         </div>
+        {/* Mobile-size banner — always visible on small screens */}
+        {mobileBanner && (
+          <div className="lg:hidden mt-10">
+            <Image
+              src={mobileBanner}
+              alt={bannerAlt}
+              width={1080}
+              height={1350}
+              priority
+              className="w-full max-w-sm mx-auto rounded-3xl border border-white/10 shadow-2xl h-auto"
+            />
+          </div>
+        )}
         {data.seoText && <p className="sr-only">{data.seoText}</p>}
       </div>
     </section>
@@ -151,7 +182,7 @@ function WhyUsSection({ data }: { data: any }) {
             const Icon = ICONS[item.icon || ""] || Gem;
             return (
               <div key={i} className="card-lift rounded-xl border bg-card p-6">
-                <span className="h-12 w-12 rounded-xl gold-gradient-bg flex items-center justify-center mb-4">
+                <span className="h-12 w-12 rounded-xl bg-forest flex items-center justify-center mb-4">
                   <Icon className="h-6 w-6 text-forest-dark" aria-hidden />
                 </span>
                 <h3 className="font-display font-semibold text-forest text-lg">{item.title}</h3>
@@ -226,8 +257,8 @@ export async function ApplicationGrid({ data, limit = 12 }: { data?: any; limit?
               href={`/applications/${a.slug}`}
               className="card-lift rounded-xl border bg-card p-5 flex flex-col items-center text-center gap-3"
             >
-              <span className="h-12 w-12 rounded-full border-2 border-gold/50 hero-dark flex items-center justify-center">
-                <Palette className="h-5 w-5 text-gold" aria-hidden />
+              <span className="h-12 w-12 rounded-full border-2 border-white/25 hero-dark flex items-center justify-center">
+                <Palette className="h-5 w-5 text-cream" aria-hidden />
               </span>
               <h3 className="font-display font-semibold text-forest text-sm leading-snug">{a.name}</h3>
               {a.description && (
@@ -251,7 +282,7 @@ function GuideSection({ data }: { data: any }) {
         <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-4">
           {steps.map((step, i) => (
             <div key={i} className="relative rounded-xl border bg-card p-6 card-lift">
-              <span className="absolute -top-3.5 left-6 h-7 w-7 rounded-full gold-gradient-bg text-forest-dark text-sm font-bold flex items-center justify-center">
+              <span className="absolute -top-3.5 left-6 h-7 w-7 rounded-full bg-forest text-cream text-sm font-bold flex items-center justify-center">
                 {i + 1}
               </span>
               <h3 className="font-display font-semibold text-forest mt-3">{step.title}</h3>
@@ -313,7 +344,7 @@ function B2BSection({ data, s }: { data: any; s: SiteSettings }) {
       <div className="max-w-7xl mx-auto px-4">
         <div className="grid lg:grid-cols-2 gap-10 items-center">
           <div>
-            <span className="inline-flex items-center gap-2 text-xs tracking-[0.25em] uppercase text-gold mb-4">
+            <span className="inline-flex items-center gap-2 text-xs tracking-[0.25em] uppercase text-forest-light mb-4">
               <Handshake className="h-4 w-4" aria-hidden /> Wholesale · Bulk · B2B
             </span>
             <h2 className="font-display text-2xl md:text-4xl font-bold text-cream">{data?.heading}</h2>
@@ -327,8 +358,8 @@ function B2BSection({ data, s }: { data: any; s: SiteSettings }) {
           </div>
           <div className="grid sm:grid-cols-2 gap-4">
             {items.map((item, i) => (
-              <div key={i} className="rounded-xl border border-gold/25 bg-white/[0.04] p-5">
-                <CheckCircle2 className="h-5 w-5 text-gold mb-2.5" aria-hidden />
+              <div key={i} className="rounded-xl border border-forest/15 bg-white/[0.04] p-5">
+                <CheckCircle2 className="h-5 w-5 text-cream mb-2.5" aria-hidden />
                 <h3 className="font-display font-semibold text-cream text-[15px]">{item.title}</h3>
                 <p className="text-[13px] text-cream/60 leading-relaxed mt-1.5">{item.text}</p>
               </div>
@@ -358,10 +389,10 @@ function InfoSection({ data }: { data: any }) {
                 <GraduationCap className="h-5 w-5 text-forest" aria-hidden />
               </span>
               <div>
-                <h3 className="font-semibold text-forest text-[15px] leading-snug group-hover:text-gold-dark transition-colors">
+                <h3 className="font-semibold text-forest text-[15px] leading-snug group-hover:text-forest-light transition-colors">
                   {l.title}
                 </h3>
-                <span className="inline-flex items-center gap-1 text-xs text-gold-dark font-medium mt-1.5">
+                <span className="inline-flex items-center gap-1 text-xs text-forest-light font-medium mt-1.5">
                   Read guide <ArrowRight className="h-3 w-3 transition-transform group-hover:translate-x-0.5" />
                 </span>
               </div>
@@ -403,7 +434,7 @@ export async function TestimonialsBlock({ data }: { data?: any }) {
                 “{t.review}”
               </blockquote>
               <figcaption className="mt-4 flex items-center gap-3">
-                <span className="h-9 w-9 rounded-full hero-dark flex items-center justify-center font-display text-gold text-sm font-bold">
+                <span className="h-9 w-9 rounded-full hero-dark flex items-center justify-center font-display text-cream text-sm font-bold">
                   {t.name.charAt(0)}
                 </span>
                 <span>
@@ -435,7 +466,7 @@ function CtaSection({ data, s }: { data: any; s: SiteSettings }) {
   return (
     <section className="py-16 lg:py-20 hero-dark text-cream">
       <div className="max-w-4xl mx-auto px-4 text-center">
-        <Scale className="h-10 w-10 text-gold mx-auto mb-5" aria-hidden />
+        <Scale className="h-10 w-10 text-cream/85 mx-auto mb-5" aria-hidden />
         <h2 className="font-display text-2xl md:text-4xl font-bold">{data?.heading}</h2>
         {data?.text && <p className="mt-4 text-cream/70 leading-relaxed max-w-2xl mx-auto">{data.text}</p>}
         <div className="mt-8 flex flex-wrap justify-center gap-3">

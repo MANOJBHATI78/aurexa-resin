@@ -141,8 +141,8 @@ export function InquiryForm({ s, defaultProduct, compact, sourcePage }: Props) {
   if (done) {
     const waMsg = `Hello ${s.brandName}, I just submitted an inquiry on your website. My name is ${submittedName}.`;
     return (
-      <div className="rounded-xl border border-gold/40 bg-gradient-to-b from-gold/10 to-transparent p-8 text-center" role="status">
-        <CheckCircle2 className="h-14 w-14 mx-auto text-gold-dark" aria-hidden />
+      <div className="rounded-xl border border-forest/25 bg-gradient-to-b from-forest-mist to-transparent p-8 text-center" role="status">
+        <CheckCircle2 className="h-14 w-14 mx-auto text-forest-light" aria-hidden />
         <h3 className="font-display text-xl font-bold text-forest mt-4">
           Thank You{submittedName ? `, ${submittedName.split(" ")[0]}` : ""}!
         </h3>
@@ -273,7 +273,7 @@ export function InquiryForm({ s, defaultProduct, compact, sourcePage }: Props) {
       </div>
       <p className="text-xs text-muted-foreground">
         By submitting, you agree to be contacted about your inquiry. We respect your privacy — see our{" "}
-        <a href="/p/privacy-policy" className="underline underline-offset-2 hover:text-gold-dark">Privacy Policy</a>.
+        <a href="/p/privacy-policy" className="underline underline-offset-2 hover:text-forest-light">Privacy Policy</a>.
       </p>
     </form>
   );

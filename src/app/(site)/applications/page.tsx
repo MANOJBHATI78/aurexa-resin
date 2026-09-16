@@ -31,7 +31,7 @@ export default async function ApplicationsPage() {
       />
       <section className="hero-dark text-cream">
         <div className="max-w-7xl mx-auto px-4 py-12 lg:py-16">
-          <p className="inline-flex items-center gap-2 text-xs tracking-[0.25em] uppercase text-gold mb-3">
+          <p className="inline-flex items-center gap-2 text-xs tracking-[0.25em] uppercase text-forest-light mb-3">
             <Palette className="h-4 w-4" aria-hidden /> What Will You Make?
           </p>
           <h1 className="font-display text-3xl md:text-4xl font-bold">Resin Applications</h1>

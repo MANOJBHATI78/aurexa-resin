@@ -61,7 +61,7 @@ export default async function LegalPage({ params }: { params: Promise<{ slug: st
           >
             {page.content || ""}
           </ReactMarkdown>
-          <div className="mt-10 rounded-xl border border-gold/40 bg-gold/5 p-6 text-center">
+          <div className="mt-10 rounded-xl border border-forest/25 bg-forest-mist/60 p-6 text-center">
             <p className="text-forest font-medium">Questions about this policy?</p>
             <p className="text-sm text-muted-foreground mt-1">Contact {s.brandName} — {s.phone}</p>
             <Button asChild className="btn-gold mt-4">

@@ -24,7 +24,7 @@ function PlaceholderTile({ name }: { name: string }) {
     .join("")
     .toUpperCase();
   return (
-    <div className="w-full h-full hero-dark flex flex-col items-center justify-center gap-2 text-gold">
+    <div className="w-full h-full hero-dark flex flex-col items-center justify-center gap-2 text-cream/85">
       <Droplets className="h-10 w-10 opacity-80" aria-hidden />
       <span className="font-display text-2xl tracking-widest opacity-90">{initials}</span>
       <span className="text-[10px] tracking-[0.25em] uppercase text-cream/40">Aurexa Resin</span>
@@ -52,7 +52,7 @@ export function ProductCard({ product, s }: { product: ProductCardData; s: SiteS
       <div className="flex flex-col flex-1 p-4 gap-2">
         <div className="flex items-center gap-2 flex-wrap">
           {product.mixingRatio && (
-            <span className="inline-flex items-center gap-1 text-[11px] font-medium text-gold-dark bg-gold/10 border border-gold/30 rounded-full px-2 py-0.5">
+            <span className="inline-flex items-center gap-1 text-[11px] font-medium text-forest bg-forest-mist border border-forest/20 rounded-full px-2 py-0.5">
               <Layers className="h-3 w-3" /> {product.mixingRatio} ratio
             </span>
           )}
@@ -61,7 +61,7 @@ export function ProductCard({ product, s }: { product: ProductCardData; s: SiteS
           )}
         </div>
         <h3 className="font-display font-semibold text-[15px] leading-snug text-forest">
-          <Link href={`/products/${product.slug}`} className="hover:text-gold-dark transition-colors">
+          <Link href={`/products/${product.slug}`} className="hover:text-forest-light transition-colors">
             {product.name}
           </Link>
         </h3>
@@ -71,7 +71,7 @@ export function ProductCard({ product, s }: { product: ProductCardData; s: SiteS
         <div className="mt-auto pt-3 flex items-center gap-2">
           <Link
             href={`/products/${product.slug}`}
-            className="text-[13px] font-semibold text-forest hover:text-gold-dark underline-offset-4 hover:underline"
+            className="text-[13px] font-semibold text-forest hover:text-forest-light underline-offset-4 hover:underline"
           >
             View Details
           </Link>
@@ -98,10 +98,10 @@ export function CategoryCard({ name, slug, description, count }: { name: string;
       aria-label={`${name} category`}
     >
       <div className="flex items-center gap-3">
-        <span className="h-10 w-10 rounded-lg gold-gradient-bg flex items-center justify-center shrink-0">
-          <Droplets className="h-5 w-5 text-forest-dark" aria-hidden />
+        <span className="h-10 w-10 rounded-lg bg-forest flex items-center justify-center shrink-0">
+          <Droplets className="h-5 w-5 text-cream" aria-hidden />
         </span>
-        <h3 className="font-display font-semibold text-[15px] text-forest group-hover:text-gold-dark transition-colors leading-snug">
+        <h3 className="font-display font-semibold text-[15px] text-forest group-hover:text-forest-light transition-colors leading-snug">
           {name}
         </h3>
       </div>
@@ -109,7 +109,7 @@ export function CategoryCard({ name, slug, description, count }: { name: string;
         <p className="text-[13px] text-muted-foreground leading-relaxed line-clamp-3">{description}</p>
       )}
       {typeof count === "number" && count > 0 && (
-        <span className="mt-auto inline-flex items-center gap-1 text-xs text-gold-dark font-medium pt-2">
+        <span className="mt-auto inline-flex items-center gap-1 text-xs text-forest-light font-medium pt-2">
           <Package className="h-3.5 w-3.5" /> {count} product{count > 1 ? "s" : ""}
         </span>
       )}

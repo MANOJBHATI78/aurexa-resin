@@ -47,32 +47,32 @@ export default async function ContactPage() {
                 <h2 className="font-display font-semibold text-forest text-lg mb-4">Business Details</h2>
                 <ul className="space-y-4 text-sm">
                   <li className="flex items-start gap-3">
-                    <Phone className="h-5 w-5 text-gold-dark mt-0.5 shrink-0" aria-hidden />
+                    <Phone className="h-5 w-5 text-forest mt-0.5 shrink-0" aria-hidden />
                     <div>
                       <p className="font-medium text-forest">Phone</p>
-                      <a href={`tel:${s.phone.replace(/\s/g, "")}`} className="text-muted-foreground hover:text-gold-dark">{s.phone}</a>
+                      <a href={`tel:${s.phone.replace(/\s/g, "")}`} className="text-muted-foreground hover:text-forest-light">{s.phone}</a>
                     </div>
                   </li>
                   <li className="flex items-start gap-3">
-                    <MessageCircle className="h-5 w-5 text-gold-dark mt-0.5 shrink-0" aria-hidden />
+                    <MessageCircle className="h-5 w-5 text-forest mt-0.5 shrink-0" aria-hidden />
                     <div>
                       <p className="font-medium text-forest">WhatsApp</p>
-                      <a href={waLink(s.whatsappNumber, s.whatsappDefaultMessage)} target="_blank" rel="noopener noreferrer" className="text-muted-foreground hover:text-gold-dark">
+                      <a href={waLink(s.whatsappNumber, s.whatsappDefaultMessage)} target="_blank" rel="noopener noreferrer" className="text-muted-foreground hover:text-forest-light">
                         {s.phone} — Chat now
                       </a>
                     </div>
                   </li>
                   {s.email && (
                     <li className="flex items-start gap-3">
-                      <Mail className="h-5 w-5 text-gold-dark mt-0.5 shrink-0" aria-hidden />
+                      <Mail className="h-5 w-5 text-forest mt-0.5 shrink-0" aria-hidden />
                       <div>
                         <p className="font-medium text-forest">Email</p>
-                        <a href={`mailto:${s.email}`} className="text-muted-foreground hover:text-gold-dark break-all">{s.email}</a>
+                        <a href={`mailto:${s.email}`} className="text-muted-foreground hover:text-forest-light break-all">{s.email}</a>
                       </div>
                     </li>
                   )}
                   <li className="flex items-start gap-3">
-                    <MapPin className="h-5 w-5 text-gold-dark mt-0.5 shrink-0" aria-hidden />
+                    <MapPin className="h-5 w-5 text-forest mt-0.5 shrink-0" aria-hidden />
                     <div>
                       <p className="font-medium text-forest">Address</p>
                       <p className="text-muted-foreground">
@@ -82,7 +82,7 @@ export default async function ContactPage() {
                     </div>
                   </li>
                   <li className="flex items-start gap-3">
-                    <Clock className="h-5 w-5 text-gold-dark mt-0.5 shrink-0" aria-hidden />
+                    <Clock className="h-5 w-5 text-forest mt-0.5 shrink-0" aria-hidden />
                     <div>
                       <p className="font-medium text-forest">Business Hours</p>
                       <p className="text-muted-foreground">{s.businessHours}</p>
@@ -97,18 +97,18 @@ export default async function ContactPage() {
                   <h3 className="font-display font-semibold text-forest mb-3">Find Us Online</h3>
                   <div className="flex flex-col gap-2.5">
                     {s.googleBusinessProfileUrl && (
-                      <a href={s.googleBusinessProfileUrl} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2.5 text-sm text-muted-foreground hover:text-gold-dark">
-                        <Globe className="h-4 w-4 text-gold-dark" /> Google Business Profile <ExternalLink className="h-3 w-3" />
+                      <a href={s.googleBusinessProfileUrl} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2.5 text-sm text-muted-foreground hover:text-forest-light">
+                        <Globe className="h-4 w-4 text-forest-light" /> Google Business Profile <ExternalLink className="h-3 w-3" />
                       </a>
                     )}
                     {s.instagramUrl && (
-                      <a href={s.instagramUrl} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2.5 text-sm text-muted-foreground hover:text-gold-dark">
-                        <Instagram className="h-4 w-4 text-gold-dark" /> Instagram — @aurexa_resin <ExternalLink className="h-3 w-3" />
+                      <a href={s.instagramUrl} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2.5 text-sm text-muted-foreground hover:text-forest-light">
+                        <Instagram className="h-4 w-4 text-forest-light" /> Instagram — @aurexa_resin <ExternalLink className="h-3 w-3" />
                       </a>
                     )}
                     {s.facebookUrl && (
-                      <a href={s.facebookUrl} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2.5 text-sm text-muted-foreground hover:text-gold-dark">
-                        <Globe className="h-4 w-4 text-gold-dark" /> Facebook <ExternalLink className="h-3 w-3" />
+                      <a href={s.facebookUrl} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2.5 text-sm text-muted-foreground hover:text-forest-light">
+                        <Globe className="h-4 w-4 text-forest-light" /> Facebook <ExternalLink className="h-3 w-3" />
                       </a>
                     )}
                   </div>

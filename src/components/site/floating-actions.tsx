@@ -32,7 +32,7 @@ export function FloatingActions({ s }: { s: SiteSettings }) {
         <a
           href={`tel:${s.phone.replace(/\s/g, "")}`}
           aria-label={`Call ${s.brandName}`}
-          className="group flex items-center h-12 w-12 rounded-full bg-forest text-gold border border-gold/40 shadow-lg hover:scale-105 transition-transform"
+          className="group flex items-center h-12 w-12 rounded-full bg-forest text-cream border border-white/20 shadow-lg hover:scale-105 transition-transform"
         >
           <Phone className="h-5 w-5 mx-auto" />
           <span className="sr-only">Call</span>

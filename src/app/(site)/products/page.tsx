@@ -96,7 +96,7 @@ export default async function ProductsPage({
         <div className="flex flex-wrap gap-2 pb-6">
           <Link
             href="/products"
-            className={`text-[13px] rounded-full px-3.5 py-1.5 border transition-colors ${!category ? "bg-forest text-cream border-forest" : "bg-card text-muted-foreground hover:border-gold/50 hover:text-forest"}`}
+            className={`text-[13px] rounded-full px-3.5 py-1.5 border transition-colors ${!category ? "bg-forest text-cream border-forest" : "bg-card text-muted-foreground hover:border-forest/40 hover:text-forest"}`}
           >
             All Products
           </Link>
@@ -104,7 +104,7 @@ export default async function ProductsPage({
             <Link
               key={c.id}
               href={`/products?category=${c.slug}`}
-              className={`text-[13px] rounded-full px-3.5 py-1.5 border transition-colors ${category === c.slug ? "bg-forest text-cream border-forest" : "bg-card text-muted-foreground hover:border-gold/50 hover:text-forest"}`}
+              className={`text-[13px] rounded-full px-3.5 py-1.5 border transition-colors ${category === c.slug ? "bg-forest text-cream border-forest" : "bg-card text-muted-foreground hover:border-forest/40 hover:text-forest"}`}
             >
               {c.name}
             </Link>

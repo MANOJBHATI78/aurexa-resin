@@ -60,6 +60,14 @@ export interface SiteSettings {
   stickyHeader: string;
   headerCtaLabel: string;
   headerCtaUrl: string;
+  headerShowPhone: string;
+  headerShowWhatsApp: string;
+  headerShowCta: string;
+  // Hero banner (desktop + mobile)
+  heroBannerEnabled: string;
+  heroBannerImage: string;
+  heroBannerMobileImage: string;
+  heroBannerAlt: string;
 }
 
 export const DEFAULT_SETTINGS: SiteSettings = {
@@ -94,7 +102,7 @@ export const DEFAULT_SETTINGS: SiteSettings = {
   linkedinUrl: "",
   youtubeUrl: "",
   pinterestUrl: "",
-  logo: "/uploads/aurexa-logo-crop.png",
+  logo: "/uploads/aurexa-logo.png",
   favicon: "/uploads/aurexa-favicon.png",
   ogDefaultImage: "/uploads/aurexa-logo.png",
   siteTitle: "Aurexa Resin | Epoxy Resin Wholesaler, Supplier & Dealer in Surat",
@@ -127,6 +135,14 @@ export const DEFAULT_SETTINGS: SiteSettings = {
   stickyHeader: "true",
   headerCtaLabel: "Send Inquiry",
   headerCtaUrl: "/inquiry",
+  headerShowPhone: "true",
+  headerShowWhatsApp: "true",
+  headerShowCta: "true",
+  heroBannerEnabled: "true",
+  heroBannerImage: "",
+  heroBannerMobileImage: "/uploads/aurexa-banner-mobile.jpg",
+  heroBannerAlt:
+    "Aurexa Resin — premium epoxy resin wholesaler in Surat, Gujarat. Original brand logo with golden resin drop.",
 };
 
 export async function getSettings(): Promise<SiteSettings> {

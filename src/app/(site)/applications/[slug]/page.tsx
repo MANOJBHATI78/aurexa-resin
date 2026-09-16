@@ -85,9 +85,9 @@ export default async function ApplicationDetailPage({ params }: { params: Promis
           <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
             {relatedCategories.map((c) => (
               <Link key={c.id} href={`/resin/${c.slug}`} className="card-lift group rounded-xl border bg-card p-5">
-                <h3 className="font-display font-semibold text-forest group-hover:text-gold-dark transition-colors text-[15px]">{c.name}</h3>
+                <h3 className="font-display font-semibold text-forest group-hover:text-forest-light transition-colors text-[15px]">{c.name}</h3>
                 {c.description && <p className="text-[13px] text-muted-foreground mt-2 line-clamp-3 leading-relaxed">{c.description}</p>}
-                <span className="inline-flex items-center gap-1 text-xs text-gold-dark font-medium mt-3">
+                <span className="inline-flex items-center gap-1 text-xs text-forest-light font-medium mt-3">
                   Browse <ArrowRight className="h-3 w-3" />
                 </span>
               </Link>

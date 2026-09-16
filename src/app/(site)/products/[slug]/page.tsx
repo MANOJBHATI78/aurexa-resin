@@ -102,7 +102,7 @@ export default async function ProductDetailPage({ params }: { params: Promise<{ 
       {/* Hero band */}
       <section className="hero-dark text-cream">
         <div className="max-w-7xl mx-auto px-4 py-10 lg:py-14">
-          <p className="inline-flex items-center gap-2 text-xs tracking-[0.22em] uppercase text-gold mb-4">
+          <p className="inline-flex items-center gap-2 text-xs tracking-[0.22em] uppercase text-forest-light mb-4">
             {product.category ? product.category.name : "Epoxy Resin"}
           </p>
           <h1 className="font-display text-2xl md:text-4xl font-bold max-w-3xl leading-snug">{product.name}</h1>
@@ -137,7 +137,7 @@ export default async function ProductDetailPage({ params }: { params: Promise<{ 
                   className="w-full h-full object-cover"
                 />
               ) : (
-                <div className="w-full h-full hero-dark flex flex-col items-center justify-center gap-3 text-gold">
+                <div className="w-full h-full hero-dark flex flex-col items-center justify-center gap-3 text-cream/85">
                   <Droplets className="h-16 w-16 opacity-70" aria-hidden />
                   <p className="text-sm text-cream/50 px-8 text-center">Product photo coming soon — supplied by {s.brandName}, Surat</p>
                 </div>
@@ -162,7 +162,7 @@ export default async function ProductDetailPage({ params }: { params: Promise<{ 
                 <dl className="grid sm:grid-cols-2 gap-x-6 gap-y-3.5">
                   {structuredSpecs.map(({ icon: Icon, label, value }) => (
                     <div key={label} className="flex items-start gap-3">
-                      <Icon className="h-5 w-5 text-gold-dark mt-0.5 shrink-0" aria-hidden />
+                      <Icon className="h-5 w-5 text-forest mt-0.5 shrink-0" aria-hidden />
                       <div>
                         <dt className="text-xs uppercase tracking-wide text-muted-foreground">{label}</dt>
                         <dd className="text-sm font-medium text-forest mt-0.5">{value}</dd>
@@ -175,7 +175,7 @@ export default async function ProductDetailPage({ params }: { params: Promise<{ 
                     <p className="text-xs uppercase tracking-wide text-muted-foreground mb-2">Available Pack Sizes</p>
                     <div className="flex flex-wrap gap-2">
                       {packSizes.map((p) => (
-                        <span key={p.size} className="text-[13px] rounded-full bg-forest-mist text-forest px-3 py-1 border border-gold/30">
+                        <span key={p.size} className="text-[13px] rounded-full bg-forest-mist text-forest px-3 py-1 border border-forest/20">
                           {p.size}
                         </span>
                       ))}
@@ -191,7 +191,7 @@ export default async function ProductDetailPage({ params }: { params: Promise<{ 
                 <h2 className="font-display font-semibold text-forest text-lg mb-3">Applications</h2>
                 <div className="flex flex-wrap gap-2">
                   {applications.map((a) => (
-                    <span key={a} className="text-[13px] rounded-full bg-gold/10 text-gold-dark px-3 py-1 border border-gold/30">{a}</span>
+                    <span key={a} className="text-[13px] rounded-full bg-forest-mist text-forest px-3 py-1 border border-forest/20">{a}</span>
                   ))}
                 </div>
               </div>
@@ -214,7 +214,7 @@ export default async function ProductDetailPage({ params }: { params: Promise<{ 
                     <ul className="space-y-2.5">
                       {features.map((f) => (
                         <li key={f} className="flex items-start gap-2 text-sm text-muted-foreground">
-                          <CheckCircle2 className="h-4 w-4 text-gold-dark mt-0.5 shrink-0" aria-hidden /> {f}
+                          <CheckCircle2 className="h-4 w-4 text-forest mt-0.5 shrink-0" aria-hidden /> {f}
                         </li>
                       ))}
                     </ul>
@@ -226,7 +226,7 @@ export default async function ProductDetailPage({ params }: { params: Promise<{ 
                     <ul className="space-y-2.5">
                       {benefits.map((b) => (
                         <li key={b} className="flex items-start gap-2 text-sm text-muted-foreground">
-                          <ShieldCheck className="h-4 w-4 text-gold-dark mt-0.5 shrink-0" aria-hidden /> {b}
+                          <ShieldCheck className="h-4 w-4 text-forest mt-0.5 shrink-0" aria-hidden /> {b}
                         </li>
                       ))}
                     </ul>
@@ -239,7 +239,7 @@ export default async function ProductDetailPage({ params }: { params: Promise<{ 
             {suitableFor.length > 0 && (
               <div className="rounded-xl border bg-card p-6">
                 <h2 className="font-display font-semibold text-forest text-lg mb-3 flex items-center gap-2">
-                  <Users className="h-5 w-5 text-gold-dark" aria-hidden /> Who Buys This Product
+                  <Users className="h-5 w-5 text-forest-light" aria-hidden /> Who Buys This Product
                 </h2>
                 <p className="text-sm text-muted-foreground">{suitableFor.join(" · ")}</p>
               </div>
@@ -264,7 +264,7 @@ export default async function ProductDetailPage({ params }: { params: Promise<{ 
 
             {/* Safety */}
             {product.safetyInfo && (
-              <div className="rounded-xl border border-gold/40 bg-gold/5 p-6">
+              <div className="rounded-xl border border-forest/25 bg-forest-mist/60 p-6">
                 <h2 className="font-display font-semibold text-forest text-lg mb-2">Safety Information</h2>
                 <p className="text-sm text-muted-foreground leading-relaxed whitespace-pre-line">{product.safetyInfo}</p>
               </div>

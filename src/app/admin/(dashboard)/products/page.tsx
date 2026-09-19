@@ -21,7 +21,7 @@ export default function AdminProductsPage() {
       title="Products"
       description="Manage your resin product catalogue — details, specifications, pack sizes, SEO and visibility."
       searchPlaceholder="Search products by name, slug or SKU…"
-      defaults={{ published: true, featured: false, noindex: false, showPrice: false }}
+      defaults={{ published: true, featured: false, noindex: false, showPrice: false, onSale: false }}
       columns={[
         { name: "name", label: "Product", render: (row) => (
           <div>
@@ -31,6 +31,7 @@ export default function AdminProductsPage() {
         )},
         { name: "sku", label: "SKU" },
         { name: "mixingRatio", label: "Ratio" },
+        { name: "onSale", label: "Sale", render: (row) => <BoolBadge value={row.onSale} trueLabel="On Sale" falseLabel="—" /> },
         { name: "featured", label: "Featured", render: (row) => <BoolBadge value={row.featured} trueLabel="Featured" falseLabel="—" /> },
         { name: "published", label: "Status", render: (row) => <BoolBadge value={row.published} trueLabel="Published" falseLabel="Draft" /> },
       ]}
@@ -61,7 +62,9 @@ export default function AdminProductsPage() {
 
         // Pricing
         { name: "showPrice", label: "Show Price (disabled by default)", type: "boolean", group: "Pricing" },
-        { name: "price", label: "Price (only if enabled)", type: "text", group: "Pricing" },
+        { name: "price", label: "Regular Price (MRP)", type: "text", group: "Pricing", placeholder: "e.g. ₹450/kg" },
+        { name: "onSale", label: "Put on Sale (shows in Sale section)", type: "boolean", group: "Pricing" },
+        { name: "salePrice", label: "Sale Price", type: "text", group: "Pricing", placeholder: "e.g. ₹399/kg", hint: "Shown in red with regular price struck through. Product appears on /sale page + Sale banner." },
 
         // Status
         { name: "published", label: "Published", type: "boolean", group: "Status" },

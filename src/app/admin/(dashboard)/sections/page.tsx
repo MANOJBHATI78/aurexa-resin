@@ -22,6 +22,7 @@ const SECTION_TYPES = [
   { value: "why_us", label: "Why Us — USP cards" },
   { value: "featured_products", label: "Featured Products" },
   { value: "products", label: "Product Grid" },
+  { value: "sale", label: "Sale Banner — CTA to /sale" },
   { value: "applications", label: "Applications Grid" },
   { value: "guide", label: "Selection Guide — numbered steps" },
   { value: "comparison", label: "Comparison Table" },

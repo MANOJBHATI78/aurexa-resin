@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { MessageCircle, Droplets, Layers, Package } from "lucide-react";
+import { MessageCircle, Droplets, Layers, Package, Percent } from "lucide-react";
 import { waLink, type SiteSettings } from "@/lib/settings";
 
 export interface ProductCardData {
@@ -11,6 +11,10 @@ export interface ProductCardData {
   mixingRatio?: string | null;
   resinType?: string | null;
   finish?: string | null;
+  showPrice?: boolean;
+  price?: string | null;
+  onSale?: boolean;
+  salePrice?: string | null;
 }
 
 /** Elegant placeholder tile when no product photo exists yet (no fake images). */
@@ -36,9 +40,9 @@ export function ProductCard({ product, s }: { product: ProductCardData; s: SiteS
   const msg = s.whatsappProductTemplate.replace("{PRODUCT}", product.name);
   return (
     <article className="card-lift group flex flex-col rounded-xl border bg-card overflow-hidden h-full">
-      <Link href={`/products/${product.slug}`} className="block aspect-[4/3] overflow-hidden" aria-label={product.name}>
+      <Link href={`/products/${product.slug}`} className="relative block aspect-[4/3] overflow-hidden" aria-label={product.name}>
         {product.image ? (
-           
+          
           <img
             src={product.image}
             alt={`${product.name} — supplied by Aurexa Resin, epoxy resin wholesaler in Surat`}
@@ -47,6 +51,11 @@ export function ProductCard({ product, s }: { product: ProductCardData; s: SiteS
           />
         ) : (
           <PlaceholderTile name={product.name} />
+        )}
+        {product.onSale && (
+          <span className="absolute top-2.5 left-2.5 inline-flex items-center gap-1 rounded-full bg-red-600 px-2.5 py-1 text-[11px] font-bold uppercase tracking-wide text-white shadow-md">
+            <Percent className="h-3 w-3" aria-hidden /> Sale
+          </span>
         )}
       </Link>
       <div className="flex flex-col flex-1 p-4 gap-2">
@@ -68,6 +77,20 @@ export function ProductCard({ product, s }: { product: ProductCardData; s: SiteS
         {product.shortDesc && (
           <p className="text-[13px] text-muted-foreground leading-relaxed line-clamp-3">{product.shortDesc}</p>
         )}
+        {(product.onSale && product.salePrice) || (product.showPrice && product.price) ? (
+          <div className="flex items-baseline gap-2 flex-wrap">
+            {product.onSale && product.salePrice ? (
+              <>
+                <span className="text-[15px] font-bold text-red-600">{product.salePrice}</span>
+                {product.price && (
+                  <span className="text-[12px] text-muted-foreground line-through">{product.price}</span>
+                )}
+              </>
+            ) : (
+              <span className="text-[15px] font-bold text-forest">{product.price}</span>
+            )}
+          </div>
+        ) : null}
         <div className="mt-auto pt-3 flex items-center gap-2">
           <Link
             href={`/products/${product.slug}`}

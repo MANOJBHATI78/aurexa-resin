@@ -771,12 +771,9 @@ export const HOME_SECTIONS = [
 
 export const NAV_HEADER = [
   { label: "Home", url: "/" },
+  { label: "Categories", url: "/resin" },
   { label: "Products", url: "/products" },
-  { label: "Resin Categories", url: "/resin" },
-  { label: "Applications", url: "/applications" },
-  { label: "About", url: "/about" },
-  { label: "Blog", url: "/blog" },
-  { label: "Contact", url: "/contact" },
+  { label: "Sale", url: "/sale" },
 ];
 
 export const NAV_FOOTER_QUICK = [
@@ -784,6 +781,7 @@ export const NAV_FOOTER_QUICK = [
   { label: "About Us", url: "/about" },
   { label: "All Products", url: "/products" },
   { label: "Resin Categories", url: "/resin" },
+  { label: "Sale Offers", url: "/sale" },
   { label: "Applications", url: "/applications" },
   { label: "Blog", url: "/blog" },
   { label: "Contact", url: "/contact" },

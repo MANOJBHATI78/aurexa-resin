@@ -7,7 +7,7 @@ import { JsonLd } from "@/components/site/json-ld";
 import { ProductCard, CategoryCard } from "@/components/site/cards";
 import { FaqSection } from "@/components/site/faq";
 import { buildMetadata, breadcrumbSchema, faqSchema, productSchema, parseJsonArray, absoluteUrl } from "@/lib/seo";
-import { MessageCircle, Phone, Layers, Droplets, Package, Clock, Wrench, Sparkles, CheckCircle2, ShieldCheck, Users } from "lucide-react";
+import { MessageCircle, Phone, Layers, Droplets, Package, Clock, Wrench, Sparkles, CheckCircle2, ShieldCheck, Users, Percent } from "lucide-react";
 import type { Metadata } from "next";
 
 export const revalidate = 60;
@@ -109,6 +109,22 @@ export default async function ProductDetailPage({ params }: { params: Promise<{ 
           {product.shortDesc && (
             <p className="mt-4 text-cream/70 max-w-3xl leading-relaxed text-[15px]">{product.shortDesc}</p>
           )}
+          {/* Price block — shows sale price when on sale, regular price when enabled */}
+          {(product.onSale && product.salePrice) || (product.showPrice && product.price) ? (
+            <div className="mt-5 inline-flex items-center gap-3 rounded-xl bg-white/[0.06] border border-white/10 px-4 py-2.5">
+              {product.onSale && (
+                <span className="inline-flex items-center gap-1 rounded-full bg-red-600 px-2.5 py-1 text-[11px] font-bold uppercase tracking-wide text-white">
+                  <Percent className="h-3 w-3" aria-hidden /> Sale
+                </span>
+              )}
+              <span className={`font-display text-xl font-bold ${product.onSale ? "text-red-400" : "text-cream"}`}>
+                {product.onSale && product.salePrice ? product.salePrice : product.price}
+              </span>
+              {product.onSale && product.price && (
+                <span className="text-sm text-cream/50 line-through">{product.price}</span>
+              )}
+            </div>
+          ) : null}
           <div className="mt-6 flex flex-wrap gap-3">
             <Button asChild className="btn-gold">
               <a href={waLink(s.whatsappNumber, waMsg)} target="_blank" rel="noopener noreferrer">
@@ -297,6 +313,7 @@ export default async function ProductDetailPage({ params }: { params: Promise<{ 
                 <ProductCard key={p.id} s={s} product={{
                   id: p.id, name: p.name, slug: p.slug, shortDesc: p.shortDesc,
                   image: p.image, mixingRatio: p.mixingRatio, resinType: p.resinType, finish: p.finish,
+                  showPrice: p.showPrice, price: p.price, onSale: p.onSale, salePrice: p.salePrice,
                 }} />
               ))}
             </div>

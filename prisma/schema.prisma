@@ -76,6 +76,8 @@ model Product {
   specs          String? // JSON array of {label, value}
   showPrice      Boolean   @default(false)
   price          String?
+  onSale         Boolean   @default(false)
+  salePrice      String?
   featured       Boolean   @default(false)
   published      Boolean   @default(true)
   // SEO

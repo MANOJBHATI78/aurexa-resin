@@ -120,6 +120,7 @@ export default async function ProductsPage({
                 product={{
                   id: p.id, name: p.name, slug: p.slug, shortDesc: p.shortDesc,
                   image: p.image, mixingRatio: p.mixingRatio, resinType: p.resinType, finish: p.finish,
+                  showPrice: p.showPrice, price: p.price, onSale: p.onSale, salePrice: p.salePrice,
                 }}
               />
             ))}

@@ -2,7 +2,7 @@ import Link from "next/link";
 import Image from "next/image";
 import {
   Gem, Layers, Palette, Factory, Package, Truck, ArrowRight, MessageCircle,
-  CheckCircle2, Star, Sparkles, GraduationCap, Scale, Handshake, BookOpen,
+  CheckCircle2, Star, Sparkles, GraduationCap, Scale, Handshake, BookOpen, Percent,
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { ProductCard, CategoryCard } from "@/components/site/cards";
@@ -220,6 +220,7 @@ export async function ProductGridSection({
             <ProductCard key={p.id} s={s} product={{
               id: p.id, name: p.name, slug: p.slug, shortDesc: p.shortDesc,
               image: p.image, mixingRatio: p.mixingRatio, resinType: p.resinType, finish: p.finish,
+              showPrice: p.showPrice, price: p.price, onSale: p.onSale, salePrice: p.salePrice,
             }} />
           ))}
         </div>
@@ -230,6 +231,48 @@ export async function ProductGridSection({
             </Button>
           </div>
         )}
+      </div>
+    </section>
+  );
+}
+
+function SaleSection({ data, s }: { data: any; s: SiteSettings }) {
+  return (
+    <section className="py-16 lg:py-20" id="sale">
+      <div className="max-w-7xl mx-auto px-4">
+        <div className="relative overflow-hidden rounded-2xl bg-forest text-cream shadow-xl">
+          <div className="absolute -top-16 -right-16 h-56 w-56 rounded-full bg-red-600/25 blur-3xl" aria-hidden />
+          <div className="absolute -bottom-20 -left-10 h-48 w-48 rounded-full bg-gold/10 blur-3xl" aria-hidden />
+          <div className="relative grid lg:grid-cols-2 gap-8 items-center p-8 md:p-12">
+            <div>
+              <span className="inline-flex items-center gap-1.5 rounded-full bg-red-600 px-3.5 py-1.5 text-xs font-bold uppercase tracking-[0.18em] text-white">
+                <Percent className="h-3.5 w-3.5" aria-hidden /> {data?.badge || "Sale"}
+              </span>
+              <h2 className="font-display text-2xl md:text-4xl font-bold mt-5">{data?.heading || "Resin Sale Offers"}</h2>
+              <div className="divider-gold mt-4" aria-hidden />
+              {data?.subheading && (
+                <p className="mt-4 text-cream/70 leading-relaxed max-w-xl">{data.subheading}</p>
+              )}
+            </div>
+            <div className="flex flex-col items-start lg:items-end gap-3">
+              {data?.cta && (
+                <Button asChild size="lg" className="bg-red-600 hover:bg-red-700 text-white border-transparent font-bold">
+                  <Link href={data.cta.url || "/sale"}>
+                    {data.cta.label || "View Sale Products"} <ArrowRight className="h-4 w-4 ml-1" />
+                  </Link>
+                </Button>
+              )}
+              {data?.whatsappCta && (
+                <Button asChild size="lg" className="bg-[#25D366] hover:bg-[#1fb857] text-white">
+                  <a href={waLink(s.whatsappNumber, s.whatsappDefaultMessage)} target="_blank" rel="noopener noreferrer">
+                    <MessageCircle className="h-4 w-4" /> {data.whatsappCta.label || "WhatsApp Us"}
+                  </a>
+                </Button>
+              )}
+              <p className="text-xs text-cream/50">Limited stock · Bulk buyers get extra wholesale discount</p>
+            </div>
+          </div>
+        </div>
       </div>
     </section>
   );
@@ -504,6 +547,7 @@ export function HomeSectionRenderer({
     case "why_us": return <WhyUsSection data={section.data} />;
     case "featured_products": return <FeaturedProductsSection data={section.data} s={s} />;
     case "products": return <ProductGridSection data={section.data} s={s} />;
+    case "sale": return <SaleSection data={section.data} s={s} />;
     case "applications": return <ApplicationsSection data={section.data} />;
     case "guide": return <GuideSection data={section.data} />;
     case "comparison": return <ComparisonSection data={section.data} />;

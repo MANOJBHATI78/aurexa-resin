@@ -30,3 +30,27 @@ Stage Summary:
 - ESLint: 0 errors, 0 warnings
 - Admin credentials: admin@aurexaresin.com / Aurexa@123 (displayed on login page hint)
 - Key files: prisma/schema.prisma, scripts/seed.ts + seed-data.ts, src/lib/{auth,settings,seo,admin-guard,admin-crud,admin-resources}.ts, src/app/(site)/*, src/app/admin/*, src/app/api/*, src/components/{site,admin}/*
+
+---
+Task ID: 2
+Agent: Main Agent (Super Z)
+Task: Simplify confusing header nav (remove Applications/About/Blog clutter) + add Category section, Product section and Sale section with button; sale products managed from admin panel.
+
+Work Log:
+- Decoded client feedback: header had too many confusing items; wanted simple Categories + Products sections and a Sale section/button for discounted products
+- Schema: added onSale Boolean + salePrice String? to Product; prisma db push + generate
+- DB: removed Applications/About/Blog/Contact/Resin Categories from HEADER nav (still in footer); header now = Home, Categories(/resin w/ category dropdown), Products, Sale(/sale); reordered homepage sections: hero → categories → featured_products → sale banner → why_us → rest; marked 4 sample products on sale (salePrice cleared after — no fake prices)
+- Header component: Sale nav item renders as standout red button (desktop pill + mobile sheet full-width row) with Percent icon; category dropdown now only on Categories item
+- New /sale page: hero with SALE badge + WhatsApp wholesale CTA, grid of on-sale products, empty state, SEO metadata + JSON-LD, added to sitemap (priority 0.9)
+- ProductCard: red SALE badge on image + price row (sale price red + regular struck through, or regular price when showPrice)
+- Product detail: price block in hero (sale badge + red sale price + strikethrough MRP)
+- Homepage: new dynamic "sale" section type — Sale banner (red badge, heading, CTA button → /sale, WhatsApp CTA) fully admin-editable via Sections manager; added to admin SECTION_TYPES dropdown
+- Admin: products manager gained onSale switch + salePrice field (+ Sale column badge in table); products API whitelist updated
+- seed-data.ts: NAV_HEADER/NAV_FOOTER_QUICK updated to match new structure
+- Restarted dev server (scripts/start-dev.sh, setsid double-fork); verified via curl: / /sale /products 200, nav items, section order, sale badges, admin login 200 + auth guard 307
+- tsc: no NEW errors from this change (remaining are pre-existing in unrelated files); ESLint clean on all touched files
+
+Stage Summary:
+- Header now simple & clear: Home | Categories (dropdown) | Products | [SALE red button]
+- /sale page live listing discounted products; homepage has Category section, Product section and Sale banner with button — all dynamic from admin panel
+- Admin can: mark any product on sale + set sale price (Products), edit sale banner text/CTA (Sections), edit nav items (Navigation) — no code needed

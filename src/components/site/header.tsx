@@ -4,7 +4,7 @@ import Link from "next/link";
 import Image from "next/image";
 import { useState } from "react";
 import { usePathname } from "next/navigation";
-import { Menu, Phone, MessageCircle, ChevronDown } from "lucide-react";
+import { Menu, Phone, MessageCircle, ChevronDown, Percent } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import {
   Sheet, SheetContent, SheetTrigger, SheetTitle,
@@ -27,9 +27,9 @@ export function SiteHeader({ s, nav, categories }: { s: SiteSettings; nav: NavIt
   const whatsappHref = waLink(s.whatsappNumber, s.whatsappDefaultMessage);
   const telHref = `tel:${s.phone.replace(/\s/g, "")}`;
 
-  // Build nav: Products item gets a dropdown of categories
+  // Build nav: only the Categories item (/resin) gets a dropdown of categories
   const items = nav.map((item) => {
-    if (item.url === "/products" || item.url === "/resin") {
+    if (item.url === "/resin") {
       return {
         ...item,
         children: categories.slice(0, 12).map((c) => ({
@@ -83,10 +83,24 @@ export function SiteHeader({ s, nav, categories }: { s: SiteSettings; nav: NavIt
                 />
               </Link>
 
-              {/* Desktop nav — uppercase, teapost style */}
+              {/* Desktop nav — simple & clear: Home, Categories, Products + Sale button */}
               <nav className="hidden lg:flex items-center gap-0.5 mx-auto" aria-label="Main navigation">
                 {items.map((item) =>
-                  item.children ? (
+                  item.url === "/sale" ? (
+                    <Link
+                      key={item.id}
+                      href={item.url}
+                      className={`ml-1 inline-flex items-center gap-1.5 rounded-full px-4 py-2 text-[13px] font-bold uppercase tracking-wide transition-colors ${
+                        isActive(item.url)
+                          ? "bg-red-700 text-white"
+                          : "bg-red-600 text-white hover:bg-red-700"
+                      }`}
+                      aria-label={`${item.label} — discounted products`}
+                    >
+                      <Percent className="h-3.5 w-3.5" aria-hidden />
+                      {item.label}
+                    </Link>
+                  ) : item.children ? (
                     <DropdownMenu key={item.id}>
                       <DropdownMenuTrigger asChild>
                         <Link
@@ -187,33 +201,45 @@ export function SiteHeader({ s, nav, categories }: { s: SiteSettings; nav: NavIt
                       />
                     </div>
                     <nav className="px-3 py-4 flex flex-col gap-0.5" aria-label="Mobile navigation">
-                      {items.map((item) => (
-                        <div key={item.id}>
+                      {items.map((item) =>
+                        item.url === "/sale" ? (
                           <Link
+                            key={item.id}
                             href={item.url}
                             onClick={() => setOpen(false)}
-                            className={`block px-3 py-2.5 rounded-lg text-sm font-medium uppercase tracking-wide transition-colors ${
-                              isActive(item.url) ? "bg-white/15 text-white" : "text-cream/90 hover:bg-white/10 hover:text-white"
-                            }`}
+                            className="flex items-center justify-center gap-2 rounded-lg bg-red-600 px-3 py-3 text-sm font-bold uppercase tracking-wide text-white hover:bg-red-700 transition-colors"
                           >
+                            <Percent className="h-4 w-4" aria-hidden />
                             {item.label}
                           </Link>
-                          {item.children && (
-                            <div className="ml-4 border-l border-white/10 pl-2">
-                              {item.children.map((child) => (
-                                <Link
-                                  key={child.id}
-                                  href={child.url}
-                                  onClick={() => setOpen(false)}
-                                  className="block px-3 py-2 text-[13px] text-cream/70 hover:text-cream rounded-md"
-                                >
-                                  {child.label}
-                                </Link>
-                              ))}
-                            </div>
-                          )}
-                        </div>
-                      ))}
+                        ) : (
+                          <div key={item.id}>
+                            <Link
+                              href={item.url}
+                              onClick={() => setOpen(false)}
+                              className={`block px-3 py-2.5 rounded-lg text-sm font-medium uppercase tracking-wide transition-colors ${
+                                isActive(item.url) ? "bg-white/15 text-white" : "text-cream/90 hover:bg-white/10 hover:text-white"
+                              }`}
+                            >
+                              {item.label}
+                            </Link>
+                            {item.children && (
+                              <div className="ml-4 border-l border-white/10 pl-2">
+                                {item.children.map((child) => (
+                                  <Link
+                                    key={child.id}
+                                    href={child.url}
+                                    onClick={() => setOpen(false)}
+                                    className="block px-3 py-2 text-[13px] text-cream/70 hover:text-cream rounded-md"
+                                  >
+                                    {child.label}
+                                  </Link>
+                                ))}
+                              </div>
+                            )}
+                          </div>
+                        )
+                      )}
                     </nav>
                     <div className="mt-auto px-4 pb-6 pt-4 border-t border-white/10 flex flex-col gap-2">
                       {s.headerShowCta !== "false" && (

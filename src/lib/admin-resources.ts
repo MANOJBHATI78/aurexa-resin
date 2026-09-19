@@ -13,7 +13,7 @@ export const RESOURCES = {
         "name", "slug", "sku", "shortDesc", "longDesc", "image", "gallery", "categoryId",
         "resinType", "mixingRatio", "packSizes", "curingInfo", "workingTime", "applications",
         "recommendedUse", "pourDepth", "finish", "features", "benefits", "suitableFor",
-        "safetyInfo", "specs", "showPrice", "price", "featured", "published",
+        "safetyInfo", "specs", "showPrice", "price", "onSale", "salePrice", "featured", "published",
         "seoTitle", "seoDescription", "seoKeywords", "canonical", "ogTitle", "ogDescription",
         "ogImage", "noindex", "customHeadCode",
       ],
@@ -22,6 +22,7 @@ export const RESOURCES = {
         if (typeof data.slug === "string" && data.slug) data.slug = slugify(data.slug) || `product-${Date.now()}`;
         if (data.categoryId === "" || data.categoryId === undefined) data.categoryId = null;
         if (typeof data.showPrice !== "boolean") data.showPrice = data.showPrice === "true";
+        if (typeof data.onSale !== "boolean") data.onSale = data.onSale === "true";
         return data;
       },
     }),

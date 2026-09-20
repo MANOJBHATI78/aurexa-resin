@@ -1,0 +1,68 @@
+🚀 Initializing Z-AI SDK...
+🔎 Searching images: "epoxy resin and hardener two part bottles kit packaging"
+✅ Got 8 images
+{
+  "success": true,
+  "query": "epoxy resin and hardener two part bottles kit packaging",
+  "count": 8,
+  "ranked": false,
+  "captioned_count": 0,
+  "results": [
+    {
+      "original_url": "https://z-cdn.chatglm.cn/image-search-mcp/images-ppt/b0fe76afca58.jpg",
+      "caption": "",
+      "source": "Rabid Models",
+      "original_width": "1207px",
+      "original_height": "1519px"
+    },
+    {
+      "original_url": "https://z-cdn.chatglm.cn/image-search-mcp/images-ppt/bf37baa8dc62.webp",
+      "caption": "",
+      "source": "ArtResin",
+      "original_width": "1445px",
+      "original_height": "1445px"
+    },
+    {
+      "original_url": "https://z-cdn.chatglm.cn/image-search-mcp/images-ppt/1f7e9dbec624.jpg",
+      "caption": "",
+      "source": "ARTEZA",
+      "original_width": "1000px",
+      "original_height": "1000px"
+    },
+    {
+      "original_url": "https://z-cdn.chatglm.cn/image-search-mcp/images-ppt/0f49817a878a.png",
+      "caption": "",
+      "source": "Fiberglass Supply",
+      "original_width": "1280px",
+      "original_height": "1032px"
+    },
+    {
+      "original_url": "https://z-cdn.chatglm.cn/image-search-mcp/images-ppt/a1a643c002eb.png",
+      "caption": "",
+      "source": "IpeDepot",
+      "original_width": "1000px",
+      "original_height": "1000px"
+    },
+    {
+      "original_url": "https://z-cdn.chatglm.cn/image-search-mcp/images-ppt/5e4582753620.jpeg",
+      "caption": "",
+      "source": "Flipkart",
+      "original_width": "1500px",
+      "original_height": "1500px"
+    },
+    {
+      "original_url": "https://z-cdn.chatglm.cn/image-search-mcp/images-ppt/b3b51b1d5555.jpg",
+      "caption": "",
+      "source": "Moscow & Pullman Building Supply",
+      "original_width": "1000px",
+      "original_height": "1000px"
+    },
+    {
+      "original_url": "https://z-cdn.chatglm.cn/image-search-mcp/images-ppt/214166695a8d.jpg",
+      "caption": "",
+      "source": "Bond Craftor",
+      "original_width": "1200px",
+      "original_height": "1200px"
+    }
+  ]
+}

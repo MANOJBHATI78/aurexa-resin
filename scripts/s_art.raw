@@ -1,0 +1,68 @@
+🚀 Initializing Z-AI SDK...
+🔎 Searching images: "colorful epoxy resin art coasters and trays finished pieces"
+✅ Got 8 images
+{
+  "success": true,
+  "query": "colorful epoxy resin art coasters and trays finished pieces",
+  "count": 8,
+  "ranked": false,
+  "captioned_count": 0,
+  "results": [
+    {
+      "original_url": "https://z-cdn.chatglm.cn/image-search-mcp/images-ppt/e8adc712ddc2.jpg",
+      "caption": "",
+      "source": "Wild Coast Flower Preservation",
+      "original_width": "1080px",
+      "original_height": "1080px"
+    },
+    {
+      "original_url": "https://z-cdn.chatglm.cn/image-search-mcp/images-ppt/119f4815ba47.webp",
+      "caption": "",
+      "source": "Resin Society",
+      "original_width": "2048px",
+      "original_height": "2048px"
+    },
+    {
+      "original_url": "https://z-cdn.chatglm.cn/image-search-mcp/images-ppt/69104ee9ca75.png",
+      "caption": "",
+      "source": "Wild Coast Flower Preservation",
+      "original_width": "1200px",
+      "original_height": "1200px"
+    },
+    {
+      "original_url": "https://z-cdn.chatglm.cn/image-search-mcp/images-ppt/0a874199ad5a.jpg",
+      "caption": "",
+      "source": "Folksy",
+      "original_width": "900px",
+      "original_height": "1200px"
+    },
+    {
+      "original_url": "https://z-cdn.chatglm.cn/image-search-mcp/images-ppt/795d8c7684f5.jpg",
+      "caption": "",
+      "source": "YouTube",
+      "original_width": "1280px",
+      "original_height": "720px"
+    },
+    {
+      "original_url": "https://z-cdn.chatglm.cn/image-search-mcp/images-ppt/c474d55f5e9e.jpg",
+      "caption": "",
+      "source": "resiners",
+      "original_width": "1600px",
+      "original_height": "896px"
+    },
+    {
+      "original_url": "https://z-cdn.chatglm.cn/image-search-mcp/images-ppt/162fbc9849f7.jpg",
+      "caption": "",
+      "source": "Artline Epoxy Resin",
+      "original_width": "1036px",
+      "original_height": "1036px"
+    },
+    {
+      "original_url": "https://z-cdn.chatglm.cn/image-search-mcp/images-ppt/7cb588423078.jpg",
+      "caption": "",
+      "source": "Mouldd Resin",
+      "original_width": "1080px",
+      "original_height": "1080px"
+    }
+  ]
+}

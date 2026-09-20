@@ -8,6 +8,7 @@ import { JsonLd } from "@/components/site/json-ld";
 import { ProductCard } from "@/components/site/cards";
 import { FaqSection } from "@/components/site/faq";
 import { buildMetadata, breadcrumbSchema, faqSchema, itemListSchema, parseJsonArray } from "@/lib/seo";
+import { toVideoEmbed, isDirectVideo } from "@/lib/video";
 import { MessageCircle } from "lucide-react";
 import Link from "next/link";
 
@@ -64,8 +65,22 @@ export default async function CategoryDetailPage({ params }: { params: Promise<{
           itemListSchema(products.map((p) => ({ name: p.name, url: `/products/${p.slug}` })), category.name),
         ]}
       />
-      <section className="hero-dark text-cream">
-        <div className="max-w-7xl mx-auto px-4 py-12 lg:py-16">
+      <section className="hero-dark text-cream relative overflow-hidden">
+        {/* Responsive banner photo — desktop + mobile variants, falls back to gradient */}
+        {category.image && (
+          <div className="absolute inset-0" aria-hidden>
+            {category.mobileImage ? (
+              <picture>
+                <source media="(max-width: 767px)" srcSet={category.mobileImage} />
+                <img src={category.image} alt="" className="w-full h-full object-cover opacity-25" />
+              </picture>
+            ) : (
+              <img src={category.image} alt="" className="w-full h-full object-cover opacity-25" />
+            )}
+            <div className="absolute inset-0 bg-gradient-to-b from-forest-dark/70 via-forest-dark/60 to-forest-dark/80" />
+          </div>
+        )}
+        <div className="relative max-w-7xl mx-auto px-4 py-12 lg:py-16">
           <h1 className="font-display text-3xl md:text-4xl font-bold">{category.name}</h1>
           {category.description && (
             <p className="mt-3 text-cream/70 max-w-3xl leading-relaxed text-[15px]">{category.description}</p>
@@ -83,6 +98,30 @@ export default async function CategoryDetailPage({ params }: { params: Promise<{
         </div>
       </section>
 
+      {/* Category video — admin can attach a YouTube/Vimeo/mp4 link */}
+      {(() => {
+        const embed = toVideoEmbed(category.videoUrl);
+        if (!embed) return null;
+        return (
+          <div className="max-w-5xl mx-auto px-4 -mt-2 mb-10">
+            <div className="rounded-2xl overflow-hidden border shadow-lg aspect-video bg-black">
+              {isDirectVideo(embed) ? (
+                <video src={embed} controls playsInline className="w-full h-full" preload="metadata" />
+              ) : (
+                <iframe
+                  src={embed}
+                  title={`${category.name} video`}
+                  className="w-full h-full"
+                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                  allowFullScreen
+                  loading="lazy"
+                />
+              )}
+            </div>
+          </div>
+        );
+      })()}
+
       <div className="max-w-7xl mx-auto px-4">
         <Breadcrumbs items={crumbs} />
 
@@ -91,6 +130,7 @@ export default async function CategoryDetailPage({ params }: { params: Promise<{
             <ProductCard key={p.id} s={s} product={{
               id: p.id, name: p.name, slug: p.slug, shortDesc: p.shortDesc,
               image: p.image, mixingRatio: p.mixingRatio, resinType: p.resinType, finish: p.finish,
+              showPrice: p.showPrice, price: p.price, onSale: p.onSale, salePrice: p.salePrice,
             }} />
           ))}
           {!products.length && (

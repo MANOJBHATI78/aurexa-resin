@@ -1,0 +1,68 @@
+🚀 Initializing Z-AI SDK...
+🔎 Searching images: "epoxy resin and hardener two part bottles kit packaging"
+✅ Got 8 images
+{
+  "success": true,
+  "query": "epoxy resin and hardener two part bottles kit packaging",
+  "count": 8,
+  "ranked": false,
+  "captioned_count": 0,
+  "results": [
+    {
+      "original_url": "https://z-cdn.chatglm.cn/image-search-mcp/images-ppt/bfd163f3c6f4.jpg",
+      "caption": "",
+      "source": "eBay",
+      "original_width": "828px",
+      "original_height": "1109px"
+    },
+    {
+      "original_url": "https://z-cdn.chatglm.cn/image-search-mcp/images-ppt/2b90cb4b44dc.jpg",
+      "caption": "",
+      "source": "Utrecht Art Supplies",
+      "original_width": "1200px",
+      "original_height": "1200px"
+    },
+    {
+      "original_url": "https://z-cdn.chatglm.cn/image-search-mcp/images-ppt/f411800e26fc.jpg",
+      "caption": "",
+      "source": "Blick Art Materials",
+      "original_width": "2400px",
+      "original_height": "2400px"
+    },
+    {
+      "original_url": "https://z-cdn.chatglm.cn/image-search-mcp/images-ppt/c3b497536039.jpg",
+      "caption": "",
+      "source": "Utrecht Art Supplies",
+      "original_width": "1200px",
+      "original_height": "1200px"
+    },
+    {
+      "original_url": "https://z-cdn.chatglm.cn/image-search-mcp/images-ppt/3b1e7ef4b03d.jpg",
+      "caption": "",
+      "source": "ARTEZA",
+      "original_width": "1000px",
+      "original_height": "1000px"
+    },
+    {
+      "original_url": "https://z-cdn.chatglm.cn/image-search-mcp/images-ppt/2b7633b410fb.jpg",
+      "caption": "",
+      "source": "Industrial Clear",
+      "original_width": "2048px",
+      "original_height": "2048px"
+    },
+    {
+      "original_url": "https://z-cdn.chatglm.cn/image-search-mcp/images-ppt/a1a643c002eb.png",
+      "caption": "",
+      "source": "IpeDepot",
+      "original_width": "1000px",
+      "original_height": "1000px"
+    },
+    {
+      "original_url": "https://z-cdn.chatglm.cn/image-search-mcp/images-ppt/c644efbf2e48.jpg",
+      "caption": "",
+      "source": "Clay Revolution",
+      "original_width": "1946px",
+      "original_height": "1946px"
+    }
+  ]
+}

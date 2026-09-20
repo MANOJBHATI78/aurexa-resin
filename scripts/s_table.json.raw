@@ -1,0 +1,54 @@
+🚀 Initializing Z-AI SDK...
+🔎 Searching images: "epoxy river table wood slab glossy finish"
+✅ Got 6 images
+{
+  "success": true,
+  "query": "epoxy river table wood slab glossy finish",
+  "count": 6,
+  "ranked": false,
+  "captioned_count": 0,
+  "results": [
+    {
+      "original_url": "https://z-cdn.chatglm.cn/image-search-mcp/images-ppt/9bba11fbf2fe.png",
+      "caption": "",
+      "source": "eBay",
+      "original_width": "1024px",
+      "original_height": "922px"
+    },
+    {
+      "original_url": "https://z-cdn.chatglm.cn/image-search-mcp/images-ppt/da7807c14be0.jpg",
+      "caption": "",
+      "source": "TotalBoat",
+      "original_width": "1445px",
+      "original_height": "1445px"
+    },
+    {
+      "original_url": "https://z-cdn.chatglm.cn/image-search-mcp/images-ppt/b1b3a19a6961.jpg",
+      "caption": "",
+      "source": "Canada Tables",
+      "original_width": "1000px",
+      "original_height": "1000px"
+    },
+    {
+      "original_url": "https://z-cdn.chatglm.cn/image-search-mcp/images-ppt/73de8431d039.jpg",
+      "caption": "",
+      "source": "UPP Home Store",
+      "original_width": "1080px",
+      "original_height": "1080px"
+    },
+    {
+      "original_url": "https://z-cdn.chatglm.cn/image-search-mcp/images-ppt/412dde1ec873.jpg",
+      "caption": "",
+      "source": "SlabstudioHongKong",
+      "original_width": "1000px",
+      "original_height": "1000px"
+    },
+    {
+      "original_url": "https://z-cdn.chatglm.cn/image-search-mcp/images-ppt/7661b41f2f00.jpg",
+      "caption": "",
+      "source": "Amazon.com",
+      "original_width": "2000px",
+      "original_height": "2000px"
+    }
+  ]
+}

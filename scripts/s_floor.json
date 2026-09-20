@@ -1,0 +1,44 @@
+{
+  "success": true,
+  "query": "metallic pigmented epoxy floor countertop marble effect",
+  "count": 5,
+  "ranked": false,
+  "captioned_count": 0,
+  "results": [
+    {
+      "original_url": "https://z-cdn.chatglm.cn/image-search-mcp/images-ppt/133c635e85e5.jpg",
+      "caption": "",
+      "source": "Stone Coat Countertops",
+      "original_width": "1280px",
+      "original_height": "1280px"
+    },
+    {
+      "original_url": "https://z-cdn.chatglm.cn/image-search-mcp/images-ppt/5b2f14ab8e8e.png",
+      "caption": "",
+      "source": "Stone Coat Countertops",
+      "original_width": "900px",
+      "original_height": "900px"
+    },
+    {
+      "original_url": "https://z-cdn.chatglm.cn/image-search-mcp/images-ppt/d5b67125ddc6.jpg",
+      "caption": "",
+      "source": "Stone Coat Countertops",
+      "original_width": "1000px",
+      "original_height": "1000px"
+    },
+    {
+      "original_url": "https://z-cdn.chatglm.cn/image-search-mcp/images-ppt/bdb82a6dbbc1.png",
+      "caption": "",
+      "source": "Epoxy Designs",
+      "original_width": "1536px",
+      "original_height": "2048px"
+    },
+    {
+      "original_url": "https://z-cdn.chatglm.cn/image-search-mcp/images-ppt/520827a8ca2c.jpg",
+      "caption": "",
+      "source": "One Stop Epoxy",
+      "original_width": "1200px",
+      "original_height": "1600px"
+    }
+  ]
+}

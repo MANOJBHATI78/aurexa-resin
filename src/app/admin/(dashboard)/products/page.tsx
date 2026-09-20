@@ -43,7 +43,10 @@ export default function AdminProductsPage() {
         { name: "categoryId", label: "Category", type: "select", group: "Basics", optionsResource: "categories", placeholder: "Select category" },
         { name: "shortDesc", label: "Short Description", type: "textarea", group: "Basics", full: true, rows: 2 },
         { name: "longDesc", label: "Long Description", type: "markdown", group: "Basics", full: true, rows: 6 },
-        { name: "image", label: "Main Image", type: "image", group: "Basics", full: true },
+        { name: "image", label: "Main Image (desktop)", type: "image", group: "Basics", full: true, hint: "Recommended: 1200×900 or square. Shown on cards + product page." },
+        { name: "mobileImage", label: "Main Image (mobile size)", type: "image", group: "Basics", full: true, hint: "Optional. Shown instead of desktop image on phones. Recommended: 800×800." },
+        { name: "videoUrl", label: "Video URL (YouTube / Vimeo / mp4)", type: "text", group: "Basics", full: true, hint: "Optional. Paste a YouTube link e.g. https://youtu.be/… — shown on the product page under the gallery." },
+        { name: "gallery", label: "Gallery Images (JSON)", type: "code", group: "Basics", full: true, hint: 'JSON array e.g. [{"url":"/uploads/x.jpg","alt":"Photo of resin"}]' },
 
         // Specifications
         { name: "resinType", label: "Resin Type", type: "text", group: "Specifications", hint: "e.g. Clear Epoxy, Deep Pour Epoxy" },

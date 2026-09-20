@@ -1,0 +1,54 @@
+🚀 Initializing Z-AI SDK...
+🔎 Searching images: "hands mixing epoxy resin in cups workshop gloves"
+✅ Got 6 images
+{
+  "success": true,
+  "query": "hands mixing epoxy resin in cups workshop gloves",
+  "count": 6,
+  "ranked": false,
+  "captioned_count": 0,
+  "results": [
+    {
+      "original_url": "https://z-cdn.chatglm.cn/image-search-mcp/images-ppt/94f7bfb14123.jpg",
+      "caption": "",
+      "source": "Dreamstime.com",
+      "original_width": "1066px",
+      "original_height": "1690px"
+    },
+    {
+      "original_url": "https://z-cdn.chatglm.cn/image-search-mcp/images-ppt/ee3f756573d7.webp",
+      "caption": "",
+      "source": "Stone Coat Countertops",
+      "original_width": "4240px",
+      "original_height": "2384px"
+    },
+    {
+      "original_url": "https://z-cdn.chatglm.cn/image-search-mcp/images-ppt/9bd700eafafa.jpg",
+      "caption": "",
+      "source": "Nordic Edge",
+      "original_width": "1280px",
+      "original_height": "960px"
+    },
+    {
+      "original_url": "https://z-cdn.chatglm.cn/image-search-mcp/images-ppt/63ba6e610cf1.jpg",
+      "caption": "",
+      "source": "Rockler",
+      "original_width": "1000px",
+      "original_height": "1000px"
+    },
+    {
+      "original_url": "https://z-cdn.chatglm.cn/image-search-mcp/images-ppt/3b7e0f6dfc19.jpg",
+      "caption": "",
+      "source": "National Supply Co.",
+      "original_width": "1000px",
+      "original_height": "1000px"
+    },
+    {
+      "original_url": "https://z-cdn.chatglm.cn/image-search-mcp/images-ppt/51fb1851a43b.jpg",
+      "caption": "",
+      "source": "Alumilite",
+      "original_width": "1000px",
+      "original_height": "1000px"
+    }
+  ]
+}

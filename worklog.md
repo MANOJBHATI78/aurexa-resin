@@ -54,3 +54,35 @@ Stage Summary:
 - Header now simple & clear: Home | Categories (dropdown) | Products | [SALE red button]
 - /sale page live listing discounted products; homepage has Category section, Product section and Sale banner with button — all dynamic from admin panel
 - Admin can: mark any product on sale + set sale price (Products), edit sale banner text/CTA (Sections), edit nav items (Navigation) — no code needed
+
+---
+Task ID: 3
+Agent: Main Agent (Super Z)
+Task: Full header menu restore + creative real-feel redesign (photos everywhere), video support, mobile/desktop image variants, creative dynamic About page, integrations QA, final production QA for go-live.
+
+Work Log:
+- Header: rebuilt DB nav with FULL menu — Home, About, Categories (dropdown), Products, Contact Us, Enquiry, Sale (red button), Blogs + phone/WhatsApp icons; compact 12px nav fits 1024px+ without overflow (verified via browser measurements); gold "Send Inquiry" CTA now xl+ only (Enquiry menu item covers it)
+- Header design: announcement bar got bottom border; decorative vertical gold gradient lines added top-to-bottom on left/right sides connecting announcement bar to header pill (client request "top ki line ko left/right connect karne wali lines")
+- Images: ran z-ai image-search (8 themed searches, 55 results), downloaded 55 resin photos to public/uploads (pour/art/kit/jewel/table/floor/canvas/work sets)
+- Seeded: 15 category images, 18 product images, 5 product galleries, hero banner desktop image + alt, 10 application images, 6 blog featured images
+- CategoryCard redesigned: photo-first card (16:10 image top) — used on homepage, /resin grid, landing category blocks
+- Schema: Category.mobileImage, Category.videoUrl, Product.mobileImage, Product.videoUrl (db push + generate)
+- Video support: src/lib/video.ts (YouTube/Vimeo/mp4 → embed resolver); category page banner video + product page video section; admin text fields with hints
+- Responsive banners: category hero uses <picture> (desktop/mobile srcset), product main image <picture>; admin fields labeled desktop/mobile with size hints
+- Landing blocks extracted to shared src/components/site/landing-blocks.tsx; added creative block types: image_text (reversible), stats, values (icon grid), gallery (mosaic)
+- About page: now renders from LandingPage(slug="about") blocks — seeded creative content (hero, Our Story w/ image, stats, How We Work reversed, What We Stand For values, gallery mosaic, CTA); future edits via Admin → Landing Pages (blocks JSON + customHeadCode injection both live)
+- [slug] landing pages also inject customHeadCode now
+- Admin: categories gained mobile image + video URL fields; products gained mobile image + video URL + gallery hint; settings gained customBodyStartCode field (head + body-start + body-end + CSS + JS all present); integration fields polished with ID-only hints
+- QA: full production build OK; standalone server (scripts/start-prod.sh) stable; ALL routes 200 (/, /about, /resin, /resin/[slug], /products, /products/[slug], /sale, /blog, /contact, /inquiry, /locations/surat-gujarat, /admin/login); production browser session: 0 console errors, 0 page errors
+- Hydration mismatch seen in dev-mode only (Next 16 Turbopack false positive, pre-existing — confirmed also present on stashed original code; production clean)
+- E2E verified via browser: admin login, products table with Sale badges, product edit dialog with desktop/mobile image + upload, settings Integrations tab with all fields; GA4 injection tested live (G-QATEST123 appeared in homepage HTML via ISR, then cleaned)
+- Responsive QA screenshots at 1440/1024/390 widths — nav fits, sections clean
+- Sitemap includes /sale; robots.txt correct; 404 works; ESLint full src/ pass clean
+
+Stage Summary:
+- Website now has real resin imagery everywhere (hero, categories, products, applications, blogs, about) — feels like a genuine resin store
+- Full 8-item header menu + call/WhatsApp icons + Sale button, fits all desktop widths; mobile sheet complete with red Sale button
+- All sections responsive; category/product pages support admin-uploaded desktop+mobile images and YouTube/Vimeo/mp4 videos
+- About page creative + fully editable (blocks + custom code) for future changes
+- Integrations (GSC/GA4/GTM/Clarity/Meta Pixel/custom head+body+CSS+JS) all admin-managed and verified injecting live
+- PRODUCTION BUILD READY: node .next/standalone/server.js (start via scripts/start-prod.sh) — 0 errors, all routes green

@@ -1,0 +1,82 @@
+🚀 Initializing Z-AI SDK...
+🔎 Searching images: "clear epoxy resin being poured into silicone mold glossy liquid"
+✅ Got 10 images
+{
+  "success": true,
+  "query": "clear epoxy resin being poured into silicone mold glossy liquid",
+  "count": 10,
+  "ranked": false,
+  "captioned_count": 0,
+  "results": [
+    {
+      "original_url": "https://z-cdn.chatglm.cn/image-search-mcp/images-ppt/03c572b61992.jpg",
+      "caption": "",
+      "source": "TotalBoat",
+      "original_width": "1703px",
+      "original_height": "952px"
+    },
+    {
+      "original_url": "https://z-cdn.chatglm.cn/image-search-mcp/images-ppt/40b1a6a0cb00.jpg",
+      "caption": "",
+      "source": "YouTube",
+      "original_width": "1280px",
+      "original_height": "720px"
+    },
+    {
+      "original_url": "https://z-cdn.chatglm.cn/image-search-mcp/images-ppt/505134519e1b.jpg",
+      "caption": "",
+      "source": "Upstart Epoxy",
+      "original_width": "1080px",
+      "original_height": "1080px"
+    },
+    {
+      "original_url": "https://z-cdn.chatglm.cn/image-search-mcp/images-ppt/aabb17258bec.jpg",
+      "caption": "",
+      "source": "eBay",
+      "original_width": "1200px",
+      "original_height": "1200px"
+    },
+    {
+      "original_url": "https://z-cdn.chatglm.cn/image-search-mcp/images-ppt/3a0e3100f251.jpg",
+      "caption": "",
+      "source": "Artline Epoxy Resin",
+      "original_width": "1800px",
+      "original_height": "1800px"
+    },
+    {
+      "original_url": "https://z-cdn.chatglm.cn/image-search-mcp/images-ppt/7094d69a244e.jpg",
+      "caption": "",
+      "source": "YouTube",
+      "original_width": "1280px",
+      "original_height": "720px"
+    },
+    {
+      "original_url": "https://z-cdn.chatglm.cn/image-search-mcp/images-ppt/ae65046c1564.jpg",
+      "caption": "",
+      "source": "Etsy",
+      "original_width": "2700px",
+      "original_height": "2700px"
+    },
+    {
+      "original_url": "https://z-cdn.chatglm.cn/image-search-mcp/images-ppt/b5e9948bde5a.jpg",
+      "caption": "",
+      "source": "resiners",
+      "original_width": "1500px",
+      "original_height": "1500px"
+    },
+    {
+      "original_url": "https://z-cdn.chatglm.cn/image-search-mcp/images-ppt/e7f4916aab9e.jpg",
+      "caption": "",
+      "source": "House Of Molds",
+      "original_width": "1500px",
+      "original_height": "1114px"
+    },
+    {
+      "original_url": "https://z-cdn.chatglm.cn/image-search-mcp/images-ppt/843902efe115.jpg",
+      "caption": "",
+      "source": "TotalBoat",
+      "original_width": "1445px",
+      "original_height": "1445px"
+    }
+  ]
+}

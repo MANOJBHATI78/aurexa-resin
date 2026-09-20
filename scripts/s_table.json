@@ -1,0 +1,51 @@
+{
+  "success": true,
+  "query": "epoxy river table wood slab glossy finish",
+  "count": 6,
+  "ranked": false,
+  "captioned_count": 0,
+  "results": [
+    {
+      "original_url": "https://z-cdn.chatglm.cn/image-search-mcp/images-ppt/927f953f7472.webp",
+      "caption": "",
+      "source": "seawavetable",
+      "original_width": "1080px",
+      "original_height": "1080px"
+    },
+    {
+      "original_url": "https://z-cdn.chatglm.cn/image-search-mcp/images-ppt/5b7b1e4c1498.jpg",
+      "caption": "",
+      "source": "eBay",
+      "original_width": "1200px",
+      "original_height": "1200px"
+    },
+    {
+      "original_url": "https://z-cdn.chatglm.cn/image-search-mcp/images-ppt/9bc1f317fc22.webp",
+      "caption": "",
+      "source": "SpeTool",
+      "original_width": "1024px",
+      "original_height": "1024px"
+    },
+    {
+      "original_url": "https://z-cdn.chatglm.cn/image-search-mcp/images-ppt/e7df76ddf90c.webp",
+      "caption": "",
+      "source": "seawavetable",
+      "original_width": "1080px",
+      "original_height": "1080px"
+    },
+    {
+      "original_url": "https://z-cdn.chatglm.cn/image-search-mcp/images-ppt/f4467e14c173.jpg",
+      "caption": "",
+      "source": "eBay",
+      "original_width": "1080px",
+      "original_height": "1080px"
+    },
+    {
+      "original_url": "https://z-cdn.chatglm.cn/image-search-mcp/images-ppt/c2eee058d6c4.jpg",
+      "caption": "",
+      "source": "Superclear Super Epoxy Resin Systems",
+      "original_width": "1080px",
+      "original_height": "1080px"
+    }
+  ]
+}

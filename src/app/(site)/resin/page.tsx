@@ -48,7 +48,7 @@ export default async function ResinCategoriesPage() {
         <Breadcrumbs items={[{ name: "Resin Categories", url: "/resin" }]} />
         <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3 pb-16">
           {categories.map((c) => (
-            <CategoryCard key={c.id} name={c.name} slug={c.slug} description={c.description} count={c._count.products} />
+            <CategoryCard key={c.id} name={c.name} slug={c.slug} description={c.description} count={c._count.products} image={c.image} />
           ))}
         </div>
       </div>

@@ -1,0 +1,54 @@
+🚀 Initializing Z-AI SDK...
+🔎 Searching images: "resin jewellery pendant epoxy casting handmade"
+✅ Got 6 images
+{
+  "success": true,
+  "query": "resin jewellery pendant epoxy casting handmade",
+  "count": 6,
+  "ranked": false,
+  "captioned_count": 0,
+  "results": [
+    {
+      "original_url": "https://z-cdn.chatglm.cn/image-search-mcp/images-ppt/f583301d02d0.jpg",
+      "caption": "",
+      "source": "Amazon.com",
+      "original_width": "1001px",
+      "original_height": "1001px"
+    },
+    {
+      "original_url": "https://z-cdn.chatglm.cn/image-search-mcp/images-ppt/749f378d09e3.jpg",
+      "caption": "",
+      "source": "YouTube",
+      "original_width": "1280px",
+      "original_height": "720px"
+    },
+    {
+      "original_url": "https://z-cdn.chatglm.cn/image-search-mcp/images-ppt/14b47aa4025e.jpg",
+      "caption": "",
+      "source": "Bond Craftor",
+      "original_width": "1600px",
+      "original_height": "1600px"
+    },
+    {
+      "original_url": "https://z-cdn.chatglm.cn/image-search-mcp/images-ppt/a14b37dcad91.png",
+      "caption": "",
+      "source": "IntoResin",
+      "original_width": "1000px",
+      "original_height": "1000px"
+    },
+    {
+      "original_url": "https://z-cdn.chatglm.cn/image-search-mcp/images-ppt/7310c3ed1a7b.jpg",
+      "caption": "",
+      "source": "YouTube",
+      "original_width": "1280px",
+      "original_height": "720px"
+    },
+    {
+      "original_url": "https://z-cdn.chatglm.cn/image-search-mcp/images-ppt/032cc8634ebe.jpg",
+      "caption": "",
+      "source": "eBay UK",
+      "original_width": "1200px",
+      "original_height": "1200px"
+    }
+  ]
+}

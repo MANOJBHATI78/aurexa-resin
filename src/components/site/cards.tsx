@@ -113,29 +113,40 @@ export function ProductCard({ product, s }: { product: ProductCardData; s: SiteS
   );
 }
 
-export function CategoryCard({ name, slug, description, count }: { name: string; slug: string; description?: string | null; count?: number }) {
+export function CategoryCard({ name, slug, description, count, image }: { name: string; slug: string; description?: string | null; count?: number; image?: string | null }) {
   return (
     <Link
       href={`/resin/${slug}`}
-      className="card-lift group rounded-xl border bg-card p-5 flex flex-col gap-2 h-full"
+      className="card-lift group rounded-xl border bg-card overflow-hidden flex flex-col h-full"
       aria-label={`${name} category`}
     >
-      <div className="flex items-center gap-3">
-        <span className="h-10 w-10 rounded-lg bg-forest flex items-center justify-center shrink-0">
-          <Droplets className="h-5 w-5 text-cream" aria-hidden />
-        </span>
+      <div className="relative aspect-[16/10] overflow-hidden bg-forest-mist">
+        {image ? (
+          <img
+            src={image}
+            alt={`${name} — epoxy resin category supplied by Aurexa Resin, Surat`}
+            className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+            loading="lazy"
+          />
+        ) : (
+          <div className="w-full h-full hero-dark flex items-center justify-center">
+            <Droplets className="h-8 w-8 text-cream/80" aria-hidden />
+          </div>
+        )}
+      </div>
+      <div className="p-4 flex flex-col gap-1.5 flex-1">
         <h3 className="font-display font-semibold text-[15px] text-forest group-hover:text-forest-light transition-colors leading-snug">
           {name}
         </h3>
+        {description && (
+          <p className="text-[13px] text-muted-foreground leading-relaxed line-clamp-2">{description}</p>
+        )}
+        {typeof count === "number" && count > 0 && (
+          <span className="mt-auto inline-flex items-center gap-1 text-xs text-forest-light font-medium pt-1.5">
+            <Package className="h-3.5 w-3.5" /> {count} product{count > 1 ? "s" : ""}
+          </span>
+        )}
       </div>
-      {description && (
-        <p className="text-[13px] text-muted-foreground leading-relaxed line-clamp-3">{description}</p>
-      )}
-      {typeof count === "number" && count > 0 && (
-        <span className="mt-auto inline-flex items-center gap-1 text-xs text-forest-light font-medium pt-2">
-          <Package className="h-3.5 w-3.5" /> {count} product{count > 1 ? "s" : ""}
-        </span>
-      )}
     </Link>
   );
 }

@@ -29,6 +29,8 @@ model Category {
   description String?
   longContent String?
   image       String?
+  mobileImage String? // mobile-sized variant for responsive banners
+  videoUrl    String? // YouTube/embed URL for category page
   icon        String?
   order       Int       @default(0)
   featured    Boolean   @default(false)
@@ -57,6 +59,8 @@ model Product {
   shortDesc      String?
   longDesc       String?
   image          String?
+  mobileImage    String? // mobile-sized variant for responsive display
+  videoUrl       String? // YouTube/embed URL shown on product page
   gallery        String? // JSON array of image objects {url, alt}
   categoryId     String?
   category       Category? @relation(fields: [categoryId], references: [id], onDelete: SetNull)

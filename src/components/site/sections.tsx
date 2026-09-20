@@ -157,7 +157,7 @@ export async function CategoryGrid({ data, s, limit = 8 }: { data: any; s: SiteS
         <Heading text={data?.heading} sub={data?.subheading} />
         <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
           {categories.map((c) => (
-            <CategoryCard key={c.id} name={c.name} slug={c.slug} description={c.description} count={c._count.products} />
+            <CategoryCard key={c.id} name={c.name} slug={c.slug} description={c.description} count={c._count.products} image={c.image} />
           ))}
         </div>
         <div className="text-center mt-8">

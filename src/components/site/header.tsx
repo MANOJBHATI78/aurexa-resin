@@ -51,9 +51,9 @@ export function SiteHeader({ s, nav, categories }: { s: SiteSettings; nav: NavIt
 
   return (
     <header className={s.stickyHeader === "true" ? "sticky top-0 z-50" : "relative z-50"}>
-      {/* Announcement bar */}
+      {/* Announcement bar — full-width horizontal line */}
       {s.announcementEnabled === "true" && s.announcementBar && (
-        <div className="bg-forest-dark text-cream/85 text-[11px] sm:text-[13px] text-center px-4 py-2">
+        <div className="bg-forest-dark text-cream/85 text-[11px] sm:text-[13px] text-center px-4 py-2 border-b border-white/10">
           <span className="inline-flex items-center gap-2">
             <span className="w-1.5 h-1.5 rounded-full bg-gold inline-block shrink-0" aria-hidden />
             {s.announcementBar}
@@ -61,11 +61,15 @@ export function SiteHeader({ s, nav, categories }: { s: SiteSettings; nav: NavIt
         </div>
       )}
 
-      {/* Floating pill header — solid brand green, minimal gold */}
+      {/* Header container with decorative vertical side lines (connect top line → header, both sides) */}
       <div className="bg-forest-dark md:bg-transparent">
-        <div className="max-w-7xl mx-auto px-3 sm:px-4 pt-2 md:pt-4 pb-1">
+        <div className="relative max-w-7xl mx-auto px-3 sm:px-4 pt-2 md:pt-4 pb-1">
+          {/* Vertical top-to-bottom lines — left & right */}
+          <span aria-hidden className="pointer-events-none hidden md:block absolute top-0 bottom-2 left-4 w-px bg-gradient-to-b from-gold/60 via-gold/25 to-transparent" />
+          <span aria-hidden className="pointer-events-none hidden md:block absolute top-0 bottom-2 right-4 w-px bg-gradient-to-b from-gold/60 via-gold/25 to-transparent" />
+
           <div className="rounded-2xl md:rounded-full bg-forest shadow-xl ring-1 ring-white/10">
-            <div className="flex items-center justify-between gap-2 h-14 md:h-[74px] pl-3 md:pl-6 pr-3 md:pr-4">
+            <div className="flex items-center justify-between gap-2 h-14 md:h-[68px] pl-3 md:pl-6 pr-3 md:pr-4">
 
               {/* Logo — original Aurexa Resin artwork, uncropped */}
               <Link
@@ -79,18 +83,18 @@ export function SiteHeader({ s, nav, categories }: { s: SiteSettings; nav: NavIt
                   width={520}
                   height={284}
                   priority
-                  className="h-10 md:h-[52px] w-auto object-contain rounded-lg"
+                  className="h-9 md:h-11 w-auto object-contain rounded-lg"
                 />
               </Link>
 
-              {/* Desktop nav — simple & clear: Home, Categories, Products + Sale button */}
-              <nav className="hidden lg:flex items-center gap-0.5 mx-auto" aria-label="Main navigation">
+              {/* Desktop nav — full menu, compact for 8 items */}
+              <nav className="hidden lg:flex items-center gap-0 mx-auto" aria-label="Main navigation">
                 {items.map((item) =>
                   item.url === "/sale" ? (
                     <Link
                       key={item.id}
                       href={item.url}
-                      className={`ml-1 inline-flex items-center gap-1.5 rounded-full px-4 py-2 text-[13px] font-bold uppercase tracking-wide transition-colors ${
+                      className={`ml-1 inline-flex items-center gap-1.5 rounded-full px-3 py-1.5 text-[12px] font-bold uppercase tracking-wide transition-colors ${
                         isActive(item.url)
                           ? "bg-red-700 text-white"
                           : "bg-red-600 text-white hover:bg-red-700"
@@ -105,7 +109,7 @@ export function SiteHeader({ s, nav, categories }: { s: SiteSettings; nav: NavIt
                       <DropdownMenuTrigger asChild>
                         <Link
                           href={item.url}
-                          className={`flex items-center gap-1 px-3.5 py-2 rounded-full text-[13px] font-medium uppercase tracking-wide transition-colors ${
+                          className={`flex items-center gap-1 px-2.5 py-2 rounded-full text-[12px] font-medium uppercase tracking-wide transition-colors ${
                             isActive(item.url)
                               ? "bg-white/15 text-white"
                               : "text-cream/85 hover:bg-white/10 hover:text-white"
@@ -134,7 +138,7 @@ export function SiteHeader({ s, nav, categories }: { s: SiteSettings; nav: NavIt
                     <Link
                       key={item.id}
                       href={item.url}
-                      className={`px-3.5 py-2 rounded-full text-[13px] font-medium uppercase tracking-wide transition-colors ${
+                      className={`px-2.5 py-2 rounded-full text-[12px] font-medium uppercase tracking-wide transition-colors ${
                         isActive(item.url)
                           ? "bg-white/15 text-white"
                           : "text-cream/85 hover:bg-white/10 hover:text-white"
@@ -172,7 +176,7 @@ export function SiteHeader({ s, nav, categories }: { s: SiteSettings; nav: NavIt
                   <Button
                     asChild
                     size="sm"
-                    className="hidden md:inline-flex btn-gold rounded-full px-4"
+                    className="hidden xl:inline-flex btn-gold rounded-full px-4"
                   >
                     <Link href={s.headerCtaUrl || "/inquiry"}>{s.headerCtaLabel || "Send Inquiry"}</Link>
                   </Button>

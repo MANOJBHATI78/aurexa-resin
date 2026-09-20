@@ -7,6 +7,7 @@ import { JsonLd } from "@/components/site/json-ld";
 import { ProductCard, CategoryCard } from "@/components/site/cards";
 import { FaqSection } from "@/components/site/faq";
 import { buildMetadata, breadcrumbSchema, faqSchema, productSchema, parseJsonArray, absoluteUrl } from "@/lib/seo";
+import { toVideoEmbed, isDirectVideo } from "@/lib/video";
 import { MessageCircle, Phone, Layers, Droplets, Package, Clock, Wrench, Sparkles, CheckCircle2, ShieldCheck, Users, Percent } from "lucide-react";
 import type { Metadata } from "next";
 
@@ -146,12 +147,22 @@ export default async function ProductDetailPage({ params }: { params: Promise<{ 
           <div className="lg:col-span-2">
             <div className="rounded-xl border overflow-hidden bg-card aspect-square">
               {product.image ? (
-                 
-                <img
-                  src={product.image}
-                  alt={`${product.name} — ${s.brandName}, epoxy resin supplier in Surat`}
-                  className="w-full h-full object-cover"
-                />
+                product.mobileImage ? (
+                  <picture>
+                    <source media="(max-width: 767px)" srcSet={product.mobileImage} />
+                    <img
+                      src={product.image}
+                      alt={`${product.name} — ${s.brandName}, epoxy resin supplier in Surat`}
+                      className="w-full h-full object-cover"
+                    />
+                  </picture>
+                ) : (
+                  <img
+                    src={product.image}
+                    alt={`${product.name} — ${s.brandName}, epoxy resin supplier in Surat`}
+                    className="w-full h-full object-cover"
+                  />
+                )
               ) : (
                 <div className="w-full h-full hero-dark flex flex-col items-center justify-center gap-3 text-cream/85">
                   <Droplets className="h-16 w-16 opacity-70" aria-hidden />
@@ -167,6 +178,27 @@ export default async function ProductDetailPage({ params }: { params: Promise<{ 
                 ))}
               </div>
             )}
+            {/* Product video — admin can attach a YouTube/Vimeo/mp4 link */}
+            {(() => {
+              const embed = toVideoEmbed(product.videoUrl);
+              if (!embed) return null;
+              return (
+                <div className="mt-3 rounded-xl overflow-hidden border shadow-md aspect-video bg-black">
+                  {isDirectVideo(embed) ? (
+                    <video src={embed} controls playsInline className="w-full h-full" preload="metadata" />
+                  ) : (
+                    <iframe
+                      src={embed}
+                      title={`${product.name} video`}
+                      className="w-full h-full"
+                      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                      allowFullScreen
+                      loading="lazy"
+                    />
+                  )}
+                </div>
+              );
+            })()}
           </div>
 
           {/* Details */}

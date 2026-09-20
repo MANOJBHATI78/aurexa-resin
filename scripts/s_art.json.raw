@@ -1,0 +1,68 @@
+🚀 Initializing Z-AI SDK...
+🔎 Searching images: "colorful epoxy resin art coasters and trays finished pieces"
+✅ Got 8 images
+{
+  "success": true,
+  "query": "colorful epoxy resin art coasters and trays finished pieces",
+  "count": 8,
+  "ranked": false,
+  "captioned_count": 0,
+  "results": [
+    {
+      "original_url": "https://z-cdn.chatglm.cn/image-search-mcp/images-ppt/feaaeceed804.png",
+      "caption": "",
+      "source": "RESIN PRO UK",
+      "original_width": "2048px",
+      "original_height": "2048px"
+    },
+    {
+      "original_url": "https://z-cdn.chatglm.cn/image-search-mcp/images-ppt/574a7ee7e09f.jpg",
+      "caption": "",
+      "source": "Amazon.com",
+      "original_width": "2048px",
+      "original_height": "2048px"
+    },
+    {
+      "original_url": "https://z-cdn.chatglm.cn/image-search-mcp/images-ppt/644ee5049290.jpg",
+      "caption": "",
+      "source": "Reddit",
+      "original_width": "3024px",
+      "original_height": "4032px"
+    },
+    {
+      "original_url": "https://z-cdn.chatglm.cn/image-search-mcp/images-ppt/8f29787fdf78.jpg",
+      "caption": "",
+      "source": "RESIN PRO UK",
+      "original_width": "1280px",
+      "original_height": "1280px"
+    },
+    {
+      "original_url": "https://z-cdn.chatglm.cn/image-search-mcp/images-ppt/795d8c7684f5.jpg",
+      "caption": "",
+      "source": "YouTube",
+      "original_width": "1280px",
+      "original_height": "720px"
+    },
+    {
+      "original_url": "https://z-cdn.chatglm.cn/image-search-mcp/images-ppt/87e44c75b1f5.jpg",
+      "caption": "",
+      "source": "resiners",
+      "original_width": "1600px",
+      "original_height": "896px"
+    },
+    {
+      "original_url": "https://z-cdn.chatglm.cn/image-search-mcp/images-ppt/5e54dbadbb9d.jpg",
+      "caption": "",
+      "source": "YouTube",
+      "original_width": "1280px",
+      "original_height": "720px"
+    },
+    {
+      "original_url": "https://z-cdn.chatglm.cn/image-search-mcp/images-ppt/2fdb9131841b.jpg",
+      "caption": "",
+      "source": "Artline Epoxy Resin",
+      "original_width": "1036px",
+      "original_height": "1036px"
+    }
+  ]
+}

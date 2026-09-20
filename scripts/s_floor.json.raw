@@ -1,0 +1,47 @@
+🚀 Initializing Z-AI SDK...
+🔎 Searching images: "metallic pigmented epoxy floor countertop marble effect"
+✅ Got 5 images
+{
+  "success": true,
+  "query": "metallic pigmented epoxy floor countertop marble effect",
+  "count": 5,
+  "ranked": false,
+  "captioned_count": 0,
+  "results": [
+    {
+      "original_url": "https://z-cdn.chatglm.cn/image-search-mcp/images-ppt/5b2f14ab8e8e.png",
+      "caption": "",
+      "source": "Stone Coat Countertops",
+      "original_width": "900px",
+      "original_height": "900px"
+    },
+    {
+      "original_url": "https://z-cdn.chatglm.cn/image-search-mcp/images-ppt/405257762024.jpg",
+      "caption": "",
+      "source": "Stone Coat Countertops",
+      "original_width": "1800px",
+      "original_height": "1200px"
+    },
+    {
+      "original_url": "https://z-cdn.chatglm.cn/image-search-mcp/images-ppt/9f71d6879476.jpg",
+      "caption": "",
+      "source": "Epoxy Plus",
+      "original_width": "930px",
+      "original_height": "1180px"
+    },
+    {
+      "original_url": "https://z-cdn.chatglm.cn/image-search-mcp/images-ppt/a613cf90b9d6.jpg",
+      "caption": "",
+      "source": "YouTube",
+      "original_width": "1280px",
+      "original_height": "720px"
+    },
+    {
+      "original_url": "https://z-cdn.chatglm.cn/image-search-mcp/images-ppt/23a72a167baf.jpg",
+      "caption": "",
+      "source": "Xtreme Polishing Systems",
+      "original_width": "1078px",
+      "original_height": "1078px"
+    }
+  ]
+}

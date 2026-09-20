@@ -10,7 +10,7 @@ export const RESOURCES = {
       orderBy: { updatedAt: "desc" as const },
       searchFields: ["name", "slug", "sku"],
       fields: [
-        "name", "slug", "sku", "shortDesc", "longDesc", "image", "gallery", "categoryId",
+        "name", "slug", "sku", "shortDesc", "longDesc", "image", "mobileImage", "videoUrl", "gallery", "categoryId",
         "resinType", "mixingRatio", "packSizes", "curingInfo", "workingTime", "applications",
         "recommendedUse", "pourDepth", "finish", "features", "benefits", "suitableFor",
         "safetyInfo", "specs", "showPrice", "price", "onSale", "salePrice", "featured", "published",
@@ -33,7 +33,7 @@ export const RESOURCES = {
       orderBy: { order: "asc" as const },
       searchFields: ["name", "slug"],
       fields: [
-        "name", "slug", "description", "longContent", "image", "icon", "order", "featured", "published",
+        "name", "slug", "description", "longContent", "image", "mobileImage", "videoUrl", "icon", "order", "featured", "published",
         "seoTitle", "seoDescription", "seoKeywords", "canonical", "ogTitle", "ogDescription",
         "ogImage", "noindex", "customHeadCode",
       ],

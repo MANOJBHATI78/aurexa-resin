@@ -1,0 +1,51 @@
+{
+  "success": true,
+  "query": "artist pouring pigmented resin on canvas abstract art",
+  "count": 6,
+  "ranked": false,
+  "captioned_count": 0,
+  "results": [
+    {
+      "original_url": "https://z-cdn.chatglm.cn/image-search-mcp/images-ppt/6ddedb892202.jpg",
+      "caption": "",
+      "source": "Etsy",
+      "original_width": "3000px",
+      "original_height": "2121px"
+    },
+    {
+      "original_url": "https://z-cdn.chatglm.cn/image-search-mcp/images-ppt/63a8163d0c0f.jpg",
+      "caption": "",
+      "source": "YouTube",
+      "original_width": "1280px",
+      "original_height": "720px"
+    },
+    {
+      "original_url": "https://z-cdn.chatglm.cn/image-search-mcp/images-ppt/16e48c551f44.jpg",
+      "caption": "",
+      "source": "Fig Lancaster",
+      "original_width": "1920px",
+      "original_height": "2560px"
+    },
+    {
+      "original_url": "https://z-cdn.chatglm.cn/image-search-mcp/images-ppt/0fa4742e90fc.jpg",
+      "caption": "",
+      "source": "Art 'N Glow",
+      "original_width": "1200px",
+      "original_height": "667px"
+    },
+    {
+      "original_url": "https://z-cdn.chatglm.cn/image-search-mcp/images-ppt/a5104b79b99d.jpg",
+      "caption": "",
+      "source": "Saatchi Art",
+      "original_width": "770px",
+      "original_height": "1026px"
+    },
+    {
+      "original_url": "https://z-cdn.chatglm.cn/image-search-mcp/images-ppt/4b63470aed30.png",
+      "caption": "",
+      "source": "Soby Art Academy",
+      "original_width": "1920px",
+      "original_height": "1080px"
+    }
+  ]
+}

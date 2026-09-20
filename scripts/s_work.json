@@ -1,0 +1,51 @@
+{
+  "success": true,
+  "query": "hands mixing epoxy resin in cups workshop gloves",
+  "count": 6,
+  "ranked": false,
+  "captioned_count": 0,
+  "results": [
+    {
+      "original_url": "https://z-cdn.chatglm.cn/image-search-mcp/images-ppt/4eba4c1127d9.jpg",
+      "caption": "",
+      "source": "Amazon.com",
+      "original_width": "894px",
+      "original_height": "894px"
+    },
+    {
+      "original_url": "https://z-cdn.chatglm.cn/image-search-mcp/images-ppt/ee3f756573d7.webp",
+      "caption": "",
+      "source": "Stone Coat Countertops",
+      "original_width": "4240px",
+      "original_height": "2384px"
+    },
+    {
+      "original_url": "https://z-cdn.chatglm.cn/image-search-mcp/images-ppt/9be391ef290b.jpg",
+      "caption": "",
+      "source": "AMC Supplies",
+      "original_width": "1640px",
+      "original_height": "856px"
+    },
+    {
+      "original_url": "https://z-cdn.chatglm.cn/image-search-mcp/images-ppt/8131260bfd9b.png",
+      "caption": "",
+      "source": "Craft Resin EU",
+      "original_width": "1500px",
+      "original_height": "994px"
+    },
+    {
+      "original_url": "https://z-cdn.chatglm.cn/image-search-mcp/images-ppt/73cf93d788f9.jpg",
+      "caption": "",
+      "source": "resiners",
+      "original_width": "1500px",
+      "original_height": "1000px"
+    },
+    {
+      "original_url": "https://z-cdn.chatglm.cn/image-search-mcp/images-ppt/438f2dfb9741.jpg",
+      "caption": "",
+      "source": "resiners",
+      "original_width": "1601px",
+      "original_height": "1601px"
+    }
+  ]
+}

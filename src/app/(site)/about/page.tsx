@@ -6,12 +6,28 @@ import { Button } from "@/components/ui/button";
 import { Breadcrumbs } from "@/components/site/breadcrumbs";
 import { JsonLd } from "@/components/site/json-ld";
 import { FaqSection } from "@/components/site/faq";
+import { LandingBlock } from "@/components/site/landing-blocks";
 import { buildMetadata, breadcrumbSchema, faqSchema, parseJsonArray } from "@/lib/seo";
 import { MessageCircle, Gem, Layers, Truck, Handshake, CheckCircle2, Instagram, Globe } from "lucide-react";
 
 export const revalidate = 60;
 
 export async function generateMetadata(): Promise<Metadata> {
+  const landing = await db.landingPage.findUnique({ where: { slug: "about" } });
+  if (landing) {
+    return buildMetadata({
+      path: "/about",
+      title: landing.seoTitle || landing.title,
+      description: landing.seoDescription || undefined,
+      keywords: landing.seoKeywords,
+      canonical: landing.canonical,
+      ogTitle: landing.ogTitle || undefined,
+      ogDescription: landing.ogDescription || undefined,
+      ogImage: landing.ogImage || undefined,
+      noindex: landing.noindex,
+      fallbackTitle: landing.title,
+    });
+  }
   return buildMetadata({
     path: "/about",
     fallbackTitle: "About Aurexa Resin — Epoxy Resin Wholesaler in Surat, Gujarat",
@@ -23,8 +39,27 @@ export async function generateMetadata(): Promise<Metadata> {
 
 export default async function AboutPage() {
   const s = await getSettingsCached();
-  const faqs = await db.faq.findMany({ where: { active: true, entityType: "GLOBAL" }, orderBy: { order: "asc" }, take: 6 });
+  const [landing, faqs] = await Promise.all([
+    db.landingPage.findUnique({ where: { slug: "about" } }),
+    db.faq.findMany({ where: { active: true, entityType: "GLOBAL" }, orderBy: { order: "asc" }, take: 6 }),
+  ]);
 
+  const blocks = parseJsonArray<{ type: string; data: Record<string, unknown> }>(landing?.blocks ?? null);
+
+  // Creative landing-driven About page (editable from Admin → Landing Pages → about)
+  if (landing && landing.published && blocks.length) {
+    return (
+      <>
+        {landing.customHeadCode && <div dangerouslySetInnerHTML={{ __html: landing.customHeadCode }} />}
+        <JsonLd data={breadcrumbSchema([{ name: "About Us", url: "/about" }])} />
+        {blocks.map((block, i) => (
+          <LandingBlock key={i} block={block} s={s} faqHeading={landing.title} />
+        ))}
+      </>
+    );
+  }
+
+  // Fallback: built-in About layout
   return (
     <>
       <JsonLd

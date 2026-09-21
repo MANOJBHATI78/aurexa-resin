@@ -8,6 +8,7 @@ import { ProductCard, CategoryCard } from "@/components/site/cards";
 import { FaqSection } from "@/components/site/faq";
 import { buildMetadata, breadcrumbSchema, faqSchema, productSchema, parseJsonArray, absoluteUrl } from "@/lib/seo";
 import { toVideoEmbed, isDirectVideo } from "@/lib/video";
+import { UspStripCompact } from "@/components/site/usp-strip";
 import { MessageCircle, Phone, Layers, Droplets, Package, Clock, Wrench, Sparkles, CheckCircle2, ShieldCheck, Users, Percent } from "lucide-react";
 import type { Metadata } from "next";
 
@@ -136,6 +137,7 @@ export default async function ProductDetailPage({ params }: { params: Promise<{ 
               <a href={`tel:${s.phone.replace(/\s/g, "")}`}><Phone className="h-4 w-4" /> Call {s.phone}</a>
             </Button>
           </div>
+          <UspStripCompact className="mt-7" />
         </div>
       </section>
 

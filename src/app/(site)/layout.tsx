@@ -14,7 +14,7 @@ export default async function SiteLayout({ children }: { children: React.ReactNo
     db.category.findMany({
       where: { published: true },
       orderBy: { order: "asc" },
-      select: { name: true, slug: true },
+      select: { name: true, slug: true, image: true },
     }),
   ]);
 

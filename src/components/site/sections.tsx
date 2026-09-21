@@ -3,6 +3,7 @@ import Image from "next/image";
 import {
   Gem, Layers, Palette, Factory, Package, Truck, ArrowRight, MessageCircle,
   CheckCircle2, Star, Sparkles, GraduationCap, Scale, Handshake, BookOpen, Percent,
+  Droplets, Leaf, Timer,
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { ProductCard, CategoryCard } from "@/components/site/cards";
@@ -13,6 +14,7 @@ import { parseJsonArray } from "@/lib/seo";
 const ICONS: Record<string, React.ComponentType<{ className?: string }>> = {
   gem: Gem, layers: Layers, palette: Palette, factory: Factory,
   package: Package, truck: Truck, sparkles: Sparkles,
+  droplets: Droplets, leaf: Leaf, timer: Timer,
 };
 
 export interface SectionDef {
@@ -82,8 +84,13 @@ function HeroSection({ data, s }: { data: any; s: SiteSettings }) {
                 </Button>
               )}
             </div>
-            <div className="mt-8 flex flex-wrap gap-x-6 gap-y-2 text-sm text-cream/65">
-              {["Wholesale & Bulk Supply", "Pan-India Dispatch", "Single-Piece Orders Welcome"].map((t) => (
+            <div className="mt-8 flex flex-wrap gap-x-5 gap-y-2 text-sm text-cream/70">
+              {[
+                "Bubble Free Finish",
+                "Atmosphere Friendly",
+                "2:1 — 4 Hrs Dry · 3:1 — 10 Hrs Dry",
+                "B2B Bulk Supplier · Pan-India Dispatch",
+              ].map((t) => (
                 <span key={t} className="inline-flex items-center gap-1.5">
                   <CheckCircle2 className="h-4 w-4 text-gold/80" aria-hidden /> {t}
                 </span>

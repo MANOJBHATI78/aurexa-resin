@@ -9,6 +9,7 @@ import { ProductCard } from "@/components/site/cards";
 import { FaqSection } from "@/components/site/faq";
 import { buildMetadata, breadcrumbSchema, faqSchema, itemListSchema, parseJsonArray } from "@/lib/seo";
 import { toVideoEmbed, isDirectVideo } from "@/lib/video";
+import { UspStripCompact } from "@/components/site/usp-strip";
 import { MessageCircle } from "lucide-react";
 import Link from "next/link";
 
@@ -95,6 +96,7 @@ export default async function CategoryDetailPage({ params }: { params: Promise<{
               <Link href={`/products?category=${category.slug}`}>View as Product List</Link>
             </Button>
           </div>
+          <UspStripCompact className="mt-7" />
         </div>
       </section>
 

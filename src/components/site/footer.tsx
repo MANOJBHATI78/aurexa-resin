@@ -139,8 +139,15 @@ export async function SiteFooter() {
           </div>
         </div>
 
+        {/* SEO keyword line — focus + supporting search terms */}
+        <p className="mt-8 text-[11.5px] leading-relaxed text-cream/40">
+          Aurexa Resin — ultra crystal clear resin · crystal clear epoxy resin · 2:1 resin (4 hrs dry) · 3:1 resin
+          (10 hrs dry) · epoxy resin wholesale · resin wholesaler · resin manufacturer · resin supplier · resin
+          exporter · B2B bulk supplier · bubble free resin · atmosphere friendly resin — Surat, Gujarat, India.
+        </p>
+
         {/* Bottom bar */}
-        <div className="mt-10 pt-6 border-t border-cream/10 flex flex-col sm:flex-row items-center justify-between gap-3 text-xs text-cream/50">
+        <div className="mt-6 pt-6 border-t border-cream/10 flex flex-col sm:flex-row items-center justify-between gap-3 text-xs text-cream/50">
           <p>© {new Date().getFullYear()} {s.brandName}. All rights reserved.</p>
           <div className="flex flex-wrap items-center justify-center gap-x-4 gap-y-2">
             {legalPages.map((p) => (

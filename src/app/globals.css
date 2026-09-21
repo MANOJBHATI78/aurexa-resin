@@ -269,3 +269,19 @@
 ::-webkit-scrollbar-track { background: #f0ede3; }
 ::-webkit-scrollbar-thumb { background: #c9c4b2; border-radius: 8px; }
 ::-webkit-scrollbar-thumb:hover { background: #a8842c; }
+
+/* Keyword ticker (header) — seamless marquee, pauses on hover */
+@keyframes ticker-scroll {
+  from { transform: translateX(0); }
+  to { transform: translateX(-50%); }
+}
+.animate-ticker {
+  animation: ticker-scroll 32s linear infinite;
+  will-change: transform;
+}
+.ticker-wrap:hover .animate-ticker {
+  animation-play-state: paused;
+}
+@media (prefers-reduced-motion: reduce) {
+  .animate-ticker { animation: none; }
+}

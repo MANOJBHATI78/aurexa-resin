@@ -86,3 +86,25 @@ Stage Summary:
 - About page creative + fully editable (blocks + custom code) for future changes
 - Integrations (GSC/GA4/GTM/Clarity/Meta Pixel/custom head+body+CSS+JS) all admin-managed and verified injecting live
 - PRODUCTION BUILD READY: node .next/standalone/server.js (start via scripts/start-prod.sh) — 0 errors, all routes green
+
+---
+Task ID: 4
+Agent: Main Agent (Super Z)
+Task: SEO keyword integration (focus: "Ultra Crystal Clear Resin" + wholesale/manufacturer/supplier/exporter/B2B bulk/2:1/3:1), creative header redesign with keyword ticker + image mega menu, main categories page (/resin) showcase redesign, brand USP representation (Bubble Free, Atmosphere Friendly, 2:1=4hrs dry, 3:1=10hrs dry).
+
+Work Log:
+- Created src/components/site/usp-strip.tsx: UspStripDark (4-card band under homepage hero), UspStripCompact (chips in page heroes), UspStripLight, RatioShowcase (2:1 / 3:1 cards with big DRY IN 4/10 HRS stats)
+- Header rebuild (src/components/site/header.tsx): keyword marquee ticker bar (admin announcement integrated as gold-highlighted item + brand keywords: Ultra Crystal Clear Resin, Bubble Free, Atmosphere Friendly, 2:1 4hrs, 3:1 10hrs, Wholesale-Mufacturer-Supplier-Exporter, B2B Bulk Supplier, Pan-India, Surat) with CSS animation (globals.css animate-ticker, pause on hover, reduced-motion safe) + phone number display in ticker (md+); Categories nav item now opens hover MEGA MENU — 2-col grid of 10 categories with thumbnail images + "View All N Categories" CTA + right rail (SIGNATURE GRADE featured card for Ultra Crystal Clear Resin linking to /resin/crystal-clear-epoxy-resin + USP mini-list); mobile sheet gained 4 USP chips
+- layout.tsx: header categories now include image field
+- /resin main categories page full redesign: keyword-rich hero (badge "15 Resin Systems · B2B Bulk Supplier · Surat Gujarat", H1 with gold focus keyword, intro paragraph with wholesale/manufacturer/supplier/exporter/B2B/2:1/3:1, USP chips, CTAs) → Signature Grade flagship banner (Crystal Clear category w/ image + bullets) → "Choose Your Mixing Ratio" 2:1/3:1 showcase → All Categories grid → B2B bulk supply summary + WhatsApp/enquiry CTAs; metadata updated with focus keywords
+- Homepage: added generateMetadata (absolute title, focus keyword description, 16 keywords); UspStripDark auto-renders right after hero section; hero trust chips now = Bubble Free / Atmosphere Friendly / 2:1 4hrs · 3:1 10hrs / B2B Bulk Supplier
+- DB (scripts/update-seo-brand.ts): hero headline → "Ultra Crystal Clear Epoxy Resin — Wholesale Manufacturer, Supplier & Exporter" (+subheading & seoText with all keywords); why_us items → 6 brand-quality cards (Ultra Crystal Clear Finish, Bubble Free Every Pour, Atmosphere Friendly, 2:1 & 3:1 Fast Dry Systems, Wholesale & B2B Bulk, Pan-India); settings: siteTitle/siteMetaDescription/siteKeywords/announcementBar/footerDescription all keyword-integrated; sections.tsx ICONS map extended (droplets/leaf/timer)
+- Category page + product page: UspStripCompact added to heroes; footer: SEO keyword line added above bottom bar
+- seed-data.ts + settings.ts defaults synced with DB values
+- Verification: ESLint clean on all touched files; tsc — zero new errors (only pre-existing); routes 200 (/ /resin /resin/[slug] /products /products/[slug] /sale); browser QA screenshots (download/qa/): desktop header+ticker, mega menu open (category images + signature card), homepage USP band, /resin hero + flagship + ratio cards, mobile 390px homepage & /resin — all clean, no overflow
+
+Stage Summary:
+- Focus keyword "Ultra Crystal Clear Resin" now in: title tag, meta description, keywords, H1, hero headline, ticker, footer, /resin hero — supporting keywords (wholesale, wholesaler, manufacturer, supplier, exporter, B2B bulk supplier, 2:1 resin, 3:1 resin) woven across
+- Brand qualities (Bubble Free / Atmosphere Friendly / 2:1 4hrs / 3:1 10hrs) visible on every key page: homepage hero+band, header ticker, mega menu, mobile sheet, category pages, product pages, /resin
+- Header: creative new design with live keyword ticker + image mega menu + phone number
+- /resin is now a true categories showcase page

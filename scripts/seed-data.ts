@@ -674,12 +674,12 @@ export const LANDING_PAGES = [
 
 export const HOME_SECTIONS = [
   { type: "hero", order: 1, title: "Hero", data: {
-    headline: "Premium Epoxy Resin Solutions for Art, Craft, Woodworking & Industrial Applications",
-    subheading: "Explore reliable resin solutions from Aurexa Resin for artists, makers, businesses, manufacturers and professional applications — supplied from Surat, Gujarat across India.",
+    headline: "Ultra Crystal Clear Epoxy Resin — Wholesale Manufacturer, Supplier & Exporter",
+    subheading: "Aurexa Resin manufactures and supplies bubble free, atmosphere friendly epoxy resin from Surat, Gujarat — our signature Ultra Crystal Clear grade, easy 2:1 resin (touch dry in 4 hrs) and deep-pour 3:1 resin (touch dry in 10 hrs). Artists, studios, resellers and industries buy direct with B2B bulk supply across India.",
     primaryCta: { label: "Explore Resin Products", url: "/products" },
     secondaryCta: { label: "Send Inquiry", url: "/inquiry" },
     whatsappCta: { label: "WhatsApp Us", url: "WA:DEFAULT" },
-    seoText: "Aurexa Resin is an epoxy resin wholesaler, supplier and dealer in Surat, Gujarat, India — offering clear epoxy resin, crystal clear epoxy resin, art resin, casting resin, table top epoxy, deep pour resin, jewellery resin and industrial epoxy systems with pan-India supply.",
+    seoText: "Aurexa Resin is an ultra crystal clear epoxy resin wholesale manufacturer, supplier, exporter and B2B bulk supplier in Surat, Gujarat, India. Buy crystal clear epoxy resin, 2:1 resin, 3:1 resin, art resin, casting resin, table top epoxy, deep pour resin, river table resin, jewellery resin and industrial epoxy systems — bubble free, atmosphere friendly, wholesale and single-piece orders, pan-India dispatch.",
   } },
   { type: "categories", order: 2, title: "Resin Product Categories", data: {
     heading: "Resin Product Categories",
@@ -687,14 +687,14 @@ export const HOME_SECTIONS = [
   } },
   { type: "why_us", order: 3, title: "Why Aurexa Resin", data: {
     heading: "Why Aurexa Resin",
-    subheading: "What buyers can expect when they work with us.",
+    subheading: "The brand qualities our customers know us for — visible in every batch we ship.",
     items: [
-      { icon: "gem", title: "Crystal Clear Finish", text: "Resin systems selected for optical clarity and glass-like, high-gloss cures." },
-      { icon: "layers", title: "Multiple Resin Systems", text: "Coating, casting, deep pour, art, jewellery, craft and industrial grades under one roof." },
-      { icon: "palette", title: "Art & Craft Applications", text: "Resins tuned for pouring, levelling, pigment suspension and creative techniques." },
-      { icon: "factory", title: "Professional Applications", text: "Technical grades for woodworking, fabrication, laminating and industrial use." },
-      { icon: "package", title: "Wholesale Supply", text: "Bulk pack sizes and wholesale pricing for resellers, studios and businesses." },
-      { icon: "truck", title: "Pan-India Supply", text: "Dispatch from Surat to artists, workshops and industries across India." },
+      { icon: "gem", title: "Ultra Crystal Clear Finish", text: "Our signature ultra crystal clear resin cures glass-clear and non-yellowing — showroom-ready results every time." },
+      { icon: "droplets", title: "Bubble Free, Every Pour", text: "Self-deaering formulation releases air on its own — no bubbles, no flaws, no wastage." },
+      { icon: "leaf", title: "Atmosphere Friendly", text: "Low-odour, low-irritation chemistry — safe for home studios, workshops and enclosed spaces." },
+      { icon: "timer", title: "2:1 & 3:1 — Fast Dry Systems", text: "2:1 resin touch-dry in 4 HRS for quick production. 3:1 resin touch-dry in 10 HRS for deep, glass-clear casts." },
+      { icon: "package", title: "Wholesale & B2B Bulk Supply", text: "Direct manufacturer pricing with bulk pack sizes for resellers, studios and industries." },
+      { icon: "truck", title: "Pan-India Dispatch — Surat", text: "Reliable supply from Surat, Gujarat to artists, workshops and industries across India." },
     ],
   } },
   { type: "featured_products", order: 4, title: "Featured Products", data: {

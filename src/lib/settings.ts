@@ -79,7 +79,7 @@ export const DEFAULT_SETTINGS: SiteSettings = {
   businessDescription:
     "Aurexa Resin is a Surat-based epoxy resin supply business offering a wide range of epoxy resin systems for art, craft, jewellery, woodworking, table tops, river tables, coating, casting and industrial applications. We cater to wholesale, bulk and single-piece requirements with pan-India supply.",
   footerDescription:
-    "Aurexa Resin — epoxy resin wholesaler, supplier and dealer in Surat, Gujarat. Clear, casting, art, table top and industrial epoxy resin for artists, workshops, resellers and industries across India.",
+    "Aurexa Resin — ultra crystal clear epoxy resin wholesale manufacturer, supplier, exporter & B2B bulk supplier in Surat, Gujarat. Bubble free, atmosphere friendly 2:1 resin (4 hrs dry) & 3:1 resin (10 hrs dry), art, casting, table top, deep pour & industrial grades. Pan-India dispatch.",
   phone: "+91 93164 94976",
   whatsappNumber: "919316494976",
   whatsappDefaultMessage:
@@ -105,11 +105,11 @@ export const DEFAULT_SETTINGS: SiteSettings = {
   logo: "/uploads/aurexa-logo.png",
   favicon: "/uploads/aurexa-favicon.png",
   ogDefaultImage: "/uploads/aurexa-logo.png",
-  siteTitle: "Aurexa Resin | Epoxy Resin Wholesaler, Supplier & Dealer in Surat",
+  siteTitle: "Aurexa Resin | Ultra Crystal Clear Epoxy Resin Wholesaler, Manufacturer & Supplier — Surat",
   siteMetaDescription:
-    "Aurexa Resin is an epoxy resin wholesaler, supplier and dealer in Surat, Gujarat. Buy clear, crystal clear, art, casting, table top, deep pour and industrial epoxy resin for art, craft, jewellery, woodworking and industrial use. Pan-India supply. WhatsApp +91 93164 94976.",
+    "Buy ultra crystal clear epoxy resin direct from Aurexa Resin — wholesale manufacturer, supplier, exporter & B2B bulk supplier in Surat, Gujarat. Bubble free, atmosphere friendly 2:1 resin (4 hrs dry) & 3:1 resin (10 hrs dry) for art, tables, jewellery & industry. Pan-India dispatch. WhatsApp +91 93164 94976.",
   siteKeywords:
-    "epoxy resin wholesaler surat, epoxy resin supplier surat, resin dealer surat, clear epoxy resin, art resin, casting resin, table top epoxy, deep pour epoxy, buy epoxy resin india",
+    "ultra crystal clear resin, ultra crystal clear epoxy resin, epoxy resin wholesale, resin wholesaler surat, resin manufacturer india, resin supplier surat, resin exporter india, b2b bulk resin supplier, 2:1 resin, 3:1 resin, bubble free resin, atmosphere friendly resin, crystal clear epoxy, art resin, casting resin, deep pour resin, epoxy resin surat, buy epoxy resin india",
   seoTitleTemplateProduct: "{name} | Epoxy Resin Supplier in Surat | Aurexa Resin",
   seoTitleTemplateCategory: "{name} | Epoxy Resin Supplier & Wholesaler | Aurexa Resin",
   seoTitleTemplateLocation: "Epoxy Resin Supplier in {name} | Aurexa Resin",
@@ -130,7 +130,7 @@ export const DEFAULT_SETTINGS: SiteSettings = {
   showInquiryFloat: "true",
   floatPosition: "right",
   announcementBar:
-    "Wholesale & bulk epoxy resin inquiries welcome — Pan-India supply | WhatsApp +91 93164 94976",
+    "Ultra Crystal Clear Resin · Bubble Free · 2:1 & 3:1 Systems — Wholesale B2B Bulk Supply | WhatsApp +91 93164 94976",
   announcementEnabled: "true",
   stickyHeader: "true",
   headerCtaLabel: "Send Inquiry",

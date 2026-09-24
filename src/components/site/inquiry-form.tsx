@@ -9,7 +9,7 @@ import { Label } from "@/components/ui/label";
 import {
   Select, SelectContent, SelectItem, SelectTrigger, SelectValue,
 } from "@/components/ui/select";
-import { waLink, type SiteSettings } from "@/lib/settings";
+import { waLink, type SiteSettings } from "@/lib/settings-shared";
 
 const COUNTRY_CODES = [
   { code: "+91", label: "India (+91)" },

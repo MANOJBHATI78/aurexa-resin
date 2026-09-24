@@ -1,0 +1,25 @@
+# Netlify deployment configuration — Aurexa Resin
+# Docs: https://docs.netlify.com/configure-builds/file-based-configuration/
+
+[build]
+  # Next.js build without standalone-output copy steps (Netlify runtime handles packaging)
+  command = "npm run build:netlify"
+  publish = ".next"
+
+[build.environment]
+  # Next.js 16 requires Node >= 20.9 — pin LTS 22 for stability
+  NODE_VERSION = "22"
+
+# Security headers for all routes (matches src/middleware.ts)
+[[headers]]
+  for = "/*"
+  [headers.values]
+    X-Content-Type-Options = "nosniff"
+    X-Frame-Options = "SAMEORIGIN"
+    Referrer-Policy = "strict-origin-when-cross-origin"
+
+# Long cache for immutable Next.js static assets
+[[headers]]
+  for = "/_next/static/*"
+  [headers.values]
+    Cache-Control = "public, max-age=31536000, immutable"

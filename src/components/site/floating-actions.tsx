@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { MessageCircle, Phone, ClipboardEdit } from "lucide-react";
-import { waLink, type SiteSettings } from "@/lib/settings";
+import { waLink, type SiteSettings } from "@/lib/settings-shared";
 
 /** Floating WhatsApp / Call / Inquiry buttons — controlled from Admin → Settings */
 export function FloatingActions({ s }: { s: SiteSettings }) {

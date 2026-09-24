@@ -108,3 +108,26 @@ Stage Summary:
 - Brand qualities (Bubble Free / Atmosphere Friendly / 2:1 4hrs / 3:1 10hrs) visible on every key page: homepage hero+band, header ticker, mega menu, mobile sheet, category pages, product pages, /resin
 - Header: creative new design with live keyword ticker + image mega menu + phone number
 - /resin is now a true categories showcase page
+
+---
+Task ID: 5
+Agent: Main Agent (Super Z)
+Task: Fix GSC/GA4 verification & save failures (integrations), dual-mode custom code for every integration, admin user management + password change, WhatsApp/Call lead-capture gate with LIVE inquiries, per-page schema manager, Google Shopping feed, Google Reviews stars.
+
+Work Log:
+- ROOT CAUSE FOUND: src/lib/admin-guard.ts requireAdmin() called getAdminSession() WITHOUT await → session was a Promise → session.role undefined → EVERY admin API save returned 403 "Insufficient permissions". That is why GSC/GA4 IDs never persisted. Fixed with await; verified save flow E2E (PUT 200 → DB row → GSC meta in raw HTML).
+- Smart input normalizer (src/lib/tracking-input.ts): admins can paste ID OR full snippet — auto-extracts GSC code from full meta tag, G-XXXX from gtag script, GTM-XXX, Clarity 10-char ID from snippet, numeric Pixel ID from fbq('init'). Wired into settings PUT ({"saved":N} returned).
+- Per-tool Custom Code fields added (ga4CustomCode/gtmCustomCode/gscCustomCode/clarityCustomCode/metaPixelCustomCode) — full <script> as-is overrides ID mode; tracking.tsx updated with override logic. GSC meta verified in raw view-source HTML head.
+- Admin Users management: /api/admin/users + [id] (SUPER_ADMIN only; create/role/active/password/delete with last-super-admin protection), /admin/users UI (list, add dialog w/ roles SUPER_ADMIN|ADMIN|SEO_MANAGER|EDITOR, edit incl. new password, enable/disable, delete). /api/admin/account + /admin/account page: change own name + password (current password verify). Nav items added.
+- Lead Gate (src/components/site/lead-gate.tsx): global capture-phase click listener intercepts ALL wa.me/api.whatsapp/tel links site-wide → modal (name + 10-digit mobile, settings-editable heading/text) → POST /api/lead-capture (rate-limited, saves Inquiry w/ application "WhatsApp/Call Button Click", sourcePage, device) → original action proceeds → localStorage remembers (leadGateOncePerVisitor). Settings: leadGateEnabled/Heading/Text/OncePerVisitor in WhatsApp & Lead Gate tab. Inquiries page: LIVE badge + silent 15s auto-refresh while tab visible.
+- Page Schema manager: Prisma PageSchema model (path w/ wildcards "/products/*", kind SCHEMA|RAW_HEAD, code, enabled) + admin resource + /admin/page-schemas UI + PageSchemas component matched via x-pathname header set in middleware; mounted in (site) layout → raw JSON-LD in server HTML for EVERY page. Verified: created schema → visible in curl HTML → deleted.
+- Google Shopping: /feeds/google-shopping.xml RSS 2.0 g: feed (priced published products only, sale_price support, mpn/sku, brand/condition from settings); productSchema() now emits Offer with price+salePrice when price set (rich results / Shopping tab); Shopping tab in settings with feed URL card + Merchant Center instructions; robots allows /feeds.
+- Google Reviews: settings (rating, count, placeId, apiKey, reviewsData, enabled toggle) + Google Reviews tab with "Fetch from Google Now" (Places API details → saves rating/count/latest reviews JSON) + GoogleReviewsBadge (Google G mark + stars + "4.9 · N+ Google reviews", links to GMB) shown in homepage hero + footer; organizationSchema emits AggregateRating from real admin-entered data (schema stars in search results).
+- Settings page: new tabs WhatsApp & Lead Gate / Google Reviews / Google Shopping; integrations hints rewritten ("ID ya pura code — dono chalega"); removed pre-existing dead "special" filter tsc error; start-dev.sh now kills existing server first (was silently keeping stale process).
+- QA: ESLint clean on src/; tsc — zero new errors (only pre-existing unrelated); all routes 200 (site + admin + feed); E2E: settings save w/ full-tag paste → extracted IDs; user create/edit verified; lead gate modal screenshot + form submit → DB lead → WhatsApp tab opened; page schema in raw HTML; feed item with price verified; aggregateRating schema verified; all test data cleaned (test user/schema/inquiry/rating/price removed).
+- NOTE: googleRating/googleReviewCount left EMPTY deliberately — owner must enter REAL GMB rating (Admin → Settings → Google Reviews) or use Fetch button; badge + star schema appear automatically once set.
+
+Stage Summary:
+- Admin save bug fixed for good — everything (settings, IDs, products, sections) now persists; dual-mode input means pasting full code never fails again
+- User management w/ roles + password change; lead capture on every WhatsApp/call click visible LIVE in Inquiries
+- Per-page schema manager + Google Shopping feed + Google reviews stars — products now discoverable via brand keyword searches with price in schema/feed

@@ -324,3 +324,15 @@ model CustomCode {
   enabled   Boolean @default(false)
   createdAt DateTime @default(now())
 }
+
+// Per-page structured data (JSON-LD schema) manager — admin can attach schema
+// markup to any page or path pattern (supports wildcards like /products/*)
+model PageSchema {
+  id        String   @id @default(cuid())
+  path      String // e.g. "/", "/resin", "/products/*"
+  label     String   @default("")
+  code      String // raw JSON-LD <script> or any head HTML
+  kind      String   @default("SCHEMA") // SCHEMA | RAW_HEAD
+  enabled   Boolean  @default(true)
+  createdAt DateTime @default(now())
+}

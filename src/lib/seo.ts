@@ -60,6 +60,13 @@ export async function buildMetadata(input: SeoInput): Promise<Metadata> {
 
 export function organizationSchema(s: SiteSettings) {
   const sameAs = [s.instagramUrl, s.facebookUrl, s.linkedinUrl, s.youtubeUrl, s.pinterestUrl, s.googleBusinessProfileUrl].filter(Boolean);
+  // AggregateRating from the admin's real Google review data (entered in Admin → Settings → Google Reviews)
+  const rating = Number(s.googleRating || 0);
+  const reviewCount = Number(s.googleReviewCount || 0);
+  const aggregateRating =
+    s.googleReviewsEnabled === "true" && rating > 0 && rating <= 5 && reviewCount > 0
+      ? { "@type": "AggregateRating", ratingValue: rating.toFixed(1), reviewCount: Math.round(reviewCount), bestRating: "5", worstRating: "1" }
+      : undefined;
   return {
     "@context": "https://schema.org",
     "@type": ["Organization", "LocalBusiness"],
@@ -79,11 +86,10 @@ export function organizationSchema(s: SiteSettings) {
     },
     openingHours: s.businessHours || undefined,
     sameAs: sameAs.length ? sameAs : undefined,
-    ...(s.googleBusinessProfileUrl
-      ? { hasMap: s.googleMapsUrl || undefined }
-      : {}),
+    ...(s.googleBusinessProfileUrl ? { hasMap: s.googleMapsUrl || undefined } : {}),
     areaServed: { "@type": "Country", name: "India" },
     priceRange: "$$",
+    ...(aggregateRating ? { aggregateRating } : {}),
   };
 }
 
@@ -131,7 +137,14 @@ export function productSchema(p: {
   image?: string | null;
   brand: string;
   sku?: string | null;
+  price?: string | null;
+  salePrice?: string | null;
+  onSale?: boolean;
+  urlPath?: string;
 }) {
+  const priceNum = Number(String(p.price || "").replace(/[^0-9.]/g, ""));
+  const saleNum = p.onSale && p.salePrice ? Number(String(p.salePrice).replace(/[^0-9.]/g, "")) : 0;
+  const hasPrice = priceNum > 0;
   return {
     "@context": "https://schema.org",
     "@type": "Product",
@@ -140,14 +153,24 @@ export function productSchema(p: {
     sku: p.sku || undefined,
     image: p.image ? [absoluteUrl(p.image)] : undefined,
     brand: { "@type": "Brand", name: p.brand },
-    offers: {
-      "@type": "AggregateOffer",
-      priceCurrency: "INR",
-      availability: "https://schema.org/InStock",
-      seller: { "@type": "Organization", name: p.brand },
-      url: absoluteUrl(`/products/${p.slug}`),
-      // price omitted — wholesale pricing shared on inquiry
-    },
+    offers: hasPrice
+      ? {
+          "@type": "Offer",
+          priceCurrency: "INR",
+          price: (saleNum > 0 && saleNum < priceNum ? saleNum : priceNum).toFixed(2),
+          availability: "https://schema.org/InStock",
+          itemCondition: "https://schema.org/NewCondition",
+          seller: { "@type": "Organization", name: p.brand },
+          url: absoluteUrl(p.urlPath || `/products/${p.slug}`),
+        }
+      : {
+          "@type": "AggregateOffer",
+          priceCurrency: "INR",
+          availability: "https://schema.org/InStock",
+          seller: { "@type": "Organization", name: p.brand },
+          url: absoluteUrl(p.urlPath || `/products/${p.slug}`),
+          // price omitted — wholesale pricing shared on inquiry
+        },
   };
 }
 

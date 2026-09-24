@@ -209,6 +209,21 @@ export const RESOURCES = {
       fields: ["name", "placement", "scope", "content", "enabled"],
     }),
 
+  pageschemas: () =>
+    makeCrud({
+      model: db.pageSchema,
+      orderBy: { createdAt: "desc" as const },
+      searchFields: ["path", "label"],
+      fields: ["path", "label", "kind", "code", "enabled"],
+      transform: (data) => {
+        if (typeof data.path === "string") data.path = data.path.trim();
+        if (!data.path) data.path = "/";
+        if (data.kind !== "RAW_HEAD") data.kind = "SCHEMA";
+        if (typeof data.enabled !== "boolean") data.enabled = data.enabled === "true" || data.enabled === true;
+        return data;
+      },
+    }),
+
   media: () =>
     makeCrud({
       model: db.media,

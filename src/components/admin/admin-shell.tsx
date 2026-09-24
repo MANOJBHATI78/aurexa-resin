@@ -7,6 +7,7 @@ import {
   LayoutDashboard, Package, FolderTree, FileText, Image as ImageIcon,
   MessageSquareQuote, HelpCircle, Star, Inbox, Globe, Link2, Code2,
   PanelTop, Menu, LogOut, Settings, Megaphone, BookOpen, MapPin, Layers,
+  Users, UserCog, ScrollText,
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Sheet, SheetContent, SheetTrigger, SheetTitle } from "@/components/ui/sheet";
@@ -38,6 +39,7 @@ const NAV_GROUPS: { label: string; items: { href: string; label: string; icon: R
       { href: "/admin/landing", label: "Landing Pages", icon: Megaphone },
       { href: "/admin/locations", label: "Locations", icon: MapPin },
       { href: "/admin/redirects", label: "Redirects", icon: Link2 },
+      { href: "/admin/page-schemas", label: "Page Schema", icon: ScrollText },
       { href: "/admin/custom-code", label: "Custom Code", icon: Code2 },
     ],
   },
@@ -51,7 +53,11 @@ const NAV_GROUPS: { label: string; items: { href: string; label: string; icon: R
   },
   {
     label: "Settings",
-    items: [{ href: "/admin/settings", label: "Site Settings", icon: Settings }],
+    items: [
+      { href: "/admin/settings", label: "Site Settings", icon: Settings },
+      { href: "/admin/users", label: "Admin Users", icon: Users },
+      { href: "/admin/account", label: "My Account", icon: UserCog },
+    ],
   },
 ];
 

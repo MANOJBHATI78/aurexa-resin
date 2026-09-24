@@ -44,18 +44,26 @@ export default function AdminInquiriesPage() {
   const [page, setPage] = useState(0);
   const perPage = 25;
 
-  const load = useCallback(async () => {
-    setLoading(true);
+  const load = useCallback(async (silent = false) => {
+    if (!silent) setLoading(true);
     try {
       const res = await fetch("/api/admin/inquiries");
       const data = await res.json();
       setRows(data.items || []);
     } finally {
-      setLoading(false);
+      if (!silent) setLoading(false);
     }
   }, []);
 
   useEffect(() => { load(); }, [load]);
+
+  // LIVE mode — poll for new leads every 15s while the tab is visible (silent, no spinner)
+  useEffect(() => {
+    const timer = setInterval(() => {
+      if (document.visibilityState === "visible") load(true);
+    }, 15_000);
+    return () => clearInterval(timer);
+  }, [load]);
 
   const filtered = rows.filter((r) => {
     if (statusFilter !== "ALL" && r.status !== statusFilter) return false;
@@ -117,8 +125,17 @@ export default function AdminInquiriesPage() {
     <div className="space-y-4 max-w-6xl">
       <div className="flex flex-wrap items-center justify-between gap-3">
         <div>
-          <h1 className="font-display text-2xl font-bold text-forest">Inquiries</h1>
-          <p className="text-sm text-muted-foreground mt-1">Leads from the website inquiry forms — track status and follow up.</p>
+          <h1 className="font-display text-2xl font-bold text-forest flex items-center gap-2.5">
+            Inquiries
+            <span className="inline-flex items-center gap-1.5 rounded-full bg-emerald-50 border border-emerald-200 px-2.5 py-1 text-[10px] font-bold uppercase tracking-wider text-emerald-700">
+              <span className="relative flex h-2 w-2">
+                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75" />
+                <span className="relative inline-flex rounded-full h-2 w-2 bg-emerald-500" />
+              </span>
+              Live
+            </span>
+          </h1>
+          <p className="text-sm text-muted-foreground mt-1">Leads from the website inquiry forms + WhatsApp/Call click capture — auto-refreshes every 15 seconds.</p>
         </div>
         <Button asChild variant="outline">
           <a href="/api/admin/export?type=inquiries" download>

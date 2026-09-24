@@ -3,6 +3,7 @@ import Image from "next/image";
 import { Phone, Mail, MapPin, Clock, MessageCircle, Instagram, Facebook, Linkedin, Youtube, Globe, ExternalLink } from "lucide-react";
 import { getSettingsCached, waLink } from "@/lib/settings";
 import { db } from "@/lib/db";
+import { GoogleReviewsBadge } from "@/components/site/google-reviews";
 
 export async function SiteFooter() {
   const s = await getSettingsCached();
@@ -52,6 +53,9 @@ export async function SiteFooter() {
               </div>
             </div>
             <p className="text-sm leading-relaxed text-cream/65">{s.footerDescription}</p>
+            <div className="mt-3">
+              <GoogleReviewsBadge variant="dark" />
+            </div>
             {socials.length > 0 && (
               <div className="flex items-center gap-2 mt-5">
                 {socials.map(({ url, label, Icon }) => (

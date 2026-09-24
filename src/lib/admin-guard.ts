@@ -23,7 +23,7 @@ export async function requireAdmin(
   req: NextRequest,
   handler: (session: SessionPayload) => Promise<NextResponse>
 ): Promise<NextResponse> {
-  const session = getAdminSession(req);
+  const session = await getAdminSession(req);
   if (!session) {
     return NextResponse.json({ error: "Unauthorized. Please log in." }, { status: 401 });
   }

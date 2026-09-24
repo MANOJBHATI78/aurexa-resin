@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
-import { Loader2, Save, CheckCircle2, Info, Upload, ImageIcon } from "lucide-react";
+import { Loader2, Save, CheckCircle2, Info, Upload, ImageIcon, Star } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
@@ -16,9 +16,11 @@ const TABS = [
   { value: "header", label: "Header & Banner" },
   { value: "contact", label: "Contact & Location" },
   { value: "social", label: "Social & Profiles" },
-  { value: "whatsapp", label: "WhatsApp" },
+  { value: "whatsapp", label: "WhatsApp & Lead Gate" },
   { value: "seo", label: "SEO Defaults" },
   { value: "integrations", label: "Integrations" },
+  { value: "reviews", label: "Google Reviews" },
+  { value: "shopping", label: "Google Shopping" },
   { value: "floating", label: "Floating Buttons" },
 ];
 
@@ -69,6 +71,8 @@ const FIELDS: Record<string, FieldRow[]> = {
     { key: "whatsappDefaultMessage", label: "Default WhatsApp Message", type: "textarea", rows: 2 },
     { key: "whatsappProductTemplate", label: "Product Page Template", type: "textarea", rows: 2, hint: "Use {PRODUCT} — replaced with product name." },
     { key: "whatsappCategoryTemplate", label: "Category Page Template", type: "textarea", rows: 2, hint: "Use {CATEGORY} — replaced with category name." },
+    { key: "leadGateHeading", label: "Lead Gate — Popup Heading", hint: "Shown when a visitor clicks WhatsApp/Call before the chat opens." },
+    { key: "leadGateText", label: "Lead Gate — Popup Text", type: "textarea", rows: 3 },
   ],
   seo: [
     { key: "siteTitle", label: "Site Title (homepage)", type: "textarea", rows: 2 },
@@ -81,16 +85,31 @@ const FIELDS: Record<string, FieldRow[]> = {
     { key: "robotsTxt", label: "Robots.txt Override", type: "textarea", rows: 8, hint: "Leave empty for safe defaults. Always include Sitemap line." },
   ],
   integrations: [
-    { key: "ga4Id", label: "Google Analytics 4 — Measurement ID", placeholder: "G-XXXXXXXXXX", hint: "Paste only the ID (G-…). Script is auto-injected site-wide." },
-    { key: "gtmId", label: "Google Tag Manager — Container ID", placeholder: "GTM-XXXXXXX", hint: "Paste only the ID (GTM-…). Includes noscript fallback automatically." },
-    { key: "gscVerification", label: "Google Search Console — Verification Code", placeholder: "google-site-verification value", hint: "Only the code, not the full meta tag." },
-    { key: "clarityId", label: "Microsoft Clarity — Project ID", placeholder: "abcdefghij", hint: "Paste only the Clarity Project ID." },
-    { key: "metaPixelId", label: "Meta (Facebook) Pixel ID", placeholder: "1234567890", hint: "Paste only the Pixel ID. PageView fires automatically." },
-    { key: "customHeadCode", label: "Custom Head Code (<head>)", type: "textarea", rows: 4, hint: "Raw HTML injected before </head>. Use Custom Code manager for scoped snippets." },
+    { key: "ga4Id", label: "Google Analytics 4 — Measurement ID", placeholder: "G-XXXXXXXXXX", hint: "Paste ONLY the ID, or the full gtag snippet — both accepted (ID auto-extracted)." },
+    { key: "ga4CustomCode", label: "GA4 — Custom Code (optional, overrides ID)", type: "textarea", rows: 3, hint: "Full <script> tag(s) as-is. If filled, this replaces the auto-built GA4 code above." },
+    { key: "gtmId", label: "Google Tag Manager — Container ID", placeholder: "GTM-XXXXXXX", hint: "Paste ONLY the ID, or the full GTM snippet — both accepted. Noscript fallback auto-included." },
+    { key: "gtmCustomCode", label: "GTM — Custom Code (optional, overrides ID)", type: "textarea", rows: 3, hint: "Full <script>+<noscript> as-is. If filled, this replaces the ID-based injection." },
+    { key: "gscVerification", label: "Google Search Console — Verification", placeholder: "google-site-verification code", hint: "Paste ONLY the code, the full <meta> tag, or the whole HTML — all accepted. Renders in raw view-source." },
+    { key: "gscCustomCode", label: "GSC — Custom Code (optional, overrides ID)", type: "textarea", rows: 3, hint: "Alternative method: paste the full verification meta tag / HTML file content marker here." },
+    { key: "clarityId", label: "Microsoft Clarity — Project ID", placeholder: "abcdefghij", hint: "Paste ONLY the Project ID or the full Clarity snippet — both accepted." },
+    { key: "clarityCustomCode", label: "Clarity — Custom Code (optional, overrides ID)", type: "textarea", rows: 3 },
+    { key: "metaPixelId", label: "Meta (Facebook) Pixel ID", placeholder: "1234567890", hint: "Paste ONLY the Pixel ID or the full pixel <script> — both accepted. PageView fires automatically." },
+    { key: "metaPixelCustomCode", label: "Meta Pixel — Custom Code (optional, overrides ID)", type: "textarea", rows: 3 },
+    { key: "customHeadCode", label: "Custom Head Code (<head>)", type: "textarea", rows: 4, hint: "Raw HTML injected into every page head — visible in view-source." },
     { key: "customBodyStartCode", label: "Custom Body Start Code (top of <body>)", type: "textarea", rows: 4, hint: "Raw HTML injected right after <body> opens — e.g. GTM noscript, widgets." },
     { key: "customBodyEndCode", label: "Custom Body End Code (bottom of <body>)", type: "textarea", rows: 4, hint: "Raw HTML injected before </body> — e.g. chat widgets, closing scripts." },
     { key: "customGlobalCss", label: "Global Custom CSS", type: "textarea", rows: 4, hint: "Injected as a <style> tag on every page." },
     { key: "customGlobalJs", label: "Global Custom JavaScript", type: "textarea", rows: 4, hint: "Injected as a script on every page." },
+  ],
+  reviews: [
+    { key: "googleRating", label: "Google Rating (0–5)", placeholder: "4.9", hint: "Copy the star rating from your Google Business Profile — used in the site badge + search star schema." },
+    { key: "googleReviewCount", label: "Google Review Count", placeholder: "132", hint: "Total reviews on your Google Business Profile." },
+    { key: "googlePlaceId", label: "Google Place ID", hint: "Find it at gmobility / google.com/maps → your business → Place ID. Needed only for auto-fetch." },
+    { key: "googleApiKey", label: "Google Places API Key", hint: "Needed only for auto-fetch. Enable 'Places API' in Google Cloud for this key." },
+  ],
+  shopping: [
+    { key: "shoppingBrand", label: "Feed Brand Name", hint: "Brand shown for every product in the Google Shopping feed." },
+    { key: "shoppingCondition", label: "Product Condition", hint: "new / refurbished / used — Google Shopping field. Default: new." },
   ],
   floating: [],
 };
@@ -113,6 +132,16 @@ const TOGGLES: Record<string, { key: string; label: string; hint?: string }[]> =
     { key: "headerShowCta", label: "Show header CTA button", hint: "\"Send Inquiry\" pill button on desktop and inside the mobile menu." },
     { key: "heroBannerEnabled", label: "Show hero banner images", hint: "Displays the desktop banner (right side) and the mobile-size banner (below hero text)." },
   ],
+  whatsapp: [
+    { key: "leadGateEnabled", label: "Lead Gate — capture details on WhatsApp/Call click", hint: "Shows a small name + mobile form before opening WhatsApp or the dialer. Every submission lands in Inquiries LIVE." },
+    { key: "leadGateOncePerVisitor", label: "Ask only once per visitor", hint: "Returning clickers go straight to WhatsApp without the form again." },
+  ],
+  reviews: [
+    { key: "googleReviewsEnabled", label: "Show Google Reviews badge", hint: "Displays your Google rating in the hero, footer and star schema in search results." },
+  ],
+  shopping: [
+    { key: "shoppingFeedEnabled", label: "Enable Google Shopping feed", hint: "Publishes /feeds/google-shopping.xml with all priced products for Merchant Center." },
+  ],
   floating: [
     { key: "showWhatsAppFloat", label: "Show WhatsApp floating button" },
     { key: "showCallFloat", label: "Show Call floating button" },
@@ -124,6 +153,7 @@ export default function AdminSettingsPage() {
   const { toast } = useToast();
   const [settings, setSettings] = useState<Record<string, string> | null>(null);
   const [saving, setSaving] = useState(false);
+  const [fetchingReviews, setFetchingReviews] = useState(false);
   const [uploadingKey, setUploadingKey] = useState<string | null>(null);
   const fileInputs = useRef<Record<string, HTMLInputElement | null>>({});
 
@@ -167,7 +197,7 @@ export default function AdminSettingsPage() {
       });
       const data = await res.json();
       if (!res.ok) throw new Error(data.error || "Save failed");
-      toast({ title: "Settings saved", description: "Changes are live across the website." });
+      toast({ title: "Settings saved", description: `${data.saved || "All"} settings are live across the website.` });
     } catch (e) {
       toast({ title: e instanceof Error ? e.message : "Save failed", variant: "destructive" });
     } finally {
@@ -232,9 +262,7 @@ export default function AdminSettingsPage() {
                 )}
               </CardHeader>
               <CardContent className="space-y-3.5">
-                {(FIELDS[tab.value] || [])
-                  .filter((f) => f.type !== "special")
-                  .map((f) => (
+                {(FIELDS[tab.value] || []).map((f) => (
                     <div key={f.key} className="space-y-1.5">
                       <Label htmlFor={`set-${f.key}`}>{f.label}</Label>
                       {f.type === "textarea" ? (
@@ -312,6 +340,63 @@ export default function AdminSettingsPage() {
                     onChange={(v) => set(t.key, String(v))}
                   />
                 ))}
+
+                {/* Google Reviews — auto-fetch from Places API */}
+                {tab.value === "reviews" && (
+                  <div className="rounded-lg border border-gold/40 bg-gold/5 p-4 space-y-2.5">
+                    <p className="text-sm font-medium text-forest">Auto-fetch from Google</p>
+                    <p className="text-[12px] text-muted-foreground">
+                      Fill the API Key + Place ID above, then fetch — rating, review count and latest reviews are pulled
+                      straight from your Google Business Profile. No API key? Just type the rating and count manually above.
+                    </p>
+                    <Button
+                      type="button"
+                      variant="outline"
+                      size="sm"
+                      disabled={fetchingReviews}
+                      onClick={async () => {
+                        setFetchingReviews(true);
+                        try {
+                          const res = await fetch("/api/admin/google-reviews", {
+                            method: "POST",
+                            headers: { "Content-Type": "application/json" },
+                            body: JSON.stringify({ apiKey: settings.googleApiKey, placeId: settings.googlePlaceId }),
+                          });
+                          const data = await res.json();
+                          if (!res.ok) throw new Error(data.error || "Fetch failed");
+                          toast({ title: "Reviews fetched", description: `Rating ${data.rating} from ${data.count} reviews.` });
+                          const refreshed = await fetch("/api/admin/settings").then((r) => r.json());
+                          setSettings(refreshed.settings);
+                        } catch (e) {
+                          toast({ title: e instanceof Error ? e.message : "Fetch failed", variant: "destructive" });
+                        } finally {
+                          setFetchingReviews(false);
+                        }
+                      }}
+                    >
+                      {fetchingReviews ? <Loader2 className="h-4 w-4 animate-spin" /> : <Star className="h-4 w-4" />}
+                      {fetchingReviews ? "Fetching…" : "Fetch from Google Now"}
+                    </Button>
+                  </div>
+                )}
+
+                {/* Google Shopping — feed URL card */}
+                {tab.value === "shopping" && (
+                  <div className="rounded-lg border border-forest/20 bg-forest-mist/50 p-4 space-y-2">
+                    <p className="text-sm font-medium text-forest">Merchant Center Feed</p>
+                    <p className="text-[12px] text-muted-foreground">
+                      In Google Merchant Center: Products → Feeds → Add feed → Scheduled fetch, and use this URL.
+                      Only products with a price are included — set prices in Admin → Products.
+                    </p>
+                    <code className="block rounded bg-forest text-cream/90 px-3 py-2 text-[12px] break-all select-all">
+                      {typeof window !== "undefined" ? window.location.origin : ""}/feeds/google-shopping.xml
+                    </code>
+                    <p className="text-[12px] text-muted-foreground">
+                      Product schema on every product page also includes the price — so your products appear in
+                      Google search rich results and the Shopping tab when brand keywords are searched.
+                    </p>
+                  </div>
+                )}
 
                 {/* Floating button position */}
                 {tab.value === "floating" && (

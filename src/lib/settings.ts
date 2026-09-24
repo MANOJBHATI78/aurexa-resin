@@ -44,11 +44,32 @@ export interface SiteSettings {
   gscVerification: string;
   clarityId: string;
   metaPixelId: string;
+  ga4CustomCode: string;
+  gtmCustomCode: string;
+  gscCustomCode: string;
+  clarityCustomCode: string;
+  metaPixelCustomCode: string;
   customHeadCode: string;
   customBodyStartCode: string;
   customBodyEndCode: string;
   customGlobalCss: string;
   customGlobalJs: string;
+  // Lead gate — WhatsApp/Call click capture
+  leadGateEnabled: string;
+  leadGateHeading: string;
+  leadGateText: string;
+  leadGateOncePerVisitor: string;
+  // Google Reviews
+  googleReviewsEnabled: string;
+  googleRating: string;
+  googleReviewCount: string;
+  googleReviewsData: string;
+  googlePlaceId: string;
+  googleApiKey: string;
+  // Google Shopping feed
+  shoppingFeedEnabled: string;
+  shoppingBrand: string;
+  shoppingCondition: string;
   // Floating buttons
   showWhatsAppFloat: string;
   showCallFloat: string;
@@ -125,6 +146,25 @@ export const DEFAULT_SETTINGS: SiteSettings = {
   customBodyEndCode: "",
   customGlobalCss: "",
   customGlobalJs: "",
+  ga4CustomCode: "",
+  gtmCustomCode: "",
+  gscCustomCode: "",
+  clarityCustomCode: "",
+  metaPixelCustomCode: "",
+  leadGateEnabled: "true",
+  leadGateHeading: "Before you continue…",
+  leadGateText:
+    "Please share your details so our team can assist you faster on WhatsApp — wholesale prices, bulk offers and product catalogues.",
+  leadGateOncePerVisitor: "true",
+  googleReviewsEnabled: "true",
+  googleRating: "",
+  googleReviewCount: "",
+  googleReviewsData: "",
+  googlePlaceId: "",
+  googleApiKey: "",
+  shoppingFeedEnabled: "true",
+  shoppingBrand: "Aurexa Resin",
+  shoppingCondition: "new",
   showWhatsAppFloat: "true",
   showCallFloat: "true",
   showInquiryFloat: "true",

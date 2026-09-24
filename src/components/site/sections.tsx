@@ -10,6 +10,7 @@ import { ProductCard, CategoryCard } from "@/components/site/cards";
 import { FaqSection, type FaqItem } from "@/components/site/faq";
 import { waLink, type SiteSettings } from "@/lib/settings";
 import { parseJsonArray } from "@/lib/seo";
+import { GoogleReviewsBadge } from "@/components/site/google-reviews";
 
 const ICONS: Record<string, React.ComponentType<{ className?: string }>> = {
   gem: Gem, layers: Layers, palette: Palette, factory: Factory,
@@ -95,6 +96,9 @@ function HeroSection({ data, s }: { data: any; s: SiteSettings }) {
                   <CheckCircle2 className="h-4 w-4 text-gold/80" aria-hidden /> {t}
                 </span>
               ))}
+            </div>
+            <div className="mt-4">
+              <GoogleReviewsBadge variant="dark" />
             </div>
           </div>
           {/* Desktop visual — hidden on mobile when the mobile banner is active (avoids duplicate branding) */}

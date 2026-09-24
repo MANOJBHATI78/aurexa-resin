@@ -5,6 +5,10 @@ const SESSION_COOKIE = "aurexa_admin_session";
 export function middleware(req: NextRequest) {
   const { pathname } = req.nextUrl;
 
+  // Pass the concrete page path down to server components (used by PageSchemas)
+  const requestHeaders = new Headers(req.headers);
+  requestHeaders.set("x-pathname", pathname);
+
   // Protect /admin routes (full token verification happens server-side in layout/API)
   if (pathname.startsWith("/admin") && pathname !== "/admin/login") {
     const token = req.cookies.get(SESSION_COOKIE)?.value;
@@ -17,7 +21,7 @@ export function middleware(req: NextRequest) {
   }
 
   // Security headers
-  const res = NextResponse.next();
+  const res = NextResponse.next({ request: { headers: requestHeaders } });
   res.headers.set("X-Content-Type-Options", "nosniff");
   res.headers.set("X-Frame-Options", "SAMEORIGIN");
   res.headers.set("Referrer-Policy", "strict-origin-when-cross-origin");

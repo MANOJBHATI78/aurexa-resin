@@ -4,47 +4,70 @@ import type { SiteSettings } from "@/lib/settings";
 /**
  * Injects CMS-configured tracking & custom code.
  * Everything here is controlled from Admin → Integrations — no source edits needed.
+ *
+ * Each tool supports TWO modes (both accepted):
+ *  1. ID mode — paste just the ID (auto-injection builds the tag for you)
+ *  2. Custom-code mode — paste the FULL <script>/<meta> snippet; it is rendered as-is
+ *     and takes priority over the ID.
  */
 export function TrackingHead({ s }: { s: SiteSettings }) {
   return (
     <>
       {/* Google Search Console verification */}
-      {s.gscVerification && (
-        <meta name="google-site-verification" content={s.gscVerification} />
+      {s.gscCustomCode ? (
+        <div dangerouslySetInnerHTML={{ __html: s.gscCustomCode }} />
+      ) : (
+        s.gscVerification && <meta name="google-site-verification" content={s.gscVerification} />
       )}
 
       {/* Google Tag Manager */}
-      {s.gtmId && (
-        <Script id="gtm" strategy="afterInteractive">
-          {`(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src='https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);})(window,document,'script','dataLayer','${s.gtmId}');`}
-        </Script>
+      {s.gtmCustomCode ? (
+        <div dangerouslySetInnerHTML={{ __html: s.gtmCustomCode }} />
+      ) : (
+        s.gtmId && (
+          <Script id="gtm" strategy="afterInteractive">
+            {`(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src='https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);})(window,document,'script','dataLayer','${s.gtmId}');`}
+          </Script>
+        )
       )}
 
       {/* GA4 */}
-      {s.ga4Id && (
-        <>
-          <Script
-            src={`https://www.googletagmanager.com/gtag/js?id=${s.ga4Id}`}
-            strategy="afterInteractive"
-          />
-          <Script id="ga4" strategy="afterInteractive">
-            {`window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','${s.ga4Id}');`}
-          </Script>
-        </>
+      {s.ga4CustomCode ? (
+        <div dangerouslySetInnerHTML={{ __html: s.ga4CustomCode }} />
+      ) : (
+        s.ga4Id && (
+          <>
+            <Script
+              src={`https://www.googletagmanager.com/gtag/js?id=${s.ga4Id}`}
+              strategy="afterInteractive"
+            />
+            <Script id="ga4" strategy="afterInteractive">
+              {`window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','${s.ga4Id}');`}
+            </Script>
+          </>
+        )
       )}
 
       {/* Microsoft Clarity */}
-      {s.clarityId && (
-        <Script id="clarity" strategy="afterInteractive">
-          {`(function(c,l,a,r,i,t,y){c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);})(window,document,"clarity","script","${s.clarityId}");`}
-        </Script>
+      {s.clarityCustomCode ? (
+        <div dangerouslySetInnerHTML={{ __html: s.clarityCustomCode }} />
+      ) : (
+        s.clarityId && (
+          <Script id="clarity" strategy="afterInteractive">
+            {`(function(c,l,a,r,i,t,y){c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);})(window,document,"clarity","script","${s.clarityId}");`}
+          </Script>
+        )
       )}
 
       {/* Meta Pixel */}
-      {s.metaPixelId && (
-        <Script id="meta-pixel" strategy="afterInteractive">
-          {`!function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];t=b.createElement(e);t.async=!0;t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}(window,document,'script','https://connect.facebook.net/en_US/fbevents.js');fbq('init','${s.metaPixelId}');fbq('track','PageView');`}
-        </Script>
+      {s.metaPixelCustomCode ? (
+        <div dangerouslySetInnerHTML={{ __html: s.metaPixelCustomCode }} />
+      ) : (
+        s.metaPixelId && (
+          <Script id="meta-pixel" strategy="afterInteractive">
+            {`!function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];t=b.createElement(e);t.async=!0;t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}(window,document,'script','https://connect.facebook.net/en_US/fbevents.js');fbq('init','${s.metaPixelId}');fbq('track','PageView');`}
+          </Script>
+        )
       )}
 
       {/* Custom head code from CMS */}
@@ -58,8 +81,8 @@ export function TrackingHead({ s }: { s: SiteSettings }) {
 export function TrackingBodyStart({ s }: { s: SiteSettings }) {
   return (
     <>
-      {/* GTM noscript fallback */}
-      {s.gtmId && (
+      {/* GTM noscript fallback (only in ID mode; custom code mode manages itself) */}
+      {!s.gtmCustomCode && s.gtmId && (
         <noscript>
           <iframe
             src={`https://www.googletagmanager.com/ns.html?id=${s.gtmId}`}

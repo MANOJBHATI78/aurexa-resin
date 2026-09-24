@@ -1,6 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
 import { requireAdmin } from "@/lib/admin-guard";
 import { getSettings, saveSettings, type SiteSettings } from "@/lib/settings";
+import { normalizeTrackingFields } from "@/lib/tracking-input";
 
 export const runtime = "nodejs";
 
@@ -17,11 +18,14 @@ export async function PUT(req: NextRequest) {
       return NextResponse.json({ error: "Insufficient permissions." }, { status: 403 });
     }
     const body = (await req.json()) as Partial<Record<keyof SiteSettings, string>>;
-    // Only save known keys
-    const allowed = Object.keys(body).filter((k) => typeof body[k as keyof SiteSettings] === "string" || body[k as keyof SiteSettings] === "");
+    // Accept whatever the admin pasted — IDs or full snippets — then normalize tracking keys
+    const normalized = normalizeTrackingFields(body as Record<string, string>);
+    const allowed = Object.keys(normalized).filter(
+      (k) => typeof normalized[k] === "string" || normalized[k] === "",
+    );
     const payload: Record<string, string> = {};
-    for (const k of allowed) payload[k] = String(body[k as keyof SiteSettings] ?? "");
+    for (const k of allowed) payload[k] = String(normalized[k] ?? "");
     await saveSettings(payload);
-    return NextResponse.json({ ok: true });
+    return NextResponse.json({ ok: true, saved: allowed.length });
   });
 }

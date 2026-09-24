@@ -131,3 +131,29 @@ Stage Summary:
 - Admin save bug fixed for good — everything (settings, IDs, products, sections) now persists; dual-mode input means pasting full code never fails again
 - User management w/ roles + password change; lead capture on every WhatsApp/call click visible LIVE in Inquiries
 - Per-page schema manager + Google Shopping feed + Google reviews stars — products now discoverable via brand keyword searches with price in schema/feed
+
+---
+Task ID: 6
+Agent: Super Z (main)
+Task: GitHub + Netlify deployment guide + project deploy-readiness prep (SQLite → Turso migration path)
+
+Work Log:
+- Inspected project: git repo (main, clean, no remote), bun.lock, Next 16, Prisma 6.11 + SQLite db/custom.db, ISR pages (revalidate 60s), middleware DB-safe, PageSchemas SSR (view-source safe)
+- Identified CRITICAL issue: SQLite on Netlify = ephemeral → admin edits + leads lost; solution = Turso (libSQL cloud, SQLite-compatible, free tier)
+- Installed @prisma/adapter-libsql@6.19.3 + @libsql/client@0.18.0 (v7 adapter rejected → matched Prisma 6.x)
+- prisma/schema.prisma: binaryTargets [native, rhel-openssl-1.0.x, rhel-openssl-3.0.x] + previewFeatures [driverAdapters] → generate OK
+- src/lib/db.ts: conditional Turso adapter via TURSO_DATABASE_URL/TURSO_AUTH_TOKEN; local SQLite unchanged when unset
+- Test script scripts/test-turso-adapter.ts: adapter read/write/delete verified locally (DATABASE_URL not needed when adapter used → Netlify needs only 2 env vars)
+- Fixed client-bundle leak: settings.ts split → browser-safe src/lib/settings-shared.ts (types/DEFAULT_SETTINGS/waLink); header/floating-actions/inquiry-form (use client) now import settings-shared; next.config serverExternalPackages added
+- next.config.ts: output standalone only when NETLIFY env absent; package.json: build:netlify + postinstall prisma generate
+- netlify.toml: npm run build:netlify, publish .next, NODE_VERSION 22, security headers
+- package-lock.json generated (npm --package-lock-only)
+- NETLIFY=true next build simulation: PASSED (all routes, sitemap/robots static, google-shopping feed static 1h)
+- scripts/migrate-to-turso.ts: generates DDL via prisma migrate diff, creates schema on target, copies all 18 models FK-safe (NavigationItem 2-pass), idempotent upserts, source→target count verification; fixed DDL splitting (no statement-breakpoint in sqlite diff; split on ;\n, strip comments, ignore already-exists)
+- Migration E2E tested against local file: target → all counts match (1 admin, 15 categories, 18 products, 17 nav, 6 blogs, 13 homeSections, 15 settings, etc.)
+- Cleanup turso-sim.db; dev server re-checked 200 OK; all changes committed (7cf525f)
+
+Stage Summary:
+- Project is now deploy-ready: push to GitHub → import to Netlify → set TURSO_DATABASE_URL + TURSO_AUTH_TOKEN → run migrate-to-turso.ts once → live site with fully working admin + leads
+- GSC verification will work in production: PageSchemas + CustomCode render server-side into initial HTML
+- User next steps: create GitHub repo (empty), give repo URL + PAT (or push themselves); create Turso DB, share URL+token; I run migration + assist Netlify import; env vars only 2 (TURSO_*)

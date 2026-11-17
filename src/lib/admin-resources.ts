@@ -1,6 +1,7 @@
 import { db } from "@/lib/db";
 import { makeCrud, ensureUniqueSlug } from "@/lib/admin-crud";
 import { slugify } from "@/lib/seo";
+import { ensureLandingSource } from "@/lib/lazy-migrate";
 
 /** Registry of admin-managed resources → Prisma delegates + CRUD config */
 export const RESOURCES = {
@@ -17,6 +18,7 @@ export const RESOURCES = {
         "seoTitle", "seoDescription", "seoKeywords", "canonical", "ogTitle", "ogDescription",
         "ogImage", "noindex", "customHeadCode",
       ],
+      revisions: { entityType: "product", labelField: "name" },
       transform: (data) => {
         if (!data.slug && data.name) data.slug = slugify(String(data.name));
         if (typeof data.slug === "string" && data.slug) data.slug = slugify(data.slug) || `product-${Date.now()}`;
@@ -37,6 +39,7 @@ export const RESOURCES = {
         "seoTitle", "seoDescription", "seoKeywords", "canonical", "ogTitle", "ogDescription",
         "ogImage", "noindex", "customHeadCode",
       ],
+      revisions: { entityType: "category", labelField: "name" },
       transform: (data) => {
         if (typeof data.order === "string") data.order = parseInt(data.order, 10) || 0;
         return data;
@@ -68,6 +71,7 @@ export const RESOURCES = {
         if (typeof data.readingTime === "string") data.readingTime = parseInt(data.readingTime, 10) || null;
         return data;
       },
+      revisions: { entityType: "blogPost", labelField: "title" },
     }),
 
   pages: () =>
@@ -76,6 +80,7 @@ export const RESOURCES = {
       orderBy: { sortOrder: "asc" as const },
       searchFields: ["title", "slug"],
       fields: ["title", "slug", "content", "published", "showInFooter", "sortOrder", "seoTitle", "seoDescription", "noindex"],
+      revisions: { entityType: "page", labelField: "title" },
       transform: (data) => {
         if (typeof data.sortOrder === "string") data.sortOrder = parseInt(data.sortOrder, 10) || 0;
         return data;
@@ -87,6 +92,7 @@ export const RESOURCES = {
       model: db.landingPage,
       orderBy: { updatedAt: "desc" as const },
       searchFields: ["title", "slug"],
+      prepare: ensureLandingSource,
       fields: [
         "title", "slug", "h1", "blocks", "published",
         "seoTitle", "seoDescription", "seoKeywords", "canonical", "ogTitle", "ogDescription",
@@ -97,6 +103,7 @@ export const RESOURCES = {
         if (typeof data.slug === "string" && data.slug) data.slug = slugify(data.slug) || `page-${Date.now()}`;
         return data;
       },
+      revisions: { entityType: "landingPage", labelField: "title" },
     }),
 
   applications: () =>
@@ -105,6 +112,7 @@ export const RESOURCES = {
       orderBy: { order: "asc" as const },
       searchFields: ["name", "slug"],
       fields: ["name", "slug", "description", "longContent", "image", "icon", "order", "published", "seoTitle", "seoDescription", "noindex"],
+      revisions: { entityType: "application", labelField: "name" },
       transform: (data) => {
         if (typeof data.order === "string") data.order = parseInt(data.order, 10) || 0;
         return data;
@@ -185,6 +193,7 @@ export const RESOURCES = {
         if (typeof data.slug === "string" && data.slug) data.slug = slugify(data.slug) || `loc-${Date.now()}`;
         return data;
       },
+      revisions: { entityType: "locationPage", labelField: "city" },
     }),
 
   redirects: () =>
@@ -195,7 +204,8 @@ export const RESOURCES = {
       fields: ["fromPath", "toPath", "statusCode", "active"],
       transform: (data) => {
         if (data.fromPath) data.fromPath = String(data.fromPath).trim();
-        if (!data.fromPath.startsWith("/")) data.fromPath = `/${data.fromPath}`;
+        const fromPath = String(data.fromPath ?? "");
+        if (fromPath && !fromPath.startsWith("/")) data.fromPath = `/${fromPath}`;
         if (data.toPath) data.toPath = String(data.toPath).trim();
         if (typeof data.statusCode === "string") data.statusCode = parseInt(data.statusCode, 10) || 301;
         return data;
@@ -230,6 +240,13 @@ export const RESOURCES = {
       orderBy: { createdAt: "desc" as const },
       searchFields: ["filename", "alt", "folder"],
       fields: ["filename", "url", "mimeType", "size", "alt", "title", "caption", "description", "folder"],
+      // Never return the base64 file content in list/edit responses —
+      // it is served publicly via /api/media/[id]
+      select: {
+        id: true, filename: true, url: true, mimeType: true, size: true,
+        alt: true, title: true, caption: true, description: true,
+        folder: true, createdAt: true, updatedAt: true,
+      },
     }),
 };
 

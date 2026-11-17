@@ -23,6 +23,7 @@ import {
   AlertDialogDescription, AlertDialogFooter, AlertDialogHeader, AlertDialogTitle,
 } from "@/components/ui/alert-dialog";
 import { useToast } from "@/hooks/use-toast";
+import { SnippetPreview } from "@/components/admin/snippet-preview";
 
 export type FieldType =
   | "text" | "textarea" | "number" | "boolean" | "select" | "list" | "image" | "code" | "markdown" | "date";
@@ -337,6 +338,18 @@ export function ResourceManager({
                 {grouped.length > 1 && (
                   <legend className="text-xs font-semibold uppercase tracking-wider text-gold-dark">{groupName}</legend>
                 )}
+                {/^seo/i.test(groupName) && (() => {
+                  const t = String(form["seoTitle"] ?? form["title"] ?? form["name"] ?? "");
+                  const slugOrPath = String(form["canonical"] || form["slug"] || "").replace(/^https?:\/\/[^/]+/, "");
+                  const path = slugOrPath.startsWith("/") ? slugOrPath : `/${slugOrPath}`;
+                  return (
+                    <SnippetPreview
+                      title={t.includes("Aurexa") ? t : `${t} | Aurexa Resin`}
+                      description={String(form["seoDescription"] ?? form["description"] ?? form["excerpt"] ?? "")}
+                      url={`www.aurexaresin.com${path === "/" ? "" : path}`}
+                    />
+                  );
+                })()}
                 <div className="grid gap-3.5 sm:grid-cols-2">
                   {groupFields.map((field) => (
                     <div key={field.name} className={`space-y-1.5 ${field.full || ["textarea", "markdown", "code", "list"].includes(field.type) ? "sm:col-span-2" : ""}`}>

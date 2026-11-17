@@ -256,6 +256,24 @@ export async function LandingBlock({
     }
 
     case "faq": {
+      // Inline FAQs (pSEO generator stores per-page Q&A directly in the block)
+      // take priority; fall back to curated GLOBAL faqs from the Faq table.
+      const inline = Array.isArray(d.faqs)
+        ? (d.faqs as { question?: unknown; answer?: unknown }[])
+            .filter((f) => typeof f?.question === "string" && typeof f?.answer === "string" && f.question.trim() && f.answer.trim())
+            .map((f) => ({ question: f.question as string, answer: f.answer as string }))
+        : [];
+      if (inline.length) {
+        return (
+          <section className="py-14 lg:py-16">
+            <div className="max-w-4xl mx-auto px-4">
+              <h2 className="font-display text-2xl md:text-3xl font-bold text-forest mb-8">{(d.heading as string) || faqHeading}</h2>
+              <JsonLd data={faqSchema(inline)} />
+              <FaqSection faqs={inline} className="rounded-xl border bg-card px-6 py-2" />
+            </div>
+          </section>
+        );
+      }
       const ids = (d.ids as string[]) || [];
       const globalFaqs = await db.faq.findMany({ where: { active: true, entityType: "GLOBAL" }, orderBy: { order: "asc" } });
       const selected = ids.length

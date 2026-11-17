@@ -42,7 +42,7 @@ export default function AdminBlogPage() {
         { name: "canonical", label: "Canonical URL", type: "text", group: "SEO" },
         { name: "ogTitle", label: "OG Title", type: "text", group: "Social" },
         { name: "ogDescription", label: "OG Description", type: "text", group: "Social" },
-        { name: "ogImage", label: "OG Image", type: "text", group: "Social" },
+        { name: "ogImage", label: "OG Image", type: "image", group: "Social" },
         { name: "noindex", label: "Hide from search engines (noindex)", type: "boolean", group: "SEO" },
         { name: "customHeadCode", label: "Custom Head Code", type: "code", group: "Advanced", full: true },
       ]}

@@ -1,7 +1,7 @@
 "use client";
 
 import { useCallback, useEffect, useMemo, useState } from "react";
-import { Loader2, Plus, Pencil, Trash2, Search, RefreshCw, Upload } from "lucide-react";
+import { Loader2, Plus, Pencil, Trash2, Search, RefreshCw, Upload, Images } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
@@ -110,6 +110,33 @@ export function ResourceManager({
   const [saving, setSaving] = useState(false);
   const [deleteId, setDeleteId] = useState<string | null>(null);
   const [search, setSearch] = useState("");
+
+  // Media library picker state
+  interface MediaLite { id: string; url: string; filename: string; mimeType: string | null; }
+  const [libraryFor, setLibraryFor] = useState<string | null>(null);
+  const [libraryItems, setLibraryItems] = useState<MediaLite[]>([]);
+  const [libraryLoading, setLibraryLoading] = useState(false);
+
+  function isImageUrl(url: string, mime?: string | null): boolean {
+    if (mime?.startsWith("image/")) return true;
+    return /\.(jpe?g|png|webp|gif|avif)(\?|$)/i.test(url);
+  }
+
+  async function openLibrary(fieldName: string) {
+    setLibraryFor(fieldName);
+    setLibraryLoading(true);
+    try {
+      const res = await fetch("/api/admin/media");
+      const data = await res.json();
+      const items = ((data.items || []) as MediaLite[]).filter((m) => isImageUrl(m.url, m.mimeType));
+      setLibraryItems(items);
+    } catch {
+      toast({ title: "Media library load failed", variant: "destructive" });
+      setLibraryFor(null);
+    } finally {
+      setLibraryLoading(false);
+    }
+  }
 
   const load = useCallback(async () => {
     setLoading(true);
@@ -408,6 +435,11 @@ export function ResourceManager({
                         <div className="flex gap-2">
                           <Input id={`f-${field.name}`} value={String(form[field.name] ?? "")} placeholder="/uploads/… or https://…"
                             onChange={(e) => setForm((f) => ({ ...f, [field.name]: e.target.value }))} className="flex-1" />
+                          <button type="button"
+                            onClick={() => openLibrary(field.name)}
+                            className="inline-flex items-center gap-1.5 rounded-md border border-input px-3 text-sm cursor-pointer hover:bg-muted shrink-0">
+                            <Images className="h-3.5 w-3.5" /> Library
+                          </button>
                           <label className="inline-flex items-center gap-1.5 rounded-md border border-input px-3 text-sm cursor-pointer hover:bg-muted shrink-0">
                             <Upload className="h-3.5 w-3.5" /> Upload
                             <input type="file" accept="image/*" className="sr-only"
@@ -429,6 +461,45 @@ export function ResourceManager({
               {saving ? <><Loader2 className="h-4 w-4 animate-spin" /> Saving…</> : "Save"}
             </Button>
           </div>
+        </DialogContent>
+      </Dialog>
+
+      {/* Media library picker */}
+      <Dialog open={Boolean(libraryFor)} onOpenChange={(v) => !v && setLibraryFor(null)}>
+        <DialogContent className="max-w-3xl max-h-[80vh] overflow-y-auto">
+          <DialogHeader>
+            <DialogTitle>Media Library</DialogTitle>
+            <DialogDescription>Click an image to select it for this field.</DialogDescription>
+          </DialogHeader>
+          {libraryLoading ? (
+            <div className="flex items-center justify-center py-12"><Loader2 className="h-6 w-6 animate-spin text-muted-foreground" /></div>
+          ) : libraryItems.length ? (
+            <div className="grid grid-cols-3 sm:grid-cols-4 gap-3">
+              {libraryItems.map((m) => (
+                <button
+                  key={m.id}
+                  type="button"
+                  onClick={() => {
+                    if (libraryFor) setForm((f) => ({ ...f, [libraryFor]: m.url }));
+                    setLibraryFor(null);
+                    toast({ title: `Selected: ${m.filename}` });
+                  }}
+                  className="group rounded-lg border overflow-hidden hover:ring-2 hover:ring-forest transition-all text-left"
+                  title={m.filename}
+                >
+                  <div className="aspect-square bg-muted flex items-center justify-center overflow-hidden">
+                    {/* eslint-disable-next-line @next/next/no-img-element */}
+                    <img src={m.url} alt={m.filename} className="w-full h-full object-cover group-hover:scale-105 transition-transform" loading="lazy" />
+                  </div>
+                  <p className="text-[10px] text-muted-foreground truncate px-1.5 py-1">{m.filename}</p>
+                </button>
+              ))}
+            </div>
+          ) : (
+            <div className="text-center py-10 text-muted-foreground text-sm">
+              Library is empty. Upload images from Admin → Media first, ya upar wale Upload button se direct upload karo.
+            </div>
+          )}
         </DialogContent>
       </Dialog>
 

@@ -194,7 +194,7 @@ function WhyUsSection({ data }: { data: any }) {
             return (
               <div key={i} className="card-lift rounded-xl border bg-card p-6">
                 <span className="h-12 w-12 rounded-xl bg-forest flex items-center justify-center mb-4">
-                  <Icon className="h-6 w-6 text-forest-dark" aria-hidden />
+                  <Icon className="h-6 w-6 text-cream" aria-hidden />
                 </span>
                 <h3 className="font-display font-semibold text-forest text-lg">{item.title}</h3>
                 <p className="text-sm text-muted-foreground leading-relaxed mt-2">{item.text}</p>

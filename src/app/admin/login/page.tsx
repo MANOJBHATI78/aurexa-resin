@@ -42,7 +42,7 @@ function LoginForm() {
         <Label htmlFor="email">Email</Label>
         <div className="relative">
           <Mail className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground" aria-hidden />
-          <Input id="email" type="email" value={email} onChange={(e) => setEmail(e.target.value)} placeholder="admin@aurexaresin.com" className="pl-9" required autoComplete="username" />
+          <Input id="email" type="email" value={email} onChange={(e) => setEmail(e.target.value)} placeholder="Enter your email" className="pl-9" required autoComplete="username" />
         </div>
       </div>
       <div className="space-y-1.5">
@@ -83,7 +83,7 @@ export default function AdminLoginPage() {
           </div>
         </div>
         <p className="text-center text-cream/40 text-xs mt-4">
-          Default credentials: admin@aurexaresin.com / Aurexa@123 — change the password after first login.
+          Authorized access only. Contact the site administrator for credentials.
         </p>
       </div>
     </div>

@@ -167,6 +167,8 @@ model LandingPage {
   title       String
   slug        String   @unique
   h1          String?
+  // "pseo" = created by the programmatic SEO generator, null = manual
+  source      String?
   blocks      String? // JSON array of blocks [{type, data}]
   published   Boolean  @default(true)
   // SEO
@@ -293,6 +295,9 @@ model Media {
   url         String   @unique
   mimeType    String?
   size        Int?
+  // Base64-encoded file bytes — works on Netlify (ephemeral FS) by storing
+  // uploads in the database (SQLite / Turso) and serving them via /api/media/[id]
+  data        String?
   alt         String?
   title       String?
   caption     String?
@@ -338,4 +343,19 @@ model PageSchema {
   kind      String   @default("SCHEMA") // SCHEMA | RAW_HEAD
   enabled   Boolean  @default(true)
   createdAt DateTime @default(now())
+}
+
+// Content revision history — automatic snapshot before every update/delete of
+// key content types, enabling one-click restore from Admin → Revisions
+model ContentRevision {
+  id          String   @id @default(cuid())
+  entityType  String   // product | blogPost | landingPage | page | category | locationPage | application
+  entityId    String
+  entityLabel String   @default("") // human-readable name at snapshot time
+  action      String   @default("update") // update | delete
+  snapshot    String   // JSON of the entity BEFORE the change
+  createdBy   String?  // admin email
+  createdAt   DateTime @default(now())
+
+  @@index([entityType, entityId])
 }

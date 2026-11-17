@@ -19,7 +19,12 @@ export default function AdminBlogPage() {
         )},
         { name: "author", label: "Author" },
         { name: "publishedAt", label: "Date", render: (row) => row.publishedAt ? new Date(String(row.publishedAt)).toLocaleDateString("en-IN") : "—" },
-        { name: "published", label: "Status", render: (row) => <BoolBadge value={row.published} trueLabel="Published" falseLabel="Draft" /> },
+        { name: "published", label: "Status", render: (row) => {
+          const isFuture = row.published && row.publishedAt && new Date(String(row.publishedAt)) > new Date();
+          return isFuture
+            ? <span className="inline-flex items-center gap-1 rounded-full bg-blue-100 text-blue-800 px-2 py-0.5 text-[11px] font-medium">Scheduled {row.publishedAt ? new Date(String(row.publishedAt)).toLocaleDateString("en-IN") : ""}</span>
+            : <BoolBadge value={row.published} trueLabel="Published" falseLabel="Draft" />;
+        } },
       ]}
       fields={[
         { name: "title", label: "Post Title", type: "text", group: "Post", full: true },
@@ -29,8 +34,8 @@ export default function AdminBlogPage() {
         { name: "excerpt", label: "Excerpt", type: "textarea", group: "Post", full: true, rows: 2 },
         { name: "content", label: "Content (Markdown)", type: "markdown", group: "Post", full: true, rows: 18, hint: "Supports ## headings, **bold**, lists, [links](/products), tables and quotes." },
         { name: "tags", label: "Tags", type: "list", group: "Post", full: true, hint: "e.g. buying guide, tutorial" },
-        { name: "published", label: "Published", type: "boolean", group: "Status", hint: "Publishing sets the publish date automatically." },
-        { name: "publishedAt", label: "Publish Date", type: "date", group: "Status" },
+        { name: "published", label: "Published", type: "boolean", group: "Status", hint: "Publishing sets the publish date automatically. Future date = scheduled (hidden until due)." },
+        { name: "publishedAt", label: "Publish Date", type: "date", group: "Status", hint: "Set a future date to schedule this post." },
         { name: "seoTitle", label: "SEO Title", type: "text", group: "SEO", full: true },
         { name: "seoDescription", label: "Meta Description", type: "textarea", group: "SEO", rows: 2 },
         { name: "seoKeywords", label: "Keywords", type: "text", group: "SEO", full: true },

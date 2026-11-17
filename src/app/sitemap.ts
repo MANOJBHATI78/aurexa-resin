@@ -1,11 +1,13 @@
 import type { MetadataRoute } from "next";
 import { db } from "@/lib/db";
 import { SITE_URL } from "@/lib/seo";
+import { ensureLandingSource } from "@/lib/lazy-migrate";
 
 export const revalidate = 3600;
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const base = SITE_URL;
+  await ensureLandingSource();
 
   // Static routes
   const staticRoutes: MetadataRoute.Sitemap = [
@@ -21,13 +23,14 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   ];
 
   try {
-    const [products, categories, posts, pages, landings, locations] = await Promise.all([
+    const [products, categories, posts, pages, landings, locations, apps] = await Promise.all([
       db.product.findMany({ where: { published: true, noindex: false }, select: { slug: true, updatedAt: true } }),
       db.category.findMany({ where: { published: true, noindex: false }, select: { slug: true, updatedAt: true } }),
-      db.blogPost.findMany({ where: { published: true, noindex: false }, select: { slug: true, updatedAt: true } }),
+      db.blogPost.findMany({ where: { published: true, noindex: false, OR: [{ publishedAt: null }, { publishedAt: { lte: new Date() } }] }, select: { slug: true, updatedAt: true } }),
       db.page.findMany({ where: { published: true, noindex: false }, select: { slug: true, updatedAt: true } }),
       db.landingPage.findMany({ where: { published: true, noindex: false }, select: { slug: true, updatedAt: true } }),
       db.locationPage.findMany({ where: { published: true, noindex: false }, select: { slug: true, updatedAt: true } }),
+      db.application.findMany({ where: { published: true, noindex: false }, select: { slug: true, updatedAt: true } }),
     ]);
 
     return [
@@ -38,6 +41,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       ...pages.map((p) => ({ url: `${base}/p/${p.slug}`, lastModified: p.updatedAt, changeFrequency: "yearly" as const, priority: 0.3 })),
       ...landings.map((l) => ({ url: `${base}/${l.slug}`, lastModified: l.updatedAt, changeFrequency: "weekly" as const, priority: 0.9 })),
       ...locations.map((l) => ({ url: `${base}/locations/${l.slug}`, lastModified: l.updatedAt, changeFrequency: "monthly" as const, priority: 0.8 })),
+      ...apps.map((a) => ({ url: `${base}/applications/${a.slug}`, lastModified: a.updatedAt, changeFrequency: "monthly" as const, priority: 0.7 })),
     ];
   } catch {
     return staticRoutes;

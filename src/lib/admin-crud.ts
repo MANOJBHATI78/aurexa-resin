@@ -1,6 +1,8 @@
 import { NextRequest, NextResponse } from "next/server";
-import { PrismaClient } from "@prisma/client";
 import { slugify } from "@/lib/seo";
+import { getAdminSession } from "@/lib/admin-guard";
+import { db } from "@/lib/db";
+import { ensureRevisionsTable } from "@/lib/lazy-migrate";
 
 type ModelDelegate = any; // Prisma dynamic delegate
 
@@ -10,14 +12,21 @@ export interface CrudConfig {
   fields: string[];
   /** Transform payload before persist (e.g. slug generation) */
   transform?: (data: Record<string, unknown>, mode: "create" | "update") => Record<string, unknown>;
-  /** Default orderBy for list */
-  orderBy?: Record<string, "asc" | "desc">;
+  /** Default orderBy for list — single key or compound (array) */
+  orderBy?: Record<string, "asc" | "desc"> | Record<string, "asc" | "desc">[];
   /** Search across these fields for ?q= */
   searchFields?: string[];
   /** Prisma include for list/get */
   include?: Record<string, unknown>;
+  /** Prisma select for list/get/create/update — use to exclude heavy columns
+   *  (e.g. Media.data base64) from API responses */
+  select?: Record<string, boolean>;
   /** Prevent delete when referenced */
   deleteGuard?: (id: string) => Promise<string | null>;
+  /** Lazy-migration hook — runs before every handler (ensures new DB columns/tables exist) */
+  prepare?: () => Promise<void>;
+  /** Automatic revision history: snapshot before update/delete */
+  revisions?: { entityType: string; labelField: string };
 }
 
 function pickFields(body: Record<string, unknown>, fields: string[]): Record<string, unknown> {
@@ -30,6 +39,42 @@ function pickFields(body: Record<string, unknown>, fields: string[]): Record<str
 
 /** Builds standard admin CRUD handlers for a Prisma model */
 export function makeCrud(cfg: CrudConfig) {
+  const runPrepare = async () => { if (cfg.prepare) await cfg.prepare(); };
+
+  /** Saves a pre-change snapshot for revision history. NEVER blocks the main
+   *  operation — failures are logged and ignored. */
+  async function snapshot(req: NextRequest, id: string, action: "update" | "delete") {
+    if (!cfg.revisions) return;
+    try {
+      await ensureRevisionsTable();
+      const row = await cfg.model.findUnique({ where: { id } });
+      if (!row) return;
+      const session = await getAdminSession(req);
+      await db.contentRevision.create({
+        data: {
+          entityType: cfg.revisions.entityType,
+          entityId: id,
+          entityLabel: String((row as Record<string, unknown>)[cfg.revisions.labelField] ?? ""),
+          action,
+          snapshot: JSON.stringify(row),
+          createdBy: session?.email || null,
+        },
+      });
+      // Prune: keep the latest 10 revisions per entity
+      const old = await db.contentRevision.findMany({
+        where: { entityType: cfg.revisions.entityType, entityId: id },
+        orderBy: { createdAt: "desc" },
+        skip: 10,
+        select: { id: true },
+      });
+      if (old.length) {
+        await db.contentRevision.deleteMany({ where: { id: { in: old.map((r) => r.id) } } });
+      }
+    } catch (err) {
+      console.error("Revision snapshot failed (ignored):", err);
+    }
+  }
+
   const buildWhere = (req: NextRequest) => {
     const q = req.nextUrl.searchParams.get("q")?.trim();
     const wheres: Record<string, unknown>[] = [];
@@ -43,10 +88,12 @@ export function makeCrud(cfg: CrudConfig) {
   };
 
   async function list(req: NextRequest) {
+    await runPrepare();
     const rows = await cfg.model.findMany({
       where: buildWhere(req),
       orderBy: cfg.orderBy || { updatedAt: "desc" },
       ...(cfg.include ? { include: cfg.include } : {}),
+      ...(cfg.select ? { select: cfg.select } : {}),
       take: 500,
     });
     // SQLite contains is case-sensitive — refine filter in JS when q present
@@ -61,32 +108,38 @@ export function makeCrud(cfg: CrudConfig) {
   }
 
   async function create(req: NextRequest) {
+    await runPrepare();
     const body = (await req.json()) as Record<string, unknown>;
     let data = pickFields(body, cfg.fields);
     if (cfg.transform) data = cfg.transform(data, "create");
-    const row = await cfg.model.create({ data, ...(cfg.include ? { include: cfg.include } : {}) });
+    const row = await cfg.model.create({ data, ...(cfg.include ? { include: cfg.include } : {}), ...(cfg.select ? { select: cfg.select } : {}) });
     return NextResponse.json({ item: row });
   }
 
   async function update(req: NextRequest, id: string) {
+    await runPrepare();
     const body = (await req.json()) as Record<string, unknown>;
     let data = pickFields(body, cfg.fields);
     if (cfg.transform) data = cfg.transform(data, "update");
-    const row = await cfg.model.update({ where: { id }, data, ...(cfg.include ? { include: cfg.include } : {}) });
+    await snapshot(req, id, "update");
+    const row = await cfg.model.update({ where: { id }, data, ...(cfg.include ? { include: cfg.include } : {}), ...(cfg.select ? { select: cfg.select } : {}) });
     return NextResponse.json({ item: row });
   }
 
   async function remove(req: NextRequest, id: string) {
+    await runPrepare();
     if (cfg.deleteGuard) {
       const block = await cfg.deleteGuard(id);
       if (block) return NextResponse.json({ error: block }, { status: 400 });
     }
+    await snapshot(req, id, "delete");
     await cfg.model.delete({ where: { id } });
     return NextResponse.json({ ok: true });
   }
 
   async function get(req: NextRequest, id: string) {
-    const row = await cfg.model.findUnique({ where: { id }, ...(cfg.include ? { include: cfg.include } : {}) });
+    await runPrepare();
+    const row = await cfg.model.findUnique({ where: { id }, ...(cfg.include ? { include: cfg.include } : {}), ...(cfg.select ? { select: cfg.select } : {}) });
     if (!row) return NextResponse.json({ error: "Not found" }, { status: 404 });
     return NextResponse.json({ item: row });
   }

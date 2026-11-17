@@ -15,14 +15,16 @@ export async function generateMetadata(): Promise<Metadata> {
     path: "/blog",
     fallbackTitle: "Epoxy Resin Blog — Guides, Tutorials & Buying Advice",
     fallbackDescription:
-      "Learn about epoxy resin — what it is, how to mix it, 2:1 vs 3:1 ratios, bubble-free casting, choosing resin for jewellery and tables. Practical guides from Aurexa Resin, Surat.",
+      "Epoxy resin guides from Aurexa Resin — mixing steps, 2:1 vs 3:1 ratios, bubble-free casting and buying advice for art, jewellery & tables.",
     keywords: "epoxy resin blog, resin guides, resin tutorials, epoxy resin india, how to use epoxy resin",
   });
 }
 
 export default async function BlogListingPage() {
+  const now = new Date();
   const posts = await db.blogPost.findMany({
-    where: { published: true },
+    // Scheduling: published posts with a future publish date stay hidden until due
+    where: { published: true, OR: [{ publishedAt: null }, { publishedAt: { lte: now } }] },
     orderBy: { publishedAt: "desc" },
   });
   if (!posts) notFound();

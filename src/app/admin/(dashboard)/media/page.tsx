@@ -1,7 +1,7 @@
 "use client";
 
 import { useCallback, useEffect, useRef, useState } from "react";
-import { Loader2, Upload, Trash2, Copy, Search, Image as ImageIcon } from "lucide-react";
+import { Loader2, Upload, Trash2, Copy, Search, Image as ImageIcon, Film, FileText, Replace } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
@@ -15,6 +15,26 @@ interface MediaItem {
   folder: string;
 }
 
+// Same limits as the upload API (images are auto-converted to WebP server-side)
+const MAX_IMAGE_BYTES = 10 * 1024 * 1024; // 10 MB pre-conversion
+const MAX_RAW_BYTES = 4 * 1024 * 1024; // 4 MB for videos / PDFs
+const ACCEPTED_TYPES = ["image/jpeg", "image/png", "image/webp", "image/gif", "image/avif", "application/pdf", "video/mp4", "video/webm", "video/quicktime"];
+
+function isVideo(m: MediaItem) {
+  return (m.mimeType || "").startsWith("video/") || /\.(mp4|webm|mov)(\?|$)/i.test(m.url || "");
+}
+
+function isPdf(m: MediaItem) {
+  return m.mimeType === "application/pdf" || /\.pdf(\?|$)/i.test(m.url || "");
+}
+
+function formatSize(bytes?: number | null) {
+  if (!bytes || bytes <= 0) return "";
+  if (bytes < 1024) return `${bytes} B`;
+  if (bytes < 1024 * 1024) return `${(bytes / 1024).toFixed(0)} KB`;
+  return `${(bytes / 1024 / 1024).toFixed(1)} MB`;
+}
+
 export default function AdminMediaPage() {
   const { toast } = useToast();
   const [items, setItems] = useState<MediaItem[]>([]);
@@ -22,7 +42,9 @@ export default function AdminMediaPage() {
   const [uploading, setUploading] = useState(false);
   const [query, setQuery] = useState("");
   const [selected, setSelected] = useState<MediaItem | null>(null);
+  const [dragging, setDragging] = useState(false);
   const fileRef = useRef<HTMLInputElement>(null);
+  const replaceRef = useRef<HTMLInputElement>(null);
 
   const load = useCallback(async () => {
     setLoading(true);
@@ -40,22 +62,66 @@ export default function AdminMediaPage() {
   async function handleUpload(files: FileList | null) {
     if (!files?.length) return;
     setUploading(true);
+    const errors: string[] = [];
     try {
       for (const file of Array.from(files)) {
+        // Client-side validation — mirrors the API so users get instant feedback
+        if (!ACCEPTED_TYPES.includes(file.type)) {
+          errors.push(`${file.name}: unsupported format (use JPG, PNG, WebP, GIF, AVIF, PDF, MP4, WebM or MOV)`);
+          continue;
+        }
+        const isImg = file.type.startsWith("image/");
+        const max = isImg ? MAX_IMAGE_BYTES : MAX_RAW_BYTES;
+        if (file.size > max) {
+          errors.push(`${file.name}: too large (${formatSize(file.size)}). Max ${isImg ? "10 MB (images are auto-optimized to WebP)" : "4 MB"}. Bigger videos ke liye YouTube link use karein.`);
+          continue;
+        }
         const fd = new FormData();
         fd.append("file", file);
         fd.append("folder", "general");
         const res = await fetch("/api/admin/media/upload", { method: "POST", body: fd });
         const data = await res.json();
-        if (!res.ok) throw new Error(data.error || `Upload failed for ${file.name}`);
+        if (!res.ok) errors.push(`${file.name}: ${data.error || "upload failed"}`);
       }
-      toast({ title: "Upload complete" });
+      if (errors.length) {
+        toast({ title: "Some files failed", description: errors.join(" \u2022 "), variant: "destructive" });
+      } else {
+        toast({ title: "Upload complete" });
+      }
       load();
-    } catch (e) {
-      toast({ title: e instanceof Error ? e.message : "Upload failed", variant: "destructive" });
     } finally {
       setUploading(false);
       if (fileRef.current) fileRef.current.value = "";
+    }
+  }
+
+  async function replaceMedia(file: File | undefined) {
+    if (!file || !selected) return;
+    if (!ACCEPTED_TYPES.includes(file.type)) {
+      toast({ title: "Unsupported format", variant: "destructive" });
+      return;
+    }
+    const isImg = file.type.startsWith("image/");
+    if (file.size > (isImg ? MAX_IMAGE_BYTES : MAX_RAW_BYTES)) {
+      toast({ title: `Too large (max ${isImg ? "10 MB" : "4 MB"})`, variant: "destructive" });
+      return;
+    }
+    setUploading(true);
+    try {
+      const fd = new FormData();
+      fd.append("file", file);
+      fd.append("replaceId", selected.id);
+      const res = await fetch("/api/admin/media/upload", { method: "POST", body: fd });
+      const data = await res.json();
+      if (!res.ok) throw new Error(data.error || "Replace failed");
+      toast({ title: "File replaced", description: "Same URL — all website links still work." });
+      setSelected(null);
+      load();
+    } catch (e) {
+      toast({ title: e instanceof Error ? e.message : "Replace failed", variant: "destructive" });
+    } finally {
+      setUploading(false);
+      if (replaceRef.current) replaceRef.current.value = "";
     }
   }
 
@@ -101,21 +167,30 @@ export default function AdminMediaPage() {
   );
 
   return (
-    <div className="space-y-4 max-w-6xl">
+    <div
+      className={`space-y-4 max-w-6xl rounded-xl transition-colors ${dragging ? "ring-2 ring-gold bg-gold/5" : ""}`}
+      onDragOver={(e) => { e.preventDefault(); setDragging(true); }}
+      onDragLeave={(e) => { if (e.currentTarget === e.target) setDragging(false); }}
+      onDrop={(e) => {
+        e.preventDefault();
+        setDragging(false);
+        if (e.dataTransfer.files?.length) handleUpload(e.dataTransfer.files);
+      }}
+    >
       <div className="flex flex-wrap items-center justify-between gap-3">
         <div>
           <h1 className="font-display text-2xl font-bold text-forest">Media Library</h1>
-          <p className="text-sm text-muted-foreground mt-1">Upload and manage images. Edit alt text for image SEO.</p>
+          <p className="text-sm text-muted-foreground mt-1">Drag & drop photos / videos / PDFs anywhere here, or use the button. Images auto-convert to fast-loading WebP.</p>
         </div>
         <label className="inline-flex">
           <Button onClick={() => fileRef.current?.click()} disabled={uploading} className="btn-gold">
             {uploading ? <Loader2 className="h-4 w-4 animate-spin" /> : <Upload className="h-4 w-4" />}
-            {uploading ? "Uploading…" : "Upload Images"}
+            {uploading ? "Uploading…" : "Upload Media"}
           </Button>
           <input
             ref={fileRef}
             type="file"
-            accept="image/*"
+            accept="image/jpeg,image/png,image/webp,image/gif,image/avif,application/pdf,video/mp4,video/webm,video/quicktime"
             multiple
             className="sr-only"
             onChange={(e) => handleUpload(e.target.files)}
@@ -133,20 +208,34 @@ export default function AdminMediaPage() {
       ) : filtered.length === 0 ? (
         <Card>
           <CardContent className="py-16 text-center">
-            <ImageIcon className="h-10 w-10 mx-auto text-muted-foreground/40 mb-3" />
-            <p className="text-muted-foreground text-sm">No images yet. Upload product photos, category images and blog images here.</p>
+            <Upload className="h-10 w-10 mx-auto text-muted-foreground/40 mb-3" />
+            <p className="text-muted-foreground text-sm">Drag & drop photos, videos and PDFs here — or click "Upload Media" above.</p>
           </CardContent>
         </Card>
       ) : (
         <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-3">
           {filtered.map((m) => (
             <Card key={m.id} className="overflow-hidden card-lift">
-              <div className="aspect-square bg-muted">
-                { }
-                <img src={m.url} alt={m.alt || m.filename} className="w-full h-full object-cover cursor-pointer" onClick={() => setSelected(m)} loading="lazy" />
+              <div className="relative aspect-square bg-muted">
+                {isVideo(m) ? (
+                  <video src={m.url} className="w-full h-full object-cover cursor-pointer" preload="metadata" muted playsInline onClick={() => setSelected(m)} />
+                ) : isPdf(m) ? (
+                  <button type="button" className="w-full h-full flex flex-col items-center justify-center gap-2 cursor-pointer" onClick={() => setSelected(m)}>
+                    <FileText className="h-10 w-10 text-forest/50" />
+                    <span className="text-[10px] font-medium text-muted-foreground">PDF</span>
+                  </button>
+                ) : (
+                  <img src={m.url} alt={m.alt || m.filename} className="w-full h-full object-cover cursor-pointer" onClick={() => setSelected(m)} loading="lazy" />
+                )}
+                {isVideo(m) && (
+                  <span className="absolute bottom-1.5 left-1.5 inline-flex items-center gap-1 rounded bg-black/70 px-1.5 py-0.5 text-[10px] font-medium text-white">
+                    <Film className="h-3 w-3" /> Video
+                  </span>
+                )}
               </div>
               <CardContent className="p-2.5">
                 <p className="text-[11px] font-medium text-forest truncate">{m.filename}</p>
+                <p className="text-[10px] text-muted-foreground mt-0.5">{formatSize(m.size)}</p>
                 <div className="flex items-center gap-1 mt-1.5">
                   <Button variant="ghost" size="icon" className="h-7 w-7" onClick={() => copyUrl(m.url)} aria-label="Copy URL">
                     <Copy className="h-3.5 w-3.5" />
@@ -171,11 +260,19 @@ export default function AdminMediaPage() {
           {selected && (
             <>
               <DialogHeader>
-                <DialogTitle className="font-display">Image Details</DialogTitle>
+                <DialogTitle className="font-display">Media Details</DialogTitle>
                 <DialogDescription>Meaningful filenames and alt text improve image SEO.</DialogDescription>
               </DialogHeader>
-              { }
-              <img src={selected.url} alt={selected.alt || ""} className="rounded-lg border max-h-56 w-full object-contain bg-muted" />
+              {isVideo(selected) ? (
+                <video src={selected.url} controls className="rounded-lg border max-h-56 w-full bg-muted" />
+              ) : isPdf(selected) ? (
+                <a href={selected.url} target="_blank" rel="noopener noreferrer" className="flex flex-col items-center gap-2 rounded-lg border bg-muted py-8 hover:bg-forest-mist">
+                  <FileText className="h-10 w-10 text-forest/50" />
+                  <span className="text-sm text-forest font-medium">Open PDF in new tab</span>
+                </a>
+              ) : (
+                <img src={selected.url} alt={selected.alt || ""} className="rounded-lg border max-h-56 w-full object-contain bg-muted" />
+              )}
               <div className="space-y-3">
                 <div className="flex items-center gap-2 text-xs text-muted-foreground">
                   <code className="truncate flex-1">{selected.url}</code>
@@ -195,7 +292,20 @@ export default function AdminMediaPage() {
                   <Label>Caption</Label>
                   <Input value={selected.caption || ""} onChange={(e) => setSelected({ ...selected, caption: e.target.value })} />
                 </div>
-                <Button onClick={saveMetadata} className="btn-gold w-full">Save Details</Button>
+                <div className="flex gap-2">
+                  <Button onClick={saveMetadata} className="btn-gold flex-1">Save Details</Button>
+                  <Button type="button" variant="outline" className="flex-1" disabled={uploading} onClick={() => replaceRef.current?.click()}>
+                    <Replace className="h-4 w-4" /> Replace File
+                  </Button>
+                  <input
+                    ref={replaceRef}
+                    type="file"
+                    accept="image/jpeg,image/png,image/webp,image/gif,image/avif,application/pdf,video/mp4,video/webm,video/quicktime"
+                    className="sr-only"
+                    onChange={(e) => replaceMedia(e.target.files?.[0])}
+                  />
+                </div>
+                <p className="text-[11px] text-muted-foreground">Replace uploads a new file under the SAME URL — every existing link stays unbroken.</p>
               </div>
             </>
           )}
